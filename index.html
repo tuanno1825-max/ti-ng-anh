@@ -1463,6 +1463,9 @@ function playSound(type) {
 }
 
 // ================= DỮ LIỆU ĐẦY ĐỦ 85 CÂU KÈM DỊCH NGHĨA TIẾNG VIỆT =================
+
+const TIPS_LIST = ["Mẹo nhớ: Thấy chữ 'databases' ➔ chọn ngay 'Database administrator'.","Mẹo nhớ: Thấy 'supervises ... team' ➔ chọn 'Helpdesk supervisor'.","Mẹo nhớ: Developer thì gắn liền với 'software specifications' (đặc tả phần mềm).","Mẹo nhớ: Đề trường bôi đậm 'Be responsible for IT projects' (chịu trách nhiệm dự án IT).","Mẹo nhớ: Đề trường bôi đậm nhầm đáp án A 'Look after computers' (khoanh A để ăn trọn điểm trường).","Mẹo nhớ: 'company profile' (hồ sơ công ty) ➔ 'background' (lý lịch hình thành).","Mẹo nhớ: 'supplier' = 'provider' (cùng đuôi -er chỉ nhà cung cấp).","Mẹo nhớ: 'database program' (phần mềm CSDL) ➔ 'manages data' (quản lý dữ liệu).","Mẹo nhớ: 'private' (tư nhân) ➔ 'Owned by a particular person or group'.","Mẹo nhớ: 'launch' (ra mắt/phóng) ➔ 'introduce a new product or version'.","Mẹo nhớ: 'CIO' có chữ I ở giữa là 'Information' (Chief Information Officer).","Mẹo nhớ: Đề trường bôi đậm 'Database administrator' cho câu giữ thông tin an toàn.","Mẹo nhớ: Chữ cái (Alpha) + Chữ số (Numeric) ➔ 'Alphanumeric'.","Mẹo nhớ: 'colleague' (đồng nghiệp) ➔ 'fellow worker' (người cùng làm việc).","Mẹo nhớ: 'maintain' (duy trì) ➔ 'keep ... running smoothly' (chạy mượt mà, trơn tru).","Mẹo nhớ: 'agenda' (lịch trình họp) ➔ 'list of topics to be discussed in a meeting'.","Mẹo nhớ: Tiền tố 'tele-' là từ xa / điện thoại ➔ 'over the phone'.","Mẹo nhớ: 'chairperson' (chủ tọa ngồi ghế chủ trì) ➔ 'controls the meeting'.","Mẹo nhớ: 'upgrade' (nâng cấp) ➔ 'improve or update something'.","Mẹo nhớ: 'attendance' (điểm danh/tham dự) ➔ 'be present at a meeting' (có mặt).","Mẹo nhớ: 'employ' (tuyển dụng) ➔ 'hire someone' (thuê người làm).","Mẹo nhớ: 'consulting' (tư vấn) ➔ 'provides advice' (cung cấp lời khuyên).","Mẹo nhớ: 'efficient' (năng suất cao) ➔ 'minimum waste' (ít hao phí nhất).","Mẹo nhớ: 'diagnosing' (chẩn đoán) ➔ 'cause of issues' (xác định nguyên nhân sự cố).","Mẹo nhớ: 'salary' (tiền lương) ➔ 'Payment for work done' (tiền trả cho công việc).","Mẹo nhớ: 'components and capabilities' (linh kiện & năng lực máy) ➔ 'system specifications'.","Mẹo nhớ: Bàn phím và chuột là thiết bị ngoại vi cắm ngoài ➔ 'peripherals'.","Mẹo nhớ: CPU nằm bên trong thùng máy tính ➔ 'internal hardware'.","Mẹo nhớ: Lưu trữ file sao lưu (backup) ➔ ổ cứng ngoài 'external drive'.","Mẹo nhớ: Nơi lưu trữ hầu hết dữ liệu máy tính ➔ ổ cứng 'hard disk drive' (HDD).","Mẹo nhớ: Đĩa CD/DVD dùng trong ổ đĩa quang ➔ 'optical drive'.","Mẹo nhớ: Nghe nhạc trên máy tính ➔ tai nghe 'headphones'.","Mẹo nhớ: Gõ bản báo cáo văn bản ➔ bàn phím 'keyboard'.","Mẹo nhớ: Đề trường bôi đậm nhầm dòng B 'DIMM slot'! (Khoanh B để khớp barem trường).","Mẹo nhớ: Trỏ và nhấp chuột (point and click) ➔ chuột máy tính 'mouse'.","Mẹo nhớ: Quyết định chạy đa nhiệm nhiều chương trình cùng lúc ➔ bộ nhớ RAM 'memory'.","Mẹo nhớ: Hiển thị kết quả hình ảnh đầu ra ➔ màn hình 'monitor'.","Mẹo nhớ: Chuyển đổi dòng điện lưới thành nguồn cho PC ➔ bộ nguồn 'power supply unit' (PSU).","Mẹo nhớ: Nhìn vào đâu để xem hình ảnh xuất ra ➔ màn hình 'monitor'.","Mẹo nhớ: Cắm tai nghe vào lỗ cắm âm thanh ➔ 'audio socket'.","Mẹo nhớ: Cắm thanh RAM trên bo mạch chủ ➔ khe cắm RAM 'DIMM slot'.","Mẹo nhớ: Cắm dây cáp để nối mạng Internet ➔ cổng mạng 'Ethernet connector'.","Mẹo nhớ: Nơi lắp đặt card màn hình đồ họa ➔ 'graphics card socket'.","Mẹo nhớ: Kết nối ổ cứng di động bên ngoài ➔ cổng cắm 'USB port'.","Mẹo nhớ: Bộ vi xử lý 2 nhân ➔ 'dual' (dual-core).","Mẹo nhớ: Nâng cấp sức mạnh xử lý gấp 4 lần ➔ 'quad' (quad-core).","Mẹo nhớ: Công nghệ chế tạo linh kiện siêu nhỏ ➔ 'nano' (nano technology).","Mẹo nhớ: Đảm bảo hình ảnh hiển thị rõ nét ➔ độ phân giải 'screen resolution'.","Mẹo nhớ: 10 × 4.6 = 46 ➔ Phép nhân 'multiply'.","Mẹo nhớ: 30.8 ÷ 2 = 15.4 ➔ Phép chia 'divide'.","Mẹo nhớ: 30 - 2.5 = 27.5 ➔ Phép trừ 'subtract'.","Mẹo nhớ: 30.7 + 2.5 = 33.2 ➔ Tổng của phép cộng 'sum'.","Mẹo nhớ: 9 số 0 sau dấu phẩy (0.000000001 = 10^-9) ➔ Tiền tố 'nano-'.","Mẹo nhớ: Bộ nhớ mất dữ liệu khi tắt máy (không lưu vĩnh viễn) ➔ 'RAMs'.","Mẹo nhớ: Kết quả máy tính tạo ra sau khi xử lý dữ liệu ➔ thông tin 'information'.","Mẹo nhớ: Các bộ phận vật lý sờ nắm được của máy tính ➔ phần cứng 'hardware'.","Mẹo nhớ: Chức năng khối điều khiển CU ➔ 'examines instructions and activate'.","Mẹo nhớ: Thiết bị không phải linh kiện bên trong thùng máy ➔ bộ điều giải 'modem'.","Mẹo nhớ: Phím cách (space bar) dài nhất ➔ tạo khoảng trống 'produces a blank space'.","Mẹo nhớ: Màn hình hiển thị dữ liệu là thiết bị xuất ➔ 'an output'.","Mẹo nhớ: Tiêu đề thể hiện chủ đề của email ➔ 'subject line'.","Mẹo nhớ: Người ký nhận kiện hàng ➔ người nhận 'receiver'.","Mẹo nhớ: Gửi thư ẩn danh bảo vệ riêng tư ➔ gửi bản sao ẩn 'blind copy address' (BCC).","Mẹo nhớ: Sửa lỗi gõ sai và chính tả văn bản ➔ 'spell checker'.","Mẹo nhớ: Người khởi xướng việc gửi thư liên lạc ➔ người gửi 'sender'.","Mẹo nhớ: Đề trường bôi đậm đáp án C 'subject line'.","Mẹo nhớ: Mạng phạm vi hẹp trong nhà hoặc văn phòng ➔ mạng cục bộ 'LAN'.","Mẹo nhớ: Mạng diện rộng bao phủ thành phố, quốc gia ➔ mạng 'WAN'.","Mẹo nhớ: Các máy nối chụm vào 1 hub/switch ở giữa như ngôi sao ➔ 'star system'.","Mẹo nhớ: Thiết bị USB nhỏ cắm ngoài kết nối mạng/phụ kiện ➔ 'dongle'.","Mẹo nhớ: Kết nối làm việc từ xa an toàn vào mạng công ty ➔ mạng riêng ảo 'VPN'.","Mẹo nhớ: Điều phối tài nguyên và quản lý client ➔ máy chủ trung tâm 'central server'.","Mẹo nhớ: Chân trang thư có tên và số liên lạc ➔ chữ ký email 'signature'.","Mẹo nhớ: Người nhận phản hồi về bản thiết kế hệ thống ➔ kiến trúc sư 'architect'.","Mẹo nhớ: Giao tiếp không cần dây nối vật lý ➔ không dây 'wireless'.","Mẹo nhớ: Cần chuyên gia cố vấn cho dự án phức tạp ➔ 'consultant'.","Mẹo nhớ: Đáp ứng đầy đủ các tiêu chuẩn / yêu cầu ➔ 'meet the requirement'.","Mẹo nhớ: Mỗi máy nối 2 máy tạo thành vòng lặp khép kín (loop) ➔ 'ring system'.","Mẹo nhớ: Nối đa đường dự phòng đan xen như mạng nhện ➔ 'mesh'.","Mẹo nhớ: Điểm trung tâm phân phối dữ liệu trong mạng ➔ 'central server'.","Mẹo nhớ: Slack và Teams là phần mềm nhắn tin tức thời ➔ 'Instant messaging software'.","Mẹo nhớ: Tệp tài liệu gửi kèm theo email ➔ 'attachment'.","Mẹo nhớ: Tuân theo các bước quy định khi làm báo cáo ➔ bản hướng dẫn 'guideline'.","Mẹo nhớ: Cung cấp truy cập từ xa bảo mật vào mạng nội bộ ➔ 'VPN'.","Mẹo nhớ: Tuân thủ từng bước trong tiến trình ➔ quy trình 'process'."];
+
 const RAW_QUESTIONS = [
   // --- UNIT 1 (25 CÂU) ---
   {
@@ -2151,6 +2154,12 @@ const RAW_QUESTIONS = [
   }
 ];
 
+
+// Tự động gán mẹo nhớ vào từng câu
+RAW_QUESTIONS.forEach((q, idx) => {
+  q.tip = TIPS_LIST[idx] || "Ghi nhớ từ khóa chính xuất hiện trong câu để chọn đáp án chuẩn.";
+});
+
 // DỮ LIỆU NỐI TỪ VÀ ĐỊNH NGHĨA (PART 3) KÈM NGHĨA TIẾNG VIỆT
 const MATCHING_DATA = {
   1: [
@@ -2245,6 +2254,7 @@ let currentIndex = 0;
 let score = 0;
 let streak = 0;
 let selectedUnit = 0; // 0 = all
+let wrongQuestions = []; // Lưu danh sách các câu làm sai
 
 function setQuizUnit(u) {
   selectedUnit = u;
@@ -2262,6 +2272,19 @@ function resetQuiz() {
   currentIndex = 0;
   score = 0;
   streak = 0;
+  wrongQuestions = [];
+  updateHUD();
+  loadQuestion();
+}
+
+function startMistakesOnlyQuiz() {
+  if (wrongQuestions.length === 0) return;
+  playSound('click');
+  currentQuestions = wrongQuestions.map(w => w.item);
+  currentIndex = 0;
+  score = 0;
+  streak = 0;
+  wrongQuestions = [];
   updateHUD();
   loadQuestion();
 }
@@ -2315,6 +2338,9 @@ function chooseAnswer(selectedIdx) {
   fb.style.display = 'block';
 
   let statusHtml = '';
+  // Lấy mẹo nhớ
+  const tipText = item.tip || (TIPS_MAP && TIPS_MAP[item.q]) || "Chú ý từ khóa chính trong câu để nhận diện đáp án nhanh.";
+
   if (selectedIdx === item.ans) {
     playSound('correct');
     buttons[selectedIdx].classList.add('correct');
@@ -2329,6 +2355,13 @@ function chooseAnswer(selectedIdx) {
     streak = 0;
     fb.className = 'feedback-box wrong';
     statusHtml = `<div class="fb-status" style="color:#ef4444;">❌ CHƯA ĐÚNG! Đáp án chuẩn của trường là: <b>${item.options[item.ans]}</b></div>`;
+    
+    // Ghi nhận câu sai để tổng kết cuối bài
+    wrongQuestions.push({
+      item: item,
+      selectedIdx: selectedIdx,
+      questionNumber: currentIndex + 1
+    });
   }
 
   fb.innerHTML = `
@@ -2338,6 +2371,9 @@ function chooseAnswer(selectedIdx) {
       <div>${item.trans}</div>
     </div>
     <div class="fb-explain">💡 <b>Chi tiết từ vựng:</b> ${item.explain}</div>
+    <div style="background:rgba(245,158,11,0.12); border-left:4px solid #f59e0b; padding:10px 14px; border-radius:0 8px 8px 0; margin-top:10px; font-size:14px; color:#fde68a;">
+      🎯 <b>MẸO NHỚ KHI ĐI THI:</b> ${tipText}
+    </div>
   `;
 
   updateHUD();
@@ -2351,16 +2387,88 @@ function nextQuestion() {
 }
 
 function showQuizCompletion() {
-  document.getElementById('progress-fill').style.width = `100%`;
+  document.getElementById('progress-fill').style.width = '100%';
   const card = document.getElementById('q-card');
+  const total = currentQuestions.length;
+  const correctCount = total - wrongQuestions.length;
+  const pct = Math.round((correctCount / total) * 100);
+
+  let mistakesHtml = '';
+  if (wrongQuestions.length > 0) {
+    mistakesHtml = `
+      <div style="margin-top:30px; text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+          <h3 style="font-size:20px; color:#f87171; display:flex; align-items:center; gap:8px;">
+            ⚠️ DANH SÁCH ${wrongQuestions.length} CÂU BẠN ĐÃ LÀM SAI (KÈM GIẢI THÍCH & MẸO NHỚ):
+          </h3>
+          <button class="btn" style="background:#dc2626; padding:10px 20px;" onclick="startMistakesOnlyQuiz()">
+            🎯 Luyện Riêng ${wrongQuestions.length} Câu Sai Này ➔
+          </button>
+        </div>
+        
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          ${wrongQuestions.map((w, idx) => {
+            const letters = ['A', 'B', 'C', 'D'];
+            const tipText = w.item.tip || (TIPS_MAP && TIPS_MAP[w.item.q]) || "Ghi nhớ các từ khóa chính xuất hiện trong câu.";
+            return `
+              <div style="background:#0f172a; border:2px solid #ef4444; border-radius:14px; padding:18px;">
+                <div style="font-size:12px; font-weight:800; color:#c7d2fe; background:#3730a3; display:inline-block; padding:3px 8px; border-radius:6px; margin-bottom:8px;">
+                  UNIT ${w.item.unit} - CÂU ${w.questionNumber}
+                </div>
+                <div style="font-size:17px; font-weight:700; color:#fff; margin-bottom:12px;">${w.item.q}</div>
+                
+                <div style="display:grid; grid-template-columns:1fr; gap:8px; margin-bottom:12px;">
+                  <div style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; padding:10px 14px; border-radius:8px; color:#fca5a5; font-size:14px;">
+                    ❌ <b>Bạn đã chọn:</b> ${letters[w.selectedIdx]}. ${w.item.options[w.selectedIdx]}
+                  </div>
+                  <div style="background:rgba(16,185,129,0.15); border:1px solid #10b981; padding:10px 14px; border-radius:8px; color:#a7f3d0; font-size:14px;">
+                    ✔ <b>Đáp án chuẩn của trường:</b> ${letters[w.item.ans]}. ${w.item.options[w.item.ans]}
+                  </div>
+                </div>
+
+                <div class="fb-translation-box" style="margin:8px 0;">
+                  <div class="fb-translation-title">🇻🇳 DỊCH NGHĨA TRỌN CÂU:</div>
+                  <div style="font-size:14px;">${w.item.trans}</div>
+                </div>
+
+                <div style="font-size:13px; color:#94a3b8; margin-top:8px;">
+                  💡 <b>Giải thích từ vựng:</b> ${w.item.explain}
+                </div>
+
+                <div style="background:rgba(245,158,11,0.15); border-left:4px solid #f59e0b; padding:10px 14px; border-radius:0 8px 8px 0; margin-top:10px; font-size:14px; color:#fde68a;">
+                  🎯 <b>MẸO NHỚ SIÊU TỐC ĐI THI:</b> ${tipText}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  } else {
+    mistakesHtml = `
+      <div style="margin-top:25px; background:rgba(16,185,129,0.12); border:2px solid #10b981; border-radius:16px; padding:24px;">
+        <div style="font-size:40px; margin-bottom:8px;">🎉💯</div>
+        <h3 style="font-size:22px; color:#10b981; font-weight:800; margin-bottom:6px;">XUẤT SẮC TUYỆT ĐỐI!</h3>
+        <p style="color:#e2e8f0; font-size:16px;">Bạn đã trả lời chính xác 100% tất cả các câu và không mắc phải lỗi sai nào!</p>
+      </div>
+    `;
+  }
+
   card.innerHTML = `
-    <div style="text-align:center; padding: 30px 10px;">
-      <div style="font-size:60px; margin-bottom:12px;">🏆</div>
-      <h2 style="font-size:28px; color:#fbbf24; margin-bottom:8px;">XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH</h2>
-      <p style="font-size:18px; color:#e2e8f0; margin-bottom:20px;">
-        Tổng điểm của bạn: <b style="color:#10b981; font-size:24px;">${score}</b> điểm.
+    <div style="text-align:center; padding: 20px 10px;">
+      <div style="font-size:55px; margin-bottom:10px;">${pct >= 80 ? '🏆' : (pct >= 50 ? '👏' : '💪')}</div>
+      <h2 style="font-size:26px; color:#fbbf24; margin-bottom:8px;">KẾT QUẢ ÔN TẬP CỦA BẠN</h2>
+      <p style="font-size:16px; color:#cbd5e1; margin-bottom:18px;">
+        Số câu đúng: <b style="color:#10b981; font-size:20px;">${correctCount}/${total}</b> (${pct}%) 
+        • Tổng điểm: <b style="color:#6366f1; font-size:20px;">${score}</b> điểm
       </p>
-      <button class="btn" onclick="resetQuiz()">Luyện Lại Từ Đầu 🔄</button>
+
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:20px;">
+        <button class="btn" onclick="resetQuiz()">Làm Lại Toàn Bộ 🔄</button>
+        ${wrongQuestions.length > 0 ? `<button class="btn" style="background:#dc2626;" onclick="startMistakesOnlyQuiz()">🎯 Luyện Riêng ${wrongQuestions.length} Câu Sai</button>` : ''}
+      </div>
+
+      ${mistakesHtml}
     </div>
   `;
 }
