@@ -1,0 +1,2601 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ôn Thi Tiếng Anh IT - Unit 1, 2, 3 (Có Dịch Tiếng Việt)</title>
+<style>
+  :root {
+    --primary: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-dark: #3730a3;
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --warning: #f59e0b;
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --card-hover: #334155;
+    --text: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%);
+    padding: 18px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-badge {
+    background: #fbbf24;
+    color: #1e1b4b;
+    font-weight: 900;
+    font-size: 20px;
+    padding: 8px 14px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #e0e7ff;
+  }
+
+  .nav-tabs {
+    display: flex;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.4);
+    padding: 6px;
+    border-radius: 14px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: #cbd5e1;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .tab-btn.active {
+    background: #4f46e5;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(79, 70, 229, 0.5);
+  }
+
+  .container {
+    max-width: 950px;
+    margin: 24px auto;
+    padding: 0 16px 40px;
+    width: 100%;
+    flex: 1;
+  }
+
+  /* Unit Selector Bar */
+  .filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: var(--card-bg);
+    padding: 12px 18px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .filter-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .unit-pill {
+    background: var(--card-hover);
+    color: var(--text);
+    border: 1px solid transparent;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .unit-pill:hover {
+    background: #475569;
+  }
+
+  .unit-pill.active {
+    background: #6366f1;
+    color: white;
+    border-color: #a5b4fc;
+  }
+
+  .switch-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* View Panels */
+  .view-panel {
+    display: none;
+  }
+  .view-panel.active {
+    display: block;
+  }
+
+  /* Quiz Multiple Choice */
+  .quiz-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .score-badge {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .streak-pill {
+    color: #f59e0b;
+    font-weight: 800;
+  }
+
+  .progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: #334155;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #10b981);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .question-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .q-badge {
+    display: inline-block;
+    background: #3730a3;
+    color: #c7d2fe;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+
+  .q-text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    color: #ffffff;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  @media(min-width: 640px) {
+    .options-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .opt-btn {
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 14px;
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .opt-btn:hover:not(:disabled) {
+    border-color: #6366f1;
+    background: #1e1b4b;
+    transform: translateY(-2px);
+  }
+
+  .opt-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #1e293b;
+    border-radius: 8px;
+    font-weight: 800;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+
+  .opt-btn.correct {
+    background: #064e3b !important;
+    border-color: #10b981 !important;
+    color: #ecfdf5 !important;
+    animation: pulseCorrect 0.4s ease;
+  }
+  .opt-btn.correct .opt-letter {
+    background: #10b981;
+    color: white;
+  }
+
+  .opt-btn.wrong {
+    background: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fef2f2 !important;
+    animation: shakeWrong 0.4s ease;
+  }
+  .opt-btn.wrong .opt-letter {
+    background: #ef4444;
+    color: white;
+  }
+
+  @keyframes pulseCorrect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes shakeWrong {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+
+  /* Feedback box với phần Dịch Câu siêu rõ ràng */
+  .feedback-box {
+    margin-top: 22px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    display: none;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .feedback-box.correct {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1.5px solid #10b981;
+    color: #ecfdf5;
+  }
+
+  .feedback-box.wrong {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1.5px solid #ef4444;
+    color: #fef2f2;
+  }
+
+  .fb-status {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fb-translation-box {
+    background: rgba(15, 23, 42, 0.6);
+    border-left: 4px solid #38bdf8;
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    margin: 10px 0;
+    font-size: 15px;
+    color: #e0f2fe;
+    line-height: 1.5;
+  }
+
+  .fb-translation-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .fb-explain {
+    font-size: 14px;
+    color: #cbd5e1;
+    margin-top: 8px;
+  }
+
+  .next-row {
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .btn {
+    background: #4f46e5;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+  }
+  .btn-secondary {
+    background: #334155;
+    color: #cbd5e1;
+  }
+  .btn-secondary:hover {
+    background: #475569;
+  }
+
+  /* Matching View */
+  .matching-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media(min-width: 768px) {
+    .matching-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .match-col-header {
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #818cf8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .match-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .match-item {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .match-item:hover {
+    border-color: #6366f1;
+    background: #1e1b4b;
+  }
+  .match-item.selected {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  }
+  .match-item.paired {
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    color: #a7f3d0;
+    opacity: 0.7;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* Fill in the blanks */
+  .passage-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    line-height: 2.1;
+    font-size: 17px;
+  }
+
+  .word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #0f172a;
+    border-radius: 14px;
+    border: 1px dashed #475569;
+  }
+
+  .bank-word {
+    background: #312e81;
+    color: #c7d2fe;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #4338ca;
+    user-select: none;
+  }
+
+  .blank-select {
+    background: #0f172a;
+    color: #fbbf24;
+    border: 2px solid #6366f1;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .blank-select.correct {
+    border-color: #10b981;
+    background: #064e3b;
+    color: #a7f3d0;
+  }
+  .blank-select.wrong {
+    border-color: #ef4444;
+    background: #7f1d1d;
+    color: #fecaca;
+  }
+
+  .vietnamese-translation-card {
+    margin-top: 24px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1.5px solid #38bdf8;
+    border-radius: 16px;
+    padding: 20px;
+    display: none;
+  }
+
+    /* Read & Listen Styles */
+  .read-pill {
+    background: var(--card-hover);
+    color: var(--text);
+    border: 1px solid transparent;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .read-pill:hover {
+    background: #475569;
+  }
+  .read-pill.active {
+    background: #0ea5e9;
+    color: white;
+    border-color: #7dd3fc;
+    box-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
+  }
+  .read-box {
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 26px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  }
+  .read-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .read-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #334155;
+  }
+  .dialogue-item {
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: #0f172a;
+    border-left: 4px solid #6366f1;
+  }
+  .dialogue-speaker {
+    font-weight: 800;
+    font-size: 14px;
+    color: #818cf8;
+    margin-bottom: 4px;
+  }
+  .dialogue-en {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .dialogue-vi {
+    font-size: 14px;
+    color: #38bdf8;
+    line-height: 1.5;
+  }
+  .fact-box {
+    background: rgba(245, 158, 11, 0.12);
+    border: 1.5px solid #f59e0b;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 20px 0;
+  }
+  .fact-title {
+    font-weight: 800;
+    font-size: 15px;
+    color: #fcd34d;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .fact-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #f1f5f9;
+  }
+  .fact-table th, .fact-table td {
+    padding: 8px 12px;
+    border: 1px solid #475569;
+    text-align: left;
+  }
+  .fact-table th {
+    background: #1e293b;
+    color: #fbbf24;
+  }
+  .step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .step-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #0f172a;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .step-num {
+    background: #6366f1;
+    color: white;
+    font-weight: 800;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+  .step-text b { color: #38bdf8; }
+
+  /* Flashcard view */
+  .flash-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media(min-width: 640px) {
+    .flash-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .flash-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    transition: all 0.2s;
+  }
+  .flash-card:hover {
+    border-color: #818cf8;
+    transform: translateY(-2px);
+  }
+  .fc-word {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 8px;
+  }
+  .fc-def {
+    font-size: 14px;
+    color: #e2e8f0;
+    line-height: 1.5;
+  }
+  .fc-viet {
+    font-size: 13px;
+    color: #38bdf8;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #334155;
+  }
+
+  .note-box {
+    background: rgba(245, 158, 11, 0.1);
+    border-left: 4px solid #f59e0b;
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    font-size: 13px;
+    color: #fcd34d;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <div class="logo-badge">IT-QUIZ</div>
+    <div>
+      <h1>Luyện Thi Tiếng Anh Chuyên Ngành IT</h1>
+      <div class="subtitle">Trắc Nghiệm • Nối Từ Định Nghĩa • Điền Bài Đọc (Có Dịch Tiếng Việt)</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="switchTab('quiz')">🎯 Trắc Nghiệm</button>
+    <button class="tab-btn" onclick="switchTab('matching')">🧩 Nối Nghĩa Từ</button>
+    <button class="tab-btn" onclick="switchTab('text')">✍️ Điền Bài Đọc</button>
+    <button class="tab-btn" onclick="switchTab('flashcards')">⚡ Xem & Học Nhanh</button>
+    <button class="tab-btn" onclick="switchTab('readlisten')">📖 Đọc & Nghe Song Ngữ</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ================= TAB 1: QUIZ TRẮC NGHIỆM ================= -->
+  <div id="tab-quiz" class="view-panel active">
+    <div class="filter-bar">
+      <span class="filter-label">Chọn Bài Học:</span>
+      <button class="unit-pill active" onclick="setQuizUnit(0)">Tất cả (85 câu)</button>
+      <button class="unit-pill" onclick="setQuizUnit(1)">Unit 1 (25 câu)</button>
+      <button class="unit-pill" onclick="setQuizUnit(2)">Unit 2 (35 câu)</button>
+      <button class="unit-pill" onclick="setQuizUnit(3)">Unit 3 (25 câu)</button>
+      
+      <div class="switch-container">
+        <label><input type="checkbox" id="shuffle-toggle" onchange="resetQuiz()"> Xáo trộn câu hỏi</label>
+      </div>
+    </div>
+
+    <div class="quiz-hud">
+      <div class="score-badge">
+        <span>Câu: <b id="q-counter" style="color:#818cf8;">1/85</b></span>
+        <span>Điểm: <b id="score-counter" style="color:#10b981;">0</b></span>
+        <span class="streak-pill">🔥 Chuỗi: <b id="streak-counter">0</b></span>
+      </div>
+      <div>
+        <button class="btn btn-secondary" onclick="restartQuiz()" style="padding:6px 14px; font-size:13px;">🔄 Làm Lại Từ Đầu</button>
+      </div>
+    </div>
+
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+
+    <div class="question-card" id="q-card">
+      <span class="q-badge" id="q-unit-badge">UNIT 1</span>
+      <div class="q-text" id="q-question">Đang tải câu hỏi...</div>
+      <div class="options-grid" id="q-options"></div>
+      
+      <div class="feedback-box" id="q-feedback"></div>
+
+      <div class="next-row" id="q-nav-row" style="display:none;">
+        <button class="btn" id="next-btn" onclick="nextQuestion()">Câu Tiếp Theo ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TAB 2: NỐI TỪ VỚI ĐỊNH NGHĨA ================= -->
+  <div id="tab-matching" class="view-panel">
+    <div class="filter-bar">
+      <span class="filter-label">Chọn Bài Học:</span>
+      <button class="unit-pill active" onclick="setMatchUnit(1)">Unit 1 (10 từ)</button>
+      <button class="unit-pill" onclick="setMatchUnit(2)">Unit 2 (10 từ)</button>
+      <button class="unit-pill" onclick="setMatchUnit(3)">Unit 3 (10 từ)</button>
+      <button class="btn btn-secondary" style="margin-left:auto; padding:6px 14px; font-size:13px;" onclick="resetMatching()">🔄 Chơi Lại</button>
+    </div>
+
+    <div class="note-box">
+      💡 <b>Hướng dẫn cách chơi:</b> Nhấp chuột chọn 1 <b>Thuật ngữ (Cột trái)</b>, sau đó nhấp vào <b>Định nghĩa tương ứng (Cột phải)</b>. Nếu đúng, cặp thẻ sẽ chuyển sang màu xanh lá và hoàn thành!
+    </div>
+
+    <div class="matching-container">
+      <div>
+        <div class="match-col-header">Thuật Ngữ IT (Terms)</div>
+        <div class="match-list" id="match-terms"></div>
+      </div>
+      <div>
+        <div class="match-col-header">Định Nghĩa (Definitions)</div>
+        <div class="match-list" id="match-defs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TAB 3: ĐIỀN TỪ VÀO BÀI ĐỌC ================= -->
+  <div id="tab-text" class="view-panel">
+    <div class="filter-bar">
+      <span class="filter-label">Chọn Bài Đọc:</span>
+      <button class="unit-pill active" onclick="setTextUnit(1)">Unit 1: Apple Inc.</button>
+      <button class="unit-pill" onclick="setTextUnit(2)">Unit 2: IT Systems</button>
+      <button class="unit-pill" onclick="setTextUnit(3)">Unit 3: Data Communication</button>
+    </div>
+
+    <div class="passage-card">
+      <div style="font-size:14px; font-weight:700; color:#818cf8; margin-bottom:10px;">HỘP TỪ VỰNG GỢI Ý (WORD BANK):</div>
+      <div class="word-bank" id="text-word-bank"></div>
+      
+      <h2 id="text-title" style="margin-bottom:18px; font-size:22px; color:#fbbf24;">Tiêu đề bài đọc</h2>
+      <div id="text-body"></div>
+
+      <div style="margin-top:24px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <button class="btn" onclick="checkTextCompletion()">Kiểm Tra & Xem Bản Dịch</button>
+        <button class="btn btn-secondary" onclick="resetTextCompletion()">Làm Lại</button>
+        <span id="text-result-badge" style="font-weight:700; font-size:16px;"></span>
+      </div>
+
+      <!-- Khung Dịch Nghĩa Toàn Bộ Bài Văn -->
+      <div class="vietnamese-translation-card" id="text-translation-box">
+        <div style="font-weight:800; font-size:16px; color:#38bdf8; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          🇻🇳 BẢN DỊCH TIẾNG VIỆT ĐẦY ĐỦ CỦA BÀI ĐỌC:
+        </div>
+        <div id="text-translation-content" style="font-size:15px; line-height:1.8; color:#f1f5f9;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TAB 5: BÀI ĐỌC & NGHE SONG NGỮ ================= -->
+  <div id="tab-readlisten" class="view-panel">
+    <div class="filter-bar" style="gap:8px;">
+      <span class="filter-label">Chọn Bài Học:</span>
+      <button class="read-pill active" onclick="setReadSubTab('track09', this)">🎧 Track 09 (Kiểm tra Đơn Hàng)</button>
+      <button class="read-pill" onclick="setReadSubTab('track10', this)">🎧 Track 10 (Thao tác Ổ Đĩa)</button>
+      <button class="read-pill" onclick="setReadSubTab('track12', this)">🎧 Track 12 (Trình Duyệt Mới)</button>
+      <button class="read-pill" onclick="setReadSubTab('read_open', this)">📖 Đọc: Open Source</button>
+      <button class="read-pill" onclick="setReadSubTab('read_net', this)">📖 Đọc: Networks</button>
+      <button class="read-pill" onclick="setReadSubTab('vocab2', this)">📚 Vocab 2: IT Organisations</button>
+    </div>
+
+    <!-- SUB-TAB 1: TRACK 09 -->
+    <div id="sub-track09" class="read-content-panel read-box">
+      <div class="read-title">🎧 Track 09 (Unit 2): Kiểm Tra Đơn Giao Hàng Thiết Bị Máy Tính</div>
+      <div class="read-subtitle">Đoạn hội thoại đối chiếu giữa <b>Phiếu đặt hàng (Order form)</b> của Quản lý và <b>Phiếu giao hàng thực tế (Delivery slip)</b>.</div>
+
+      <div class="fact-box">
+        <div class="fact-title">📌 BẢNG SO SÁNH THÔNG SỐ CỐT LÕI (CỰC KỲ DỄ THI):</div>
+        <table class="fact-table">
+          <thead>
+            <tr>
+              <th>Thiết bị & Bộ phận</th>
+              <th>Đơn đặt hàng (Ordered)</th>
+              <th>Thực tế giao (Delivered)</th>
+              <th>Kết quả kiểm tra</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Số lượng Laptop</b></td>
+              <td>5 chiếc</td>
+              <td>5 chiếc</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Vi xử lý Laptop (CPU)</b></td>
+              <td>2.73 GHz dual-core</td>
+              <td>2.73 GHz dual-core</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Ổ cứng Laptop (Drive)</b></td>
+              <td><b>500 GB</b></td>
+              <td><b>390 GB</b></td>
+              <td><span style="color:#ef4444;">❌ Sai (giao thiếu dung lượng)</span></td>
+            </tr>
+            <tr>
+              <td><b>Bộ nhớ RAM Laptop</b></td>
+              <td><b>16 GB</b></td>
+              <td><b>8 GB</b></td>
+              <td><span style="color:#ef4444;">❌ Sai (giao thiếu RAM)</span></td>
+            </tr>
+            <tr>
+              <td><b>Card đồ họa Laptop (GPU)</b></td>
+              <td>Ladeon 3850, 1 GB</td>
+              <td>Ladeon 3850, 1 GB</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Màn hình Laptop (Screen)</b></td>
+              <td>1366 × 768</td>
+              <td><b>15.6-inch, 1920 × 1080</b></td>
+              <td><span style="color:#10b981;">✔ Quản lý chấp nhận (nét hơn)</span></td>
+            </tr>
+            <tr>
+              <td><b>Cổng USB Laptop</b></td>
+              <td>4 cổng USB</td>
+              <td>4 cổng USB</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Bảo hành & Hệ điều hành</b></td>
+              <td>Không OS, bảo hành 1 năm</td>
+              <td>Không OS, bảo hành 1 năm</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Số lượng Desktop để bàn</b></td>
+              <td>10 bộ (10 boxes)</td>
+              <td>10 bộ</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Vi xử lý Desktop (CPU)</b></td>
+              <td><b>3.4 GHz, 8 nhân (eight cores)</b></td>
+              <td><b>Quad cores (4 nhân)</b></td>
+              <td><span style="color:#ef4444;">❌ Sai (thiếu nhân xử lý)</span></td>
+            </tr>
+            <tr>
+              <td><b>Ổ đĩa quang Desktop</b></td>
+              <td>8× DVD-RW</td>
+              <td>8× DVD-RW</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Card mạng Desktop</b></td>
+              <td>Wi-Fi card</td>
+              <td>Wi-Fi card</td>
+              <td><span style="color:#10b981;">✔ Đúng</span></td>
+            </tr>
+            <tr>
+              <td><b>Cổng USB Desktop</b></td>
+              <td><b>8 cổng USB</b></td>
+              <td><b>4 cổng USB</b></td>
+              <td><span style="color:#ef4444;">❌ Sai (giao thiếu 4 cổng)</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
+      
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">The shipment just arrived!</div>
+        <div class="dialogue-vi">Kiện hàng vừa mới tới nơi ạ!</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Great! Let's check everything's here. OK. I've got the order form here.</div>
+        <div class="dialogue-vi">Tuyệt quá! Hãy kiểm tra xem mọi thứ có đủ ở đây không. Tôi có phiếu đặt hàng ở đây rồi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">And here's the delivery slip from the shipment.</div>
+        <div class="dialogue-vi">Và đây là phiếu giao hàng đi kèm kiện hàng ạ.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Right. Let's see if they match. What's first on yours?</div>
+        <div class="dialogue-vi">Được rồi. Hãy xem chúng có khớp nhau không. Thứ đầu tiên trên phiếu của cậu là gì?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">Five laptops, each with a 2.73-gigahertz dual-core processor.</div>
+        <div class="dialogue-vi">5 chiếc máy tính xách tay (laptop), mỗi chiếc chạy chip 2 nhân 2.73 GHz.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">OK, that's fine.</div>
+        <div class="dialogue-vi">Được rồi, phần đó đúng.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">And 390-gigabyte drives.</div>
+        <div class="dialogue-vi">Và ổ cứng dung lượng 390 GB.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Ah! We ordered 500-gigabyte drives. Oh dear! How much memory do they have?</div>
+        <div class="dialogue-vi">Ơ kìa! Chúng ta đặt ổ cứng 500 GB cơ mà. Thôi chết rồi! Thế bộ nhớ RAM của chúng là bao nhiêu?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">Eight gigabytes.</div>
+        <div class="dialogue-vi">Dạ 8 GB ạ.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">That's no good. We ordered 16. How about the video card?</div>
+        <div class="dialogue-vi">Thế thì không ổn rồi. Chúng ta đặt 16 GB. Còn card màn hình thì sao?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">Ladeon 3850. One gigabyte.</div>
+        <div class="dialogue-vi">Card Ladeon 3850, dung lượng 1 GB ạ.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Well, at least they got that one right. And the screen resolution?</div>
+        <div class="dialogue-vi">Chà, ít nhất thì mục đó họ giao đúng. Còn độ phân giải màn hình?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">15.6-inch, 1920 × 1080.</div>
+        <div class="dialogue-vi">Màn hình 15.6 inch, độ phân giải 1920 × 1080.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Hmm... Should be 1366 × 768. I won't complain about that though.</div>
+        <div class="dialogue-vi">Hừm... Đáng lẽ phải là 1366 × 768. Nhưng màn hình nét hơn thì tôi sẽ không phàn nàn đâu.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">And four USB ports, no OS, one year warranty.</div>
+        <div class="dialogue-vi">Và có 4 cổng USB, không có sẵn hệ điều hành (no OS), bảo hành 1 năm ạ.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Yep, that bit's fine. How about the desktops? There should be ten of those?</div>
+        <div class="dialogue-vi">Ừ, phần đó đúng. Thế còn máy tính để bàn (desktop)? Có đúng 10 bộ không?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">Yep, that's what this says as well. And, er... yep, ten boxes.</div>
+        <div class="dialogue-vi">Vâng, phiếu cũng ghi thế ạ. Và... vâng, đúng 10 thùng máy.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">And they should be 3.4 gigahertz and with eight cores.</div>
+        <div class="dialogue-vi">Và chúng phải có tốc độ 3.4 GHz với vi xử lý 8 nhân (8 cores) đấy nhé.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">Nope, they each have quad cores.</div>
+        <div class="dialogue-vi">Không ạ, mỗi máy chỉ có chip 4 nhân (quad cores) thôi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Oh dear! Still not what we ordered. We really need eight cores. What about the optical drive?</div>
+        <div class="dialogue-vi">Trời đất ơi! Lại không đúng như ta đã đặt rồi. Ta thực sự cần chip 8 nhân mà. Còn ổ đĩa quang thì sao?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">That's OK. It's an 8x DVD-RW.</div>
+        <div class="dialogue-vi">Dạ ổ quang đúng ạ, là loại 8x DVD-RW.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-en">And there are four USB ports and a wi-fi card.</div>
+        <div class="dialogue-vi">Và có 4 cổng USB kèm một card mạng Wi-Fi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-en">Well, they got the optical drive and the wi-fi card right, but we asked for eight USB ports! Oh dear! I'll call Dingle straight away.</div>
+        <div class="dialogue-vi">Chà, họ giao ổ quang với card Wi-Fi đúng, nhưng ta yêu cầu tới 8 cổng USB cơ mà! Thôi để tôi gọi ngay cho bên Dingle để khiếu nại.</div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 2: TRACK 10 -->
+    <div id="sub-track10" class="read-content-panel read-box" style="display:none;">
+      <div class="read-title">🎧 Track 10 (Unit 2): Các Bước Tra Cứu Thông Tin Ổ Đĩa (Disk Management)</div>
+      <div class="read-subtitle">Quy trình hướng dẫn từng bước trên hệ thống để xem ngày cài đặt ổ cứng <b>(Install date)</b>.</div>
+
+      <div class="fact-box">
+        <div class="fact-title">📌 5 BƯỚC THAO TÁC CẦN NHỚ THEO THỨ TỰ:</div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div><div class="step-text">Chuột phải vào <b>'Computer'</b> ở khung bên trái (left-hand pane) ➔ Chọn <b>'Manage'</b>.</div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-text">Tại mục <b>'Storage'</b>, nhấp vào ô dấu cộng (<b>plus sign +</b>) ở bên trái.</div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-text">Nhấp vào biểu tượng <b>'Disk management'</b> ➔ Khung giữa hiện danh sách ổ đĩa (gồm 2 ổ: <b>'Disk 0'</b> và <b>'Disk 1'</b>).</div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-text">Chuột phải vào <b>'Disk 0'</b> ➔ Chọn <b>'Properties'</b> ➔ Chọn thẻ <b>'Details'</b>.</div></div>
+          <div class="step-item"><div class="step-num">5</div><div class="step-text">Trong menu thả xuống (drop-down menu), cuộn xuống chọn <b>'Install date'</b> ➔ Ngày hiển thị: <b>7 December 2011</b>.</div></div>
+        </div>
+      </div>
+
+      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
+      
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">OK, so first, can you see 'Computer' in the left-hand pane?</div>
+        <div class="dialogue-vi">Được rồi, đầu tiên cậu có thấy mục 'Computer' ở khung bên trái không?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Er... mm... no, I don't think so.</div>
+        <div class="dialogue-vi">Ờ... không, tôi chưa thấy.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">OK, can you scroll up to the top?</div>
+        <div class="dialogue-vi">Cậu cuộn chuột lên trên cùng xem nào?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Ah, yes. I can see it now.</div>
+        <div class="dialogue-vi">À thấy rồi, tôi thấy nó rồi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">Now, right-click on that and a menu will appear. Just select 'Manage'. There may be a short wait but a box should appear. Can you see it yet?</div>
+        <div class="dialogue-vi">Bây giờ, nhấp chuột phải vào đó, một menu sẽ hiện ra. Chọn 'Manage'. Có thể phải đợi một lát nhưng một cửa sổ sẽ hiện lên. Cậu thấy chưa?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Mm... not yet. Ah, yes! There it is.</div>
+        <div class="dialogue-vi">Chưa... À được rồi! Nó đây rồi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">Can you see where it says 'Storage', in the left-hand pane?</div>
+        <div class="dialogue-vi">Cậu có thấy chỗ nào ghi chữ 'Storage' ở khung bên trái không?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Yep.</div>
+        <div class="dialogue-vi">Có.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">Just to the left of that is a little box with a plus sign. Click on that.</div>
+        <div class="dialogue-vi">Ngay bên trái chữ đó có một ô vuông nhỏ chứa dấu cộng (+). Nhấp vào đó.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Um... yep, got it!</div>
+        <div class="dialogue-vi">Xong rồi, tôi bấm rồi!</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">And a new icon will appear, labelled 'Disk management'. Click on that and a list of your drives will appear in the centre pane. How many are there?</div>
+        <div class="dialogue-vi">Một biểu tượng mới sẽ hiện ra mang tên 'Disk management' (Quản lý ổ đĩa). Nhấp vào đó và danh sách các ổ đĩa sẽ hiện ra ở khung giữa. Có bao nhiêu ổ ở đó?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">There are two: 'Disk 0' and 'Disk 1'.</div>
+        <div class="dialogue-vi">Có 2 ổ: 'Disk 0' và 'Disk 1'.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">I see. Now, just right-click where it says 'Disk 0' and choose 'Properties' from the menu. Then, from the box that appears, choose the 'Details' tab. Then you'll see a drop-down menu.</div>
+        <div class="dialogue-vi">Tôi hiểu rồi. Giờ hãy nhấp chuột phải vào chỗ ghi 'Disk 0' và chọn 'Properties'. Sau đó chọn thẻ 'Details'. Cậu sẽ thấy một menu thả xuống.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-en">In that drop-down menu, select 'Install date'. It's about half way down. You'll probably have to scroll down a bit.</div>
+        <div class="dialogue-vi">Trong menu thả xuống đó, hãy chọn mục 'Install date' (Ngày cài đặt). Nó ở khoảng giữa, cậu cần cuộn chuột xuống một chút.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-en">Ah, yes. Here it is. 7 December 2011.</div>
+        <div class="dialogue-vi">À thấy rồi. Nó đây: Ngày <b>7 tháng 12 năm 2011</b>.</div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 3: TRACK 12 -->
+    <div id="sub-track12" class="read-content-panel read-box" style="display:none;">
+      <div class="read-title">🎧 Track 12 (Unit 3): Hướng Dẫn Sử Dụng Trình Duyệt Web Mới</div>
+      <div class="read-subtitle">Cuộc gọi hỗ trợ giữa nhân viên văn phòng và chuyên viên phòng IT về các tính năng trên Browser mới.</div>
+
+      <div class="fact-box">
+        <div class="fact-title">📌 4 ĐẶC ĐIỂM CỦA TRÌNH DUYỆT MỚI:</div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">🔍</div><div class="step-text"><b>Ô tìm kiếm (Search bar):</b> Nằm chung một vị trí với <b>thanh địa chỉ (address bar)</b> - nơi gõ web bắt đầu bằng <i>'http'</i>. Gõ từ khóa rồi bấm Enter là tìm kiếm được ngay.</div></div>
+          <div class="step-item"><div class="step-num">➕</div><div class="step-text"><b>Mở tab mới (New tab):</b> Nhấp vào biểu tượng hình nhỏ xíu nằm ở bên phải của tab hiện tại (<b>little shape to the right of your current tab</b>).</div></div>
+          <div class="step-item"><div class="step-num">🔧</div><div class="step-text"><b>Xem các Menu:</b> Bấm vào biểu tượng mỏ lết / cờ lê (<b>spanner symbol</b>) ở góc trên cùng bên phải.</div></div>
+          <div class="step-item"><div class="step-num">⭐</div><div class="step-text"><b>Thanh dấu trang (Bookmarks):</b> Hiển thị ngay bên dưới thanh địa chỉ (<b>just below the address bar</b>), tiện hơn trước rất nhiều.</div></div>
+        </div>
+      </div>
+
+      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
+      
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Hi, is that the IT Department? I'm having trouble with the new browser we're using on our PCs.</div>
+        <div class="dialogue-vi">Xin chào, có phải phòng CNTT không ạ? Tôi đang gặp chút rắc rối với trình duyệt web mới cài trên máy tính của chúng tôi.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-en">OK, what's the problem?</div>
+        <div class="dialogue-vi">Vâng, có vấn đề gì vậy bạn?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Well, the old one had a box for searching.</div>
+        <div class="dialogue-vi">À, ở trình duyệt cũ thì có một ô riêng để tìm kiếm.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-en">The search bar? Yep, this one has it too but it's the same place that you type the web address into.</div>
+        <div class="dialogue-vi">Thanh tìm kiếm ấy hả? Trình duyệt này cũng có, nhưng nó nằm chung một chỗ với nơi bạn gõ địa chỉ trang web (thanh địa chỉ).</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Ah, you mean that one that starts with 'http'? OK, let me try it. I need to open a new tab first. I knew how to do that in the old browser but not in this one.</div>
+        <div class="dialogue-vi">À, ý anh là cái chỗ bắt đầu bằng chữ 'http' đúng không? Để tôi thử xem. Nhưng trước tiên tôi cần mở một tab mới đã. Trình duyệt cũ tôi biết làm, nhưng cái mới này thì chưa.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-en">Now, see the little shape to the right of your current tab? Just click on that.</div>
+        <div class="dialogue-vi">Bây giờ, bạn có thấy cái biểu tượng hình nhỏ xíu nằm ở bên phải tab hiện tại không? Chỉ cần bấm vào đó.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Ah, yes. I've got a new tab now.</div>
+        <div class="dialogue-vi">À được rồi, tôi vừa mở được một tab mới.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-en">OK, now just type what you are looking for into the address bar and hit 'Enter'. It'll search for you.</div>
+        <div class="dialogue-vi">Tốt, giờ bạn chỉ cần gõ nội dung muốn tìm vào thanh địa chỉ rồi nhấn phím 'Enter' là nó sẽ tự tìm kiếm.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Oh, I see. OK, that works! Great! But something else is confusing me: I can't see any menus. Where did they go?</div>
+        <div class="dialogue-vi">Ồ được rồi, tìm được rồi! Tuyệt quá! Nhưng còn điều này làm tôi bối rối: Tôi không thấy các thanh menu đâu cả. Chúng biến đi đâu rồi?</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-en">Well, see that spanner symbol in the top right corner? Click on that and you'll see all the menus there.</div>
+        <div class="dialogue-vi">Bạn có thấy biểu tượng cái mỏ lết (cờ lê) ở góc trên cùng bên phải không? Bấm vào đó bạn sẽ thấy toàn bộ menu nằm trong đó.</div>
+      </div>
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-en">Oh yes! Thank you. I don't know how I missed that! There is one thing I do like. I can see all my bookmarks now, just below the address bar. Much easier than going to a menu for them like before!</div>
+        <div class="dialogue-vi">Ôi đúng rồi! Cảm ơn anh nhé. Có một điều tôi rất thích: Bây giờ tôi có thể nhìn thấy tất cả các dấu trang (bookmarks) của mình ngay bên dưới thanh địa chỉ. Dễ hơn nhiều so với việc phải vào menu như trước kia!</div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 4: READING OPEN SOURCE -->
+    <div id="sub-read_open" class="read-content-panel read-box" style="display:none;">
+      <div class="read-title">📖 Bài Đọc: Open source: the way forward? (Unit 2)</div>
+      <div class="read-subtitle">So sánh chi tiết giữa <b>Open Source Software (Phần mềm nguồn mở)</b> và <b>Proprietary Software (Phần mềm thương mại độc quyền)</b>.</div>
+
+      <div class="fact-box">
+        <div class="fact-title">💡 Ý CHÍNH CỐT LÕI CỦA BÀI ĐỌC:</div>
+        <ul style="padding-left:20px; line-height:1.8; font-size:14px;">
+          <li><b>Lý do số 1 (Number one reason):</b> Các tổ chức chọn Open Source là vì <b>sự tự do khỏi nhà cung cấp (freedom from the software vendors)</b>, không bị ép theo quyết định cập nhật của họ.</li>
+          <li><b>Khả năng tùy biến:</b> Người dùng có thể tự thêm tính năng (add features) vào Open Source, nhưng KHÔNG THỂ tự thêm vào Proprietary.</li>
+          <li><b>Quyền kiểm soát dữ liệu:</b> Open Source công khai cấu trúc dữ liệu ➔ chuyển đổi dữ liệu (moving data) dễ dàng. Proprietary lưu dữ liệu theo cách đặc biệt bí mật ➔ chuyển đổi rất khó khăn.</li>
+          <li><b>Hệ điều hành nguồn mở (Linux):</b> Vẫn có rất nhiều ứng dụng văn phòng chạy tốt (word processors, spreadsheets).</li>
+          <li><b>Lĩnh vực Proprietary vượt trội hơn:</b> Chỉ có một số lĩnh vực chuyên biệt như <b>thiết kế đồ họa (graphics design)</b> là phần mềm độc quyền rõ ràng tốt hơn.</li>
+        </ul>
+      </div>
+
+      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">ĐOẠN VĂN SONG NGỮ CHI TIẾT:</div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 1: Chi phí và sự tự do khỏi nhà cung cấp</div>
+        <div class="dialogue-en">With open source software, what do people think about first? Money, usually, because open source software is free. But this isn't the only important thing. First, there is freedom from the software vendors. Organisations say that freedom is the number one reason to choose open source software. With open source software, an organisation doesn't have to follow the software vendor's decisions. With proprietary software the vendor controls software updates. For example, users can't add features to proprietary software themselves but they can add features to open source software.</div>
+        <div class="dialogue-vi">Khi nói về phần mềm nguồn mở, người ta nghĩ đến điều gì đầu tiên? Thường là tiền bạc, bởi vì phần mềm nguồn mở là miễn phí. Nhưng đây không phải là điều quan trọng duy nhất. Trước hết, đó là <b>sự tự do khỏi các nhà cung cấp phần mềm</b>. Các tổ chức cho rằng sự tự do chính là lý do số một để lựa chọn phần mềm nguồn mở. Với phần mềm nguồn mở, một tổ chức không bắt buộc phải tuân theo các quyết định của nhà cung cấp. Trong khi với phần mềm thương mại độc quyền, nhà cung cấp nắm toàn quyền kiểm soát các bản cập nhật. Ví dụ: người dùng không thể tự thêm các tính năng vào phần mềm độc quyền, nhưng họ hoàn toàn có thể tự thêm tính năng vào phần mềm nguồn mở.</div>
+      </div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 2: Kiểm soát dữ liệu và chuyển đổi dữ liệu</div>
+        <div class="dialogue-en">Also, with open source software companies have more control of their data. Proprietary software often stores data in special ways that only the vendor understands. So, when a company wants to change to another vendor's software, moving the data to the new software can be very difficult. Open source software is different; open source software vendors explain their data clearly and openly so that they are not a secret. Because of this, moving data isn't a problem.</div>
+        <div class="dialogue-vi">Ngoài ra, với phần mềm nguồn mở, các công ty có nhiều quyền kiểm soát dữ liệu của mình hơn. Phần mềm thương mại đóng thường lưu trữ dữ liệu theo những cách thức đặc biệt mà chỉ có nhà cung cấp đó mới hiểu được. Vì vậy, khi một công ty muốn chuyển sang phần mềm của nhà cung cấp khác, việc di chuyển dữ liệu sang phần mềm mới có thể vô cùng khó khăn. Phần mềm nguồn mở thì khác; các nhà phát triển nguồn mở giải thích dữ liệu của họ một cách rõ ràng và công khai để chúng không phải là bí mật. Nhờ vậy, việc chuyển đổi dữ liệu không còn là vấn đề nan giải.</div>
+      </div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 3: Hệ điều hành và mảng đồ họa</div>
+        <div class="dialogue-en">Sometimes people worry about open source operating systems. They think that their favourite software won't run on open source operating systems. However, this isn't true because there is a lot of office software, such as word processors and spreadsheets, for open source operating systems. In fact, there are many kinds of this software and they work well. It is only special areas, such as graphics design, where proprietary software is clearly better.</div>
+        <div class="dialogue-vi">Đôi khi mọi người lo lắng về các hệ điều hành nguồn mở. Họ nghĩ rằng phần mềm yêu thích của họ sẽ không chạy được trên hệ điều hành nguồn mở. Tuy nhiên, điều này không đúng vì hiện có rất nhiều phần mềm văn phòng, chẳng hạn như trình soạn thảo văn bản và bảng tính, dành cho hệ điều hành nguồn mở. Thực tế có rất nhiều loại phần mềm như vậy và chúng hoạt động rất mượt mà. Chỉ có một số lĩnh vực chuyên biệt đặc thù, chẳng hạn như <b>thiết kế đồ họa (graphics design)</b>, là nơi mà phần mềm thương mại độc quyền vẫn vượt trội hơn hẳn.</div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 5: READING NETWORKS -->
+    <div id="sub-read_net" class="read-content-panel read-box" style="display:none;">
+      <div class="read-title">📖 Bài Đọc: What is a network? (Unit 3)</div>
+      <div class="read-subtitle">Khái niệm mạng máy tính, phân biệt mạng LAN/WAN, 4 mô hình cấu trúc mạng (Topologies) và hệ thống Client-Server.</div>
+
+      <div class="fact-box">
+        <div class="fact-title">🖼️ NHẬN DIỆN 4 MÔ HÌNH CẤU TRÚC MẠNG (BÀI TẬP 4):</div>
+        <table class="fact-table">
+          <thead>
+            <tr>
+              <th>Hình vẽ mô tả</th>
+              <th>Tên mô hình (Topology)</th>
+              <th>Đặc điểm nhận dạng</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Hình 1: Vòng tròn khép kín</td>
+              <td><b>Ring system</b></td>
+              <td>Mỗi máy tính nối với 2 máy khác tạo thành một vòng tròn lặp kín (loop).</td>
+            </tr>
+            <tr>
+              <td>Hình 2: Nối chụm vào tâm</td>
+              <td><b>Star system</b></td>
+              <td>Tất cả các máy tính đều kết nối vào một hub / switch trung tâm.</td>
+            </tr>
+            <tr>
+              <td>Hình 3: Nối đan chéo chằng chịt</td>
+              <td><b>Mesh</b></td>
+              <td>Mỗi máy tính nối với nhiều máy khác. Ưu điểm: Nếu 1 đường đứt, dữ liệu đi đường khác ➔ Rất khó bị ngắt mạng.</td>
+            </tr>
+            <tr>
+              <td>Hình 4: Nối dọc đường thẳng</td>
+              <td><b>Bus system</b></td>
+              <td>Tất cả các máy tính cùng nối vào một đường cáp trục trung tâm gọi là "bus".</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fact-box" style="background:rgba(56, 189, 248, 0.1); border-color:#38bdf8;">
+        <div class="fact-title" style="color:#38bdf8;">📝 CÂU HỎI QUY CHIẾU TỪ THAY THẾ (BÀI TẬP 3 - CỰC HAY THI):</div>
+        <ul style="padding-left:20px; line-height:1.9; font-size:14px; color:#e0f2fe;">
+          <li>Từ <b>"They"</b> (dòng 5) thay thế cho: ➔ <b>computers</b> (các máy tính)</li>
+          <li>Từ <b>"One"</b> (dòng 11) thay thế cho: ➔ <b>a wired network</b> (một kiểu mạng có dây)</li>
+          <li>Từ <b>"this"</b> (dòng 12) thay thế cho: ➔ <b>a star system</b> (mạng hình sao)</li>
+          <li>Từ <b>"Another type"</b> (dòng 13) thay thế cho: ➔ <b>a wired network / a ring system</b> (mạng hình vòng)</li>
+          <li>Từ <b>"it"</b> (dòng 17) thay thế cho: ➔ <b>a bus / a central cable</b> (đường cáp trung tâm)</li>
+          <li>Từ <b>"this"</b> (dòng 17) thay thế cho: ➔ <b>a mesh</b> (mạng lưới)</li>
+          <li>Từ <b>"This"</b> (dòng 18) thay thế cho: ➔ <b>the link to several other computers</b> (việc liên kết với nhiều máy tính khác)</li>
+        </ul>
+      </div>
+
+      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">ĐOẠN VĂN SONG NGỮ CHI TIẾT:</div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 1: Định nghĩa mạng, LAN và WAN</div>
+        <div class="dialogue-en">A network is a group of linked computers or other devices. There are two kinds of networks that are in common use. In Local Area Networks (LANs) computers are close together - perhaps in the same building. They might be connected directly to each other by cable or through a wireless network such as wi-fi. In contrast, wide area networks (WANs) cover a larger area and usually use telephone lines or a mobile phone system to connect. A LAN can be a part of a WAN.</div>
+        <div class="dialogue-vi">Mạng máy tính là một tập hợp các máy tính hoặc các thiết bị khác được liên kết lại với nhau. Có hai loại mạng thông dụng nhất: Mạng cục bộ (LANs) là nơi các máy tính ở gần nhau - chẳng hạn như trong cùng một tòa nhà. Chúng có thể được kết nối trực tiếp với nhau bằng dây cáp hoặc thông qua mạng không dây như Wi-Fi. Ngược lại, mạng diện rộng (WANs) bao phủ một khu vực rộng lớn hơn và thường sử dụng đường dây điện thoại hoặc hệ thống mạng di động để kết nối. Một mạng LAN có thể là một phần nằm trong mạng WAN.</div>
+      </div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 2: Các cấu trúc mạng có dây (Star, Ring, Bus, Mesh)</div>
+        <div class="dialogue-en">There are different types of wired networks. One is a star system. In this, each computer (or other device) is connected to a central server. Another type is a ring system. This is a network that has each computer linked to two others. In a bus system there is a central cable which is called a bus, and each computer is linked to it. Some large networks use a mesh. In this, each computer is linked to several others. This has one big advantage: if one connection breaks, the data can use other connections. Therefore, it is difficult to break a mesh network.</div>
+        <div class="dialogue-vi">Có nhiều loại cấu trúc mạng có dây khác nhau: Một là mạng hình sao (star system), mỗi máy tính đều kết nối vào máy chủ trung tâm. Một loại khác là mạng hình vòng (ring system), mỗi máy tính liên kết với 2 máy khác tạo thành vòng khép kín. Trong mạng đường trục (bus system), có một sợi cáp trung tâm gọi là bus và các máy tính nối vào đó. Một số mạng lớn dùng mạng lưới (mesh), mỗi máy nối với nhiều máy khác. Ưu điểm lớn: nếu một đường truyền bị đứt, dữ liệu có thể đi qua đường khác ➔ rất khó làm tê liệt mạng lưới.</div>
+      </div>
+
+      <div class="dialogue-item">
+        <div class="dialogue-speaker">Đoạn 3: Hệ thống Máy khách - Máy chủ (Client-Server System)</div>
+        <div class="dialogue-en">Many networks work on a client-server system. In this, servers are special computers that store data, serve websites and have other similar functions. Generally, a client program will ask the server for data and the server will then send the data back to the client. For example, when you type a web address into a browser, the browser (the client) will ask the server for a web page, which then sends the web page back.</div>
+        <div class="dialogue-vi">Nhiều hệ thống mạng hoạt động theo mô hình máy khách - máy chủ (client-server). Máy chủ (server) là các máy tính đặc biệt chuyên lưu trữ dữ liệu, cung cấp trang web và các chức năng tương tự. Một chương trình máy khách (client) sẽ gửi yêu cầu xin dữ liệu tới máy chủ, và máy chủ sẽ gửi trả dữ liệu về. Ví dụ: khi bạn gõ địa chỉ web vào trình duyệt, trình duyệt (client) gửi yêu cầu đòi trang web từ máy chủ, và máy chủ gửi trang web trở lại cho bạn xem.</div>
+      </div>
+    </div>
+
+    <!-- SUB-TAB 6: VOCABULARY 2 -->
+    <div id="sub-vocab2" class="read-content-panel read-box" style="display:none;">
+      <div class="read-title">📚 Vocabulary 2: IT Organisations (Unit 1)</div>
+      <div class="read-subtitle">Định nghĩa từ vựng cốt lõi của các tổ chức, doanh nghiệp công nghệ thông tin.</div>
+
+      <table class="fact-table" style="margin-top:16px;">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Định nghĩa trong bài (Definitions)</th>
+            <th>Thuật ngữ tiếng Anh</th>
+            <th>Giải thích tiếng Việt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>a company or companies that sell things</td>
+            <td><b style="color:#38bdf8;">supplier / suppliers</b></td>
+            <td>Nhà cung cấp / công ty bán hàng</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>companies that make things to sell</td>
+            <td><b style="color:#38bdf8;">manufacturers</b></td>
+            <td>Các nhà sản xuất / công ty chế tạo sản phẩm</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>factories</td>
+            <td><b style="color:#38bdf8;">production facilities</b></td>
+            <td>Các nhà máy / cơ sở sản xuất</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>things a company sells</td>
+            <td><b style="color:#38bdf8;">products</b></td>
+            <td>Các sản phẩm công ty bán ra</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>using software that runs and stores information on the internet</td>
+            <td><b style="color:#38bdf8;">cloud computing</b></td>
+            <td>Điện toán đám mây (chạy phần mềm và lưu dữ liệu trên Internet)</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>customers</td>
+            <td><b style="color:#38bdf8;">clients</b></td>
+            <td>Khách hàng sử dụng dịch vụ</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>start selling a new product</td>
+            <td><b style="color:#38bdf8;">launch</b></td>
+            <td>Ra mắt / bắt đầu bán một sản phẩm mới</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- ================= TAB 4: FLASHCARDS TỔNG HỢP ================= -->
+  <div id="tab-flashcards" class="view-panel">
+    <div class="filter-bar">
+      <span class="filter-label">Chọn Unit:</span>
+      <button class="unit-pill active" onclick="setFlashUnit(0)">Tất cả (30 thuật ngữ)</button>
+      <button class="unit-pill" onclick="setFlashUnit(1)">Unit 1</button>
+      <button class="unit-pill" onclick="setFlashUnit(2)">Unit 2</button>
+      <button class="unit-pill" onclick="setFlashUnit(3)">Unit 3</button>
+    </div>
+
+    <div class="flash-grid" id="flash-container"></div>
+  </div>
+
+</div>
+
+<script>
+// ================= ÂM THANH HIỆU ỨNG (Web Audio API) =================
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(type) {
+  try {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    if (type === 'correct') {
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    } else if (type === 'wrong') {
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+      osc.frequency.linearRampToValueAtTime(130, audioCtx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.25);
+    } else if (type === 'click') {
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.08);
+    }
+  } catch(e) {}
+}
+
+// ================= DỮ LIỆU ĐẦY ĐỦ 85 CÂU KÈM DỊCH NGHĨA TIẾNG VIỆT =================
+const RAW_QUESTIONS = [
+  // --- UNIT 1 (25 CÂU) ---
+  {
+    unit: 1,
+    q: "Who is responsible for managing databases?",
+    options: ["Helpdesk supervisor", "Database administrator", "Support technician", "System analyst"],
+    ans: 1, // b
+    trans: "Ai là người chịu trách nhiệm quản lý các cơ sở dữ liệu? ➔ Quản trị viên cơ sở dữ liệu (Database administrator).",
+    explain: "Database administrator: Quản trị viên CSDL, người chịu trách nhiệm thiết kế, sao lưu và bảo mật hệ thống dữ liệu."
+  },
+  {
+    unit: 1,
+    q: "Who supervises a support technician team?",
+    options: ["Project manager", "Software developer", "Helpdesk supervisor", "System analyst"],
+    ans: 2, // c
+    trans: "Ai là người giám sát đội ngũ kỹ thuật viên hỗ trợ kỹ thuật? ➔ Người giám sát hỗ trợ (Helpdesk supervisor).",
+    explain: "Helpdesk supervisor: Trưởng nhóm/giám sát đội ngũ hỗ trợ kỹ thuật (support technician team)."
+  },
+  {
+    unit: 1,
+    q: "What does a software developer do?",
+    options: ["Diagnose the problem", "Design databases", "Install software", "Write software specifications"],
+    ans: 3, // d
+    trans: "Nhà phát triển phần mềm làm công việc gì? ➔ Viết các đặc tả kỹ thuật phần mềm (Write software specifications).",
+    explain: "Software developer: Lập trình viên / kỹ sư phần mềm viết đặc tả, code và kiểm thử chương trình."
+  },
+  {
+    unit: 1,
+    q: "What is one of the daily routines of a support technician?",
+    options: ["Check/ reply to email", "Be responsible for IT projects", "Attend meetings", "Design databases"],
+    ans: 1, // b theo trường
+    trans: "Một trong những công việc thường nhật của kỹ thuật viên hỗ trợ là gì? ➔ Chịu trách nhiệm cho các dự án CNTT (Be responsible for IT projects).",
+    explain: "Đáp án chuẩn theo file đề cương của trường: Be responsible for IT projects."
+  },
+  {
+    unit: 1,
+    q: "Which of the following means 'accessing a computer system from a distant location'?",
+    options: ["Look after computers", "Remote access", "Visit people at their desk", "Solve the problem"],
+    ans: 0, // a theo trường
+    trans: "Cụm từ nào dưới đây có nghĩa là 'truy cập hệ thống máy tính từ một vị trí xa'? ➔ Look after computers (theo file đề trường bôi đậm) / Remote access.",
+    explain: "Đáp án chuẩn theo file đề cương của trường: Look after computers."
+  },
+  {
+    unit: 1,
+    q: "What is a 'company profile'?",
+    options: ["A company that provides services", "Information about a company's background", "A private company", "A state-owned company"],
+    ans: 1, // b
+    trans: "'Hồ sơ công ty' (Company profile) là gì? ➔ Thông tin về lý lịch và quá trình hình thành của một công ty.",
+    explain: "Company profile = Information about a company's background (thông tin giới thiệu về công ty)."
+  },
+  {
+    unit: 1,
+    q: "Which word has the same meaning with 'supplier'?",
+    options: ["Manufacturer", "Provider", "Major market", "Facility"],
+    ans: 1, // b
+    trans: "Từ nào đồng nghĩa với từ 'supplier' (nhà cung cấp)? ➔ Provider (Nhà cung cấp).",
+    explain: "Supplier = Provider = Nhà cung cấp sản phẩm hoặc dịch vụ."
+  },
+  {
+    unit: 1,
+    q: "What does a 'database program' do?",
+    options: ["It helps with word processing", "It creates spreadsheets", "It manages data", "It assists with presentations"],
+    ans: 2, // c
+    trans: "'Chương trình cơ sở dữ liệu' làm nhiệm vụ gì? ➔ Nó quản lý dữ liệu (It manages data).",
+    explain: "Database program: Phần mềm hệ quản trị cơ sở dữ liệu dùng để lưu trữ và quản lý dữ liệu."
+  },
+  {
+    unit: 1,
+    q: "Which of the following terms refers to a 'private company'?",
+    options: ["State-owned company", "Leading company", "Public company", "Owned by a particular person or group"],
+    ans: 3, // d
+    trans: "Thuật ngữ nào sau đây chỉ một 'công ty tư nhân'? ➔ Do một cá nhân hoặc một nhóm người cụ thể sở hữu.",
+    explain: "Private company: Công ty thuộc sở hữu tư nhân (không phát hành cổ phiếu đại chúng)."
+  },
+  {
+    unit: 1,
+    q: "What is the meaning of 'launch' in a business context?",
+    options: ["To upgrade a product", "To introduce a new product or version", "To design a database", "To maintain a database"],
+    ans: 1, // b
+    trans: "Từ 'launch' (ra mắt) có nghĩa là gì trong ngữ cảnh kinh doanh? ➔ Giới thiệu một sản phẩm hoặc phiên bản mới ra thị trường.",
+    explain: "Launch = To introduce a new product or version for sale."
+  },
+  {
+    unit: 1,
+    q: "What does CIO stand for?",
+    options: ["Chief Innovation Officer", "Chief Information Officer", "Chief Implementation Officer", "Chief Integration Officer"],
+    ans: 1, // b
+    trans: "Chữ viết tắt CIO có nghĩa là gì? ➔ Giám đốc Thông tin (Chief Information Officer).",
+    explain: "CIO = Chief Information Officer (Người đứng đầu bộ phận công nghệ thông tin trong doanh nghiệp)."
+  },
+  {
+    unit: 1,
+    q: "Who is in charge of keeping information secure?",
+    options: ["Database administrator", "Support technician", "System analyst", "Office worker"],
+    ans: 0, // a
+    trans: "Ai chịu trách nhiệm giữ cho thông tin được an toàn và bảo mật? ➔ Quản trị viên cơ sở dữ liệu (Database administrator).",
+    explain: "Database administrator phụ trách bảo vệ và bảo mật dữ liệu của công ty."
+  },
+  {
+    unit: 1,
+    q: "Which term refers to 'details' including letters and numbers?",
+    options: ["Security", "Alphanumeric", "Character", "Network"],
+    ans: 1, // b
+    trans: "Thuật ngữ nào chỉ 'thông tin chi tiết' bao gồm cả chữ cái và chữ số? ➔ Alphanumeric (Ký tự chữ và số).",
+    explain: "Alphanumeric: Gồm cả ký tự chữ cái (alpha) và chữ số (numeric), không chứa khoảng trắng hay ký hiệu."
+  },
+  {
+    unit: 1,
+    q: "What is a colleague?",
+    options: ["A database program", "A company profile", "A fellow worker", "A provider"],
+    ans: 2, // c
+    trans: "'Colleague' (đồng nghiệp) là gì? ➔ Một người bạn cùng làm việc trong cơ quan (A fellow worker).",
+    explain: "Colleague = Fellow worker (Đồng nghiệp)."
+  },
+  {
+    unit: 1,
+    q: "What does 'maintain database' mean?",
+    options: ["To upgrade software", "To design a network", "To keep the database running smoothly", "To attend meetings"],
+    ans: 2, // c
+    trans: "'Maintain database' (bảo trì cơ sở dữ liệu) có nghĩa là gì? ➔ Giữ cho cơ sở dữ liệu hoạt động trơn tru, ổn định.",
+    explain: "Maintain database = To keep the database running smoothly."
+  },
+  {
+    unit: 1,
+    q: "What is an agenda?",
+    options: ["A record of the meeting", "A list of topics to be discussed in a meeting", "A suggestion", "An upgrade"],
+    ans: 1, // b
+    trans: "'Agenda' (chương trình nghị sự) là gì? ➔ Một danh sách các chủ đề sẽ được thảo luận trong cuộc họp.",
+    explain: "Agenda = A list of topics/items to be discussed in a meeting."
+  },
+  {
+    unit: 1,
+    q: "What is a teleconference?",
+    options: ["A video conference", "A face-to-face meeting", "A meeting held over the phone", "A meeting held via email"],
+    ans: 2, // c
+    trans: "'Teleconference' (hội nghị từ xa) là gì? ➔ Một cuộc họp được tổ chức qua điện thoại.",
+    explain: "Teleconference = A meeting held over the phone."
+  },
+  {
+    unit: 1,
+    q: "Who is the chairperson?",
+    options: ["The person who takes minutes", "The person who attends the meeting", "The person who controls the meeting", "The person who makes suggestions"],
+    ans: 2, // c
+    trans: "'Chairperson' (chủ tọa) là ai? ➔ Người điều khiển và chủ trì cuộc họp.",
+    explain: "Chairperson = The person who controls the meeting."
+  },
+  {
+    unit: 1,
+    q: "What is the meaning of 'upgrade'?",
+    options: ["To write software specifications", "To make a suggestion", "To attend a meeting", "To improve or update something"],
+    ans: 3, // d
+    trans: "'Upgrade' (nâng cấp) có nghĩa là gì? ➔ Cải tiến hoặc cập nhật một thứ gì đó.",
+    explain: "Upgrade = To improve or update something."
+  },
+  {
+    unit: 1,
+    q: "What does 'in attendance' mean?",
+    options: ["To run the meeting smoothly", "To be present at a meeting", "To control the meeting", "To keep a record"],
+    ans: 1, // b
+    trans: "'In attendance' có nghĩa là gì? ➔ Có mặt / tham dự một cuộc họp (To be present at a meeting).",
+    explain: "In attendance = Be present at a meeting."
+  },
+  {
+    unit: 1,
+    q: "What does 'employ' mean?",
+    options: ["To carry out", "To hire someone", "To request something", "To install something"],
+    ans: 1, // b
+    trans: "'Employ' (tuyển dụng) có nghĩa là gì? ➔ Thuê mướn ai đó làm việc (To hire someone).",
+    explain: "Employ = To hire someone."
+  },
+  {
+    unit: 1,
+    q: "What is a 'consulting service'?",
+    options: ["A service that requests information", "A service that installs software", "A service that carries out repairs", "A service that helps solve problems and provides advice"],
+    ans: 3, // d
+    trans: "'Dịch vụ tư vấn' (Consulting service) là gì? ➔ Một dịch vụ giúp giải quyết các vấn đề và đưa ra lời khuyên chuyên môn.",
+    explain: "Consulting service = Dịch vụ tư vấn giải pháp và lời khuyên."
+  },
+  {
+    unit: 1,
+    q: "What does 'efficient' mean?",
+    options: ["Difficult", "Fast-growing", "Productive with minimum waste", "State-owned"],
+    ans: 2, // c
+    trans: "'Efficient' (hiệu quả) có nghĩa là gì? ➔ Đạt năng suất cao với mức hao phí tối thiểu.",
+    explain: "Efficient = Productive with minimum waste."
+  },
+  {
+    unit: 1,
+    q: "What does 'diagnosing problems' involve?",
+    options: ["Requesting information", "Identifying and determining the cause of issues", "Hiring staff", "Consulting"],
+    ans: 1, // b
+    trans: "'Chẩn đoán sự cố' (Diagnosing problems) bao gồm việc gì? ➔ Nhận diện và xác định nguyên nhân của các vấn đề.",
+    explain: "Diagnosing problems = Identifying and determining the cause of issues."
+  },
+  {
+    unit: 1,
+    q: "What is 'salary'?",
+    options: ["A benefit", "A diploma", "A request", "Payment for work done"],
+    ans: 3, // d
+    trans: "'Salary' (tiền lương) là gì? ➔ Khoản tiền thanh toán cho công việc đã hoàn thành.",
+    explain: "Salary = Payment for work done."
+  },
+
+  // --- UNIT 2 (35 CÂU) ---
+  {
+    unit: 2,
+    q: "The ________ provides information about the components and capabilities of the computer.",
+    options: ["peripherals", "system specifications", "internal hardware", "monitor"],
+    ans: 1, // b
+    trans: "Bản thông số kỹ thuật hệ thống (system specifications) cung cấp thông tin về các linh kiện và năng lực hoạt động của máy tính.",
+    explain: "System specifications = Bảng thông số cấu hình phần cứng và phần mềm của máy tính."
+  },
+  {
+    unit: 2,
+    q: "The keyboard and mouse are examples of ________.",
+    options: ["internal hardware", "peripherals", "power supply unit", "screen"],
+    ans: 1, // b
+    trans: "Bàn phím và chuột là những ví dụ điển hình của thiết bị ngoại vi (peripherals).",
+    explain: "Peripherals = Các thiết bị ngoại vi cắm ngoài như bàn phím, chuột, máy in."
+  },
+  {
+    unit: 2,
+    q: "The CPU is part of the ________ of a computer.",
+    options: ["peripherals", "external drive", "internal hardware", "optical drive"],
+    ans: 2, // c
+    trans: "Bộ vi xử lý CPU là một phần thuộc phần cứng bên trong (internal hardware) của máy tính.",
+    explain: "Internal hardware = Phần cứng nằm bên trong thùng máy (CPU, RAM, bo mạch chủ)."
+  },
+  {
+    unit: 2,
+    q: "She stored the backup files on an ________.",
+    options: ["monitor", "external drive", "audio socket", "DIMM slot"],
+    ans: 1, // b
+    trans: "Cô ấy đã lưu trữ các tệp tin sao lưu trên một ổ đĩa gắn ngoài (external drive).",
+    explain: "External drive = Ổ cứng ngoài dùng để lưu dữ liệu sao lưu (backup)."
+  },
+  {
+    unit: 2,
+    q: "The ________ is where most of the computer's data is stored.",
+    options: ["monitor", "power supply unit", "printer", "hard disk drive"],
+    ans: 3, // d
+    trans: "Ổ đĩa cứng (hard disk drive - HDD) là nơi lưu trữ hầu hết dữ liệu của máy tính.",
+    explain: "Hard disk drive = Ổ đĩa cứng lưu trữ dữ liệu chính."
+  },
+  {
+    unit: 2,
+    q: "DVDs and CDs are used in the ________.",
+    options: ["Ethernet connector", "solid state drive", "optical drive", "audio socket"],
+    ans: 2, // c
+    trans: "Đĩa DVD và CD được sử dụng trong ổ đĩa quang (optical drive).",
+    explain: "Optical drive = Ổ đĩa quang (đọc đĩa CD/DVD bằng tia laser)."
+  },
+  {
+    unit: 2,
+    q: "He plugged his ________ into the computer to listen to music.",
+    options: ["keyboard", "headphones", "monitor", "power supply unit"],
+    ans: 1, // b
+    trans: "Anh ấy đã cắm tai nghe (headphones) vào máy tính để nghe nhạc.",
+    explain: "Headphones = Tai nghe."
+  },
+  {
+    unit: 2,
+    q: "She typed her report using the ________.",
+    options: ["keyboard", "mouse", "printer", "solid state drive"],
+    ans: 0, // a
+    trans: "Cô ấy đã gõ bản báo cáo của mình bằng bàn phím (keyboard).",
+    explain: "Keyboard = Bàn phím dùng để nhập văn bản."
+  },
+  {
+    unit: 2,
+    q: "A ________ is faster and more durable than a traditional hard drive.",
+    options: ["graphics card socket", "DIMM slot", "solid state drive", "SATA socket"],
+    ans: 1, // b theo trường
+    trans: "(Theo file đề trường) Khe cắm DIMM (DIMM slot) nhanh hơn và bền hơn ổ cứng truyền thống.",
+    explain: "Đáp án chuẩn theo file đề cương của trường: DIMM slot."
+  },
+  {
+    unit: 2,
+    q: "The ________ allows you to point and click on items on the screen.",
+    options: ["memory", "mouse", "monitor", "keyboard"],
+    ans: 1, // b
+    trans: "Chuột (mouse) cho phép bạn trỏ và nhấp chuột vào các đối tượng hiển thị trên màn hình.",
+    explain: "Mouse = Chuột máy tính dùng để point (trỏ) and click (nhấp)."
+  },
+  {
+    unit: 2,
+    q: "The computer's ________ determines how many programs it can run simultaneously.",
+    options: ["memory", "printer", "screen", "processor"],
+    ans: 0, // a
+    trans: "Bộ nhớ (memory / RAM) của máy tính quyết định máy có thể chạy đồng thời bao nhiêu chương trình.",
+    explain: "Memory (RAM) = Bộ nhớ tạm thời, quyết định khả năng đa nhiệm (simultaneously)."
+  },
+  {
+    unit: 2,
+    q: "The ________ displays the output from the computer.",
+    options: ["power supply unit", "monitor", "optical drive", "USB port"],
+    ans: 1, // b
+    trans: "Màn hình (monitor) hiển thị hình ảnh đầu ra từ máy tính.",
+    explain: "Monitor = Màn hình máy tính."
+  },
+  {
+    unit: 2,
+    q: "The ________ converts electrical power from an outlet into usable power for the computer.",
+    options: ["power supply unit", "monitor", "screen", "memory"],
+    ans: 0, // a
+    trans: "Bộ nguồn (power supply unit - PSU) biến đổi dòng điện từ ổ cắm thành nguồn điện sử dụng được cho máy tính.",
+    explain: "Power supply unit = Bộ nguồn máy tính."
+  },
+  {
+    unit: 2,
+    q: "He looked at the ________ to see the output from his computer.",
+    options: ["monitor", "screen", "audio socket", "power supply unit"],
+    ans: 0, // a
+    trans: "Anh ấy nhìn vào màn hình (monitor) để theo dõi kết quả hiển thị từ máy tính của mình.",
+    explain: "Monitor = Màn hình."
+  },
+  {
+    unit: 2,
+    q: "He plugged his headphones into the ________ on his computer.",
+    options: ["DIMM slot", "Ethernet connector", "SATA socket", "audio socket"],
+    ans: 3, // d
+    trans: "Anh ấy đã cắm tai nghe vào cổng cắm âm thanh (audio socket) trên máy tính.",
+    explain: "Audio socket = Jack cắm âm thanh 3.5mm."
+  },
+  {
+    unit: 2,
+    q: "He added more RAM by inserting it into the ________ on the motherboard.",
+    options: ["DIMM slot", "Ethernet connector", "USB port", "graphics card socket"],
+    ans: 0, // a
+    trans: "Anh ấy nâng cấp thêm RAM bằng cách cắm thanh RAM vào khe cắm DIMM trên bo mạch chủ.",
+    explain: "DIMM slot = Khe cắm thanh RAM trên motherboard."
+  },
+  {
+    unit: 2,
+    q: "To connect to the internet, he plugged the cable into the ________.",
+    options: ["SATA socket", "audio socket", "Ethernet connector", "monitor"],
+    ans: 2, // c
+    trans: "Để kết nối internet, anh ấy đã cắm dây cáp mạng vào cổng mạng Ethernet.",
+    explain: "Ethernet connector = Cổng kết nối dây mạng LAN."
+  },
+  {
+    unit: 2,
+    q: "The ________ is where the graphics card is installed.",
+    options: ["SATA socket", "USB port", "Ethernet connector", "graphics card socket"],
+    ans: 3, // d
+    trans: "Khe cắm card đồ họa (graphics card socket) là vị trí card màn hình được lắp đặt.",
+    explain: "Graphics card socket = Khe cắm card màn hình (PCIe)."
+  },
+  {
+    unit: 2,
+    q: "He connected his external hard drive using the ________.",
+    options: ["SATA socket", "USB port", "Ethernet connector", "audio socket"],
+    ans: 1, // b
+    trans: "Anh ấy đã kết nối ổ cứng di động bên ngoài của mình thông qua cổng USB.",
+    explain: "USB port = Cổng giao tiếp USB."
+  },
+  {
+    unit: 2,
+    q: "The computer had a ________ core processor for better performance.",
+    options: ["dual", "mega", "giga", "nano"],
+    ans: 0, // a
+    trans: "Chiếc máy tính được trang bị bộ vi xử lý 2 nhân (dual-core) để có hiệu năng xử lý tốt hơn.",
+    explain: "Dual core = Lõi kép (2 nhân)."
+  },
+  {
+    unit: 2,
+    q: "He upgraded his computer to have ________ the processing power.",
+    options: ["quad", "nano", "dual", "micro"],
+    ans: 0, // a
+    trans: "Anh ấy đã nâng cấp máy tính để có sức mạnh xử lý gấp bốn lần (quad).",
+    explain: "Quad = 4 nhân / gấp bốn lần."
+  },
+  {
+    unit: 2,
+    q: "The ________ technology allowed for very small components in the device.",
+    options: ["giga", "tera", "micro", "nano"],
+    ans: 3, // d
+    trans: "Công nghệ nano (nano technology) cho phép chế tạo các linh kiện có kích thước siêu nhỏ trong thiết bị.",
+    explain: "Nano = Tiền tố chỉ kích thước siêu nhỏ (1 phần tỷ mét)."
+  },
+  {
+    unit: 2,
+    q: "He checked the ________ to ensure the display was clear and sharp.",
+    options: ["administration staff", "processor", "screen resolution", "server"],
+    ans: 2, // c
+    trans: "Anh ấy đã kiểm tra độ phân giải màn hình (screen resolution) để đảm bảo hình ảnh hiển thị rõ ràng và sắc nét.",
+    explain: "Screen resolution = Độ phân giải màn hình (số lượng điểm ảnh pixels)."
+  },
+  {
+    unit: 2,
+    q: "If we ________ 10 by 4.6, we get 46.",
+    options: ["multiply", "divide", "subtract", "plus"],
+    ans: 0, // a
+    trans: "Nếu chúng ta nhân (multiply) 10 với 4.6, chúng ta sẽ nhận được kết quả là 46.",
+    explain: "Multiply = Phép nhân toán học."
+  },
+  {
+    unit: 2,
+    q: "If we ________ 30.8 by 2, we get 15.4.",
+    options: ["multiply", "divide", "subtract", "plus"],
+    ans: 1, // b
+    trans: "Nếu chúng ta chia (divide) 30.8 cho 2, chúng ta sẽ nhận được kết quả là 15.4.",
+    explain: "Divide = Phép chia toán học."
+  },
+  {
+    unit: 2,
+    q: "If we ________ 2.5 from 30, we get 27.5.",
+    options: ["multiply", "divide", "subtract", "plus"],
+    ans: 2, // c
+    trans: "Nếu chúng ta trừ (subtract) 2.5 khỏi 30, chúng ta sẽ nhận được kết quả là 27.5.",
+    explain: "Subtract = Phép trừ toán học."
+  },
+  {
+    unit: 2,
+    q: "The ________ of 30.7 and 2.5 is 33.2.",
+    options: ["multiply", "divide", "subtract", "sum"],
+    ans: 3, // d
+    trans: "Tổng (sum) của hai số 30.7 và 2.5 là 33.2.",
+    explain: "Sum = Tổng của phép tính cộng."
+  },
+  {
+    unit: 2,
+    q: "Which prefix is correct for the number 0.000000001?",
+    options: ["tera-", "giga-", "nano-", "micro-"],
+    ans: 2, // c
+    trans: "Tiền tố nào đúng cho con số 0.000000001 (10^-9)? ➔ Tiền tố nano-.",
+    explain: "Nano- = 10^-9 (0.000000001)."
+  },
+  {
+    unit: 2,
+    q: "________ are not used for permanent storage?",
+    options: ["RAMs", "ROMs", "Disk drives", "Hard disks"],
+    ans: 0, // a
+    trans: "Thiết bị nào sau đây không được dùng để lưu trữ dữ liệu vĩnh viễn? ➔ Bộ nhớ RAM (vì bị mất dữ liệu khi mất điện).",
+    explain: "RAM (Random Access Memory) = Bộ nhớ tạm thời, không phải lưu trữ vĩnh viễn (permanent storage)."
+  },
+  {
+    unit: 2,
+    q: "What are the results produced by a computer?",
+    options: ["input", "devices", "monitor", "information"],
+    ans: 3, // d
+    trans: "Kết quả được tạo ra sau khi máy tính xử lý dữ liệu thô gọi là gì? ➔ Thông tin (information).",
+    explain: "Information: Dữ liệu sau khi xử lý trở thành thông tin hữu ích."
+  },
+  {
+    unit: 2,
+    q: "Physical parts that make up a computer system is called ________.",
+    options: ["hardware", "software", "data", "peripheral"],
+    ans: 0, // a
+    trans: "Các bộ phận vật lý cấu thành nên hệ thống máy tính được gọi là phần cứng (hardware).",
+    explain: "Hardware = Phần cứng máy tính."
+  },
+  {
+    unit: 2,
+    q: "What is the function of the control unit?",
+    options: ["examines instructions and activate other PC's components.", "store and control information.", "performs mathematic calculations.", "converts programming language into machine code."],
+    ans: 0, // a
+    trans: "Chức năng của khối điều khiển (CU trong CPU) là gì? ➔ Kiểm tra các chỉ lệnh và kích hoạt các bộ phận khác của PC.",
+    explain: "Control Unit = Khối điều khiển chỉ huy hoạt động của máy tính."
+  },
+  {
+    unit: 2,
+    q: "Which one is not an internal component?",
+    options: ["power supply unit", "optical drive", "memory", "modem"],
+    ans: 3, // d
+    trans: "Thiết bị nào sau đây không phải là linh kiện bên trong máy tính? ➔ Bộ điều giải mạng Modem.",
+    explain: "Modem: Thiết bị mạng gắn ngoài, không phải linh kiện bên trong thùng máy."
+  },
+  {
+    unit: 2,
+    q: "What is the function of 'space bar' key?",
+    options: ["It removes the character on the left.", "It produces a blank space.", "It moves the cursor to the beginning of a new line.", "It works with combination with other keys to produce special actions."],
+    ans: 1, // b
+    trans: "Chức năng của phím cách (space bar) là gì? ➔ Nó tạo ra một khoảng trắng giữa các chữ.",
+    explain: "Space bar = Phím dấu cách."
+  },
+  {
+    unit: 2,
+    q: "A monitor is ________ device which displays data.",
+    options: ["an input", "a storage", "an output", "screen"],
+    ans: 2, // c
+    trans: "Màn hình là một thiết bị đầu ra (output device) dùng để hiển thị dữ liệu.",
+    explain: "An output device: Thiết bị xuất/đầu ra."
+  },
+
+  // --- UNIT 3 (25 CÂU) ---
+  {
+    unit: 3,
+    q: "The email's ________ should clearly indicate the topic of the message.",
+    options: ["attachment", "subject line", "signature", "sender"],
+    ans: 1, // b
+    trans: "Dòng tiêu đề (subject line) của email nên nêu rõ chủ đề của bức thư.",
+    explain: "Subject line = Tiêu đề tóm tắt nội dung email."
+  },
+  {
+    unit: 3,
+    q: "The ________ of the package signed the delivery form.",
+    options: ["receiver", "sender", "consultant", "architect"],
+    ans: 0, // a
+    trans: "Người nhận (receiver) của kiện hàng đã ký vào phiếu giao nhận.",
+    explain: "Receiver = Người nhận hàng."
+  },
+  {
+    unit: 3,
+    q: "To ensure privacy, use the ________ when sending emails to multiple recipients.",
+    options: ["forward", "subject line", "blind copy address", "guideline"],
+    ans: 2, // c
+    trans: "Để đảm bảo quyền riêng tư, hãy sử dụng tính năng gửi bản sao ẩn danh (BCC - blind copy address) khi gửi email cho nhiều người.",
+    explain: "Blind copy address (BCC) = Ẩn danh sách email người nhận."
+  },
+  {
+    unit: 3,
+    q: "A ________ helps to correct typos and spelling errors in your document.",
+    options: ["spell checker", "attachment", "dongle", "proposal"],
+    ans: 0, // a
+    trans: "Công cụ kiểm tra chính tả (spell checker) giúp phát hiện và sửa các lỗi gõ sai và lỗi chính tả trong văn bản.",
+    explain: "Spell checker = Công cụ soát lỗi chính tả."
+  },
+  {
+    unit: 3,
+    q: "The ________ is responsible for initiating communication with the recipient.",
+    options: ["forward", "sender", "architect", "consultant"],
+    ans: 1, // b
+    trans: "Người gửi (sender) chịu trách nhiệm khởi xướng việc liên lạc với người nhận.",
+    explain: "Sender = Người gửi thư."
+  },
+  {
+    unit: 3,
+    q: "Please review the ________ attached to the email for more information.",
+    options: ["VPN", "subject line (b)", "subject line (c)", "guideline"],
+    ans: 2, // c theo trường
+    trans: "(Theo file đề trường) Vui lòng xem lại dòng tiêu đề (subject line) đính kèm trong email để biết thêm thông tin.",
+    explain: "Đáp án chuẩn theo file đề cương của trường: subject line."
+  },
+  {
+    unit: 3,
+    q: "A ________ connects devices within a limited area, such as a home or office.",
+    options: ["WAN", "LAN", "mesh", "star system"],
+    ans: 1, // b
+    trans: "Mạng cục bộ (LAN) kết nối các thiết bị trong một phạm vi giới hạn, chẳng hạn như gia đình hoặc văn phòng.",
+    explain: "LAN = Local Area Network (Mạng cục bộ phạm vi hẹp)."
+  },
+  {
+    unit: 3,
+    q: "A ________ covers a large geographical area, often spanning cities or countries.",
+    options: ["LAN", "ring system", "WAN", "bus system"],
+    ans: 2, // c
+    trans: "Mạng diện rộng (WAN) bao phủ một vùng địa lý rộng lớn, thường trải dài qua các thành phố hoặc quốc gia.",
+    explain: "WAN = Wide Area Network (Mạng diện rộng toàn cầu/quốc gia)."
+  },
+  {
+    unit: 3,
+    q: "In a ________, all computers are connected to a single central hub.",
+    options: ["bus system", "ring system", "mesh", "star system"],
+    ans: 3, // d
+    trans: "Trong mạng hình sao (star system), tất cả các máy tính đều được kết nối vào một hub trung tâm duy nhất.",
+    explain: "Star system = Mạng hình sao có switch/hub ở tâm."
+  },
+  {
+    unit: 3,
+    q: "A ________ is a small device that provides internet access or connects peripherals.",
+    options: ["client-server system", "consultant", "dongle", "architect"],
+    ans: 2, // c
+    trans: "Một dongle là một thiết bị nhỏ cắm qua cổng USB cung cấp quyền truy cập internet hoặc kết nối các thiết bị ngoại vi.",
+    explain: "Dongle = Thiết bị USB nhỏ (như USB 4G, USB Wi-Fi adapter)."
+  },
+  {
+    unit: 3,
+    q: "The company uses ________ to securely connect remote employees to the network.",
+    options: ["LAN", "VPN", "WAN", "mesh"],
+    ans: 1, // b
+    trans: "Công ty sử dụng mạng riêng ảo (VPN) để kết nối các nhân viên làm việc từ xa một cách an toàn vào hệ thống mạng.",
+    explain: "VPN = Virtual Private Network (Mạng riêng ảo mã hóa bảo mật)."
+  },
+  {
+    unit: 3,
+    q: "A ________ is essential for managing requests and resources between clients and servers.",
+    options: ["central server", "forward", "spell checker", "similar function"],
+    ans: 0, // a
+    trans: "Một máy chủ trung tâm (central server) là rất thiết yếu để điều phối các yêu cầu và tài nguyên giữa máy khách và máy chủ.",
+    explain: "Central server = Máy chủ trung tâm mạng."
+  },
+  {
+    unit: 3,
+    q: "The ________ of an email often includes the sender's name and contact information.",
+    options: ["proposal", "signature", "subject line", "attachment"],
+    ans: 1, // b
+    trans: "Chữ ký (signature) của email thường bao gồm tên và thông tin liên lạc của người gửi.",
+    explain: "Signature = Chữ ký chân trang email."
+  },
+  {
+    unit: 3,
+    q: "The ________ received feedback on their designs from the clients.",
+    options: ["architect", "forward", "recipient", "consultant"],
+    ans: 0, // a
+    trans: "Kiến trúc sư hệ thống (architect) đã nhận được phản hồi về các bản thiết kế của họ từ phía khách hàng.",
+    explain: "Architect = Kiến trúc sư giải pháp / hệ thống."
+  },
+  {
+    unit: 3,
+    q: "The ________ between devices allows them to communicate without physical connections.",
+    options: ["wired", "wireless", "LAN", "WAN"],
+    ans: 1, // b
+    trans: "Kết nối không dây (wireless) giữa các thiết bị cho phép chúng truyền thông với nhau mà không cần dây nối vật lý.",
+    explain: "Wireless = Không dây (Wi-Fi, Bluetooth)."
+  },
+  {
+    unit: 3,
+    q: "We need a ________ to help us with this complex project.",
+    options: ["recipient", "dongle", "consultant", "signature"],
+    ans: 2, // c
+    trans: "Chúng tôi cần một chuyên gia tư vấn (consultant) để hỗ trợ chúng tôi thực hiện dự án phức tạp này.",
+    explain: "Consultant = Chuyên gia tư vấn cố vấn chuyên môn."
+  },
+  {
+    unit: 3,
+    q: "This project will not be approved unless we ________",
+    options: ["get through", "meet the requirement", "store", "confuse"],
+    ans: 1, // b
+    trans: "Dự án này sẽ không được phê duyệt trừ khi chúng ta đáp ứng đầy đủ các yêu cầu (meet the requirement).",
+    explain: "Meet the requirement = Thỏa mãn, đáp ứng các tiêu chuẩn yêu cầu."
+  },
+  {
+    unit: 3,
+    q: "A ________ ensures that each device is connected to two other devices, forming a loop.",
+    options: ["mesh", "bus system", "ring system", "star system"],
+    ans: 2, // c
+    trans: "Mô hình mạng hình vòng (ring system) đảm bảo mỗi thiết bị được kết nối với hai thiết bị khác, tạo thành một vòng lặp khép kín.",
+    explain: "Ring system = Cấu trúc mạng vòng khép kín."
+  },
+  {
+    unit: 3,
+    q: "The system uses a ________ to connect multiple devices in a redundant manner.",
+    options: ["bus system", "star system", "mesh", "LAN"],
+    ans: 2, // c
+    trans: "Hệ thống sử dụng mạng lưới (mesh) để kết nối nhiều thiết bị với nhau theo cơ chế dự phòng đa đường.",
+    explain: "Mesh topology = Mạng lưới liên kết chéo nhiều đường dự phòng."
+  },
+  {
+    unit: 3,
+    q: "A ________ provides a central point for distributing data in a network.",
+    options: ["client-server system", "VPN", "central server", "dongle"],
+    ans: 2, // c
+    trans: "Một máy chủ trung tâm (central server) đóng vai trò là điểm nút cốt lõi để phân phối dữ liệu trong mạng.",
+    explain: "Central server = Máy chủ trung tâm lưu trữ và phân phối tài nguyên."
+  },
+  {
+    unit: 3,
+    q: "________ like Slack and Microsoft Teams facilitate real-time communication among teams.",
+    options: ["Instant messaging software", "Spell checker"],
+    ans: 0, // a
+    trans: "Phần mềm nhắn tin tức thời (Instant messaging software) như Slack và Microsoft Teams giúp việc giao tiếp thời gian thực thuận tiện hơn.",
+    explain: "Instant messaging software = Phần mềm chat/nhắn tin trực tuyến tức thời."
+  },
+  {
+    unit: 3,
+    q: "The email's ________ should include all relevant files for the meeting.",
+    options: ["recipient", "sender", "attachment", "signature"],
+    ans: 2, // c
+    trans: "Tệp đính kèm (attachment) của email nên chứa đầy đủ tất cả các file tài liệu liên quan cho cuộc họp.",
+    explain: "Attachment = Tệp đính kèm gửi cùng thư điện tử."
+  },
+  {
+    unit: 3,
+    q: "It's important to follow the ________ when preparing your project report.",
+    options: ["guideline", "attachment", "dongle", "mesh"],
+    ans: 0, // a
+    trans: "Điều rất quan trọng là phải tuân thủ bản hướng dẫn (guideline) khi chuẩn bị bản báo cáo dự án của bạn.",
+    explain: "Guideline = Hướng dẫn, quy định mẫu."
+  },
+  {
+    unit: 3,
+    q: "A ________ provides secure, remote access to a company's internal network.",
+    options: ["similar function", "VPN", "consultant", "proposal"],
+    ans: 1, // b
+    trans: "Một mạng riêng ảo (VPN) cung cấp quyền truy cập từ xa an toàn và bảo mật vào mạng nội bộ của công ty.",
+    explain: "VPN = Virtual Private Network."
+  },
+  {
+    unit: 3,
+    q: "To ensure the proposal is successful, we must follow every ________ step.",
+    options: ["similar function", "spell checker", "architecture", "process"],
+    ans: 3, // d
+    trans: "Để đảm bảo đề xuất dự án thành công, chúng ta phải tuân thủ nghiêm ngặt từng bước trong quy trình (process).",
+    explain: "Process = Quy trình, các bước thực hiện."
+  }
+];
+
+// DỮ LIỆU NỐI TỪ VÀ ĐỊNH NGHĨA (PART 3) KÈM NGHĨA TIẾNG VIỆT
+const MATCHING_DATA = {
+  1: [
+    { term: "1. Software developer", def: "writes, tests and debugs computer programs", viet: "Lập trình viên: viết, kiểm thử và gỡ lỗi các chương trình máy tính." },
+    { term: "2. Helpdesk supervisor", def: "supervises technical support staff", viet: "Trưởng nhóm hỗ trợ: giám sát nhân viên hỗ trợ kỹ thuật." },
+    { term: "3. Support technician", def: "sets up new computers, installs software and provides help with IT problems", viet: "Kỹ thuật viên hỗ trợ: cài đặt máy mới, cài phần mềm và giải quyết lỗi IT." },
+    { term: "4. Database administrator", def: "designs, develops and maintains databases", viet: "Quản trị viên CSDL: thiết kế, phát triển và bảo trì cơ sở dữ liệu." },
+    { term: "5. Project manager", def: "is responsible for ensuring that the project is finished on time and within budget.", viet: "Quản lý dự án: đảm bảo dự án hoàn thành đúng tiến độ và trong ngân sách." },
+    { term: "6. Systems analyst", def: "communicates with the client to understand their requirements and propose solutions to meet them", viet: "Chuyên viên phân tích hệ thống: trao đổi với khách hàng để nắm yêu cầu và đề xuất giải pháp." },
+    { term: "7. Alphanumeric", def: "comprised only of letters and numbers and not including spaces or punctuation symbols", viet: "Ký tự chữ-số: chỉ gồm chữ cái và chữ số, không có dấu cách hay ký hiệu." },
+    { term: "8. Product launch", def: "introducing a new product for sale and attracting people's attention to it", viet: "Lễ ra mắt sản phẩm: giới thiệu sản phẩm mới ra thị trường và thu hút người dùng." },
+    { term: "9. Minutes", def: "a record of what is said or decided at a meeting", viet: "Biên bản cuộc họp: bản ghi lại những nội dung đã nói hoặc quyết định trong cuộc họp." },
+    { term: "10. Agenda", def: "a list of items to be discussed at a meeting", viet: "Chương trình nghị sự: danh sách các đề mục cần thảo luận trong cuộc họp." }
+  ],
+  2: [
+    { term: "1. system specifications", def: "The details about a computer's hardware and software configuration.", viet: "Thông số hệ thống: chi tiết cấu hình phần cứng và phần mềm của máy tính." },
+    { term: "2. peripherals", def: "Additional devices connected to a computer, such as a mouse, keyboard, or printer", viet: "Thiết bị ngoại vi: các thiết bị phụ cắm ngoài như chuột, bàn phím, máy in." },
+    { term: "3. power supply unit", def: "A device that provides power to a computer.", viet: "Bộ nguồn: thiết bị cấp điện cho máy tính." },
+    { term: "4. screen resolution", def: "The measurement of how many pixels your screen can display", viet: "Độ phân giải màn hình: thước đo số điểm ảnh mà màn hình hiển thị được." },
+    { term: "5. server", def: "controls or supplies information to several computers connected in a network", viet: "Máy chủ: điều khiển hoặc cung cấp thông tin cho các máy tính trong mạng." },
+    { term: "6. virtual reality goggles", def: "eyewear which functions as a display device, enables the wearer to view and interact with a series of computer-generated images", viet: "Kính thực tế ảo: kính hiển thị giúp người đeo tương tác với không gian ảo do máy tính tạo ra." },
+    { term: "7. a boot drive", def: "A storage device from which a computer starts its operating system", viet: "Ổ khởi động: thiết bị lưu trữ chứa hệ điều hành để máy tính khởi động lên." },
+    { term: "8. back up", def: "The process of copying and saving data to prevent loss", viet: "Sao lưu: quá trình sao chép dữ liệu để phòng ngừa mất mát." },
+    { term: "9. open source software", def: "A software that is free for anyone to use, modify, and distribute.", viet: "Phần mềm nguồn mở: phần mềm miễn phí cho phép mọi người sử dụng, sửa đổi và chia sẻ." },
+    { term: "10. the vendor", def: "a company that sells a particular product", viet: "Nhà cung cấp / Bên bán: công ty bán một sản phẩm cụ thể." }
+  ],
+  3: [
+    { term: "1. Central server", def: "Main computer controlling a network.", viet: "Máy chủ trung tâm: máy tính chính điều khiển toàn bộ mạng." },
+    { term: "2. Spell checker", def: "Tool for correcting spelling errors.", viet: "Bộ kiểm tra chính tả: công cụ soát và sửa lỗi gõ sai." },
+    { term: "3. Star system", def: "Network where devices connect to a hub.", viet: "Mạng hình sao: mạng mà tất cả thiết bị đều nối vào một hub trung tâm." },
+    { term: "4. Ring system", def: "Network where devices are connected in a loop.", viet: "Mạng hình vòng: mạng mà các thiết bị nối với nhau thành một vòng lặp." },
+    { term: "5. Proposal", def: "Suggestion or plan for a project.", viet: "Bản đề xuất: gợi ý hoặc kế hoạch cho một dự án." },
+    { term: "6. Blind copy address", def: "Hidden email recipient (BCC).", viet: "Bản sao ẩn danh: địa chỉ người nhận email được ẩn đi." },
+    { term: "7. Attachment", def: "File sent with an email.", viet: "Tệp đính kèm: tệp tin được gửi kèm theo email." },
+    { term: "8. Webinar", def: "Online seminar or workshop.", viet: "Hội thảo trực tuyến: hội thảo diễn ra qua mạng internet." },
+    { term: "9. Consultant", def: "Expert advisor.", viet: "Chuyên gia tư vấn: người cố vấn có chuyên môn cao." },
+    { term: "10. Mesh", def: "Network topology with interconnected devices.", viet: "Mạng lưới: cấu trúc mạng các thiết bị nối đan xen chéo nhau." }
+  ]
+};
+
+// DỮ LIỆU ĐIỀN TỪ VÀO ĐOẠN VĂN (PART 2) KÈM BẢN DỊCH TIẾNG VIỆT
+const TEXT_COMPLETION_DATA = {
+  1: {
+    title: "Apple Inc.",
+    bank: ["easy to use", "products", "devices", "quality", "technology", "customers", "hardware", "apps.", "leading", "storage"],
+    answers: ["technology", "products", "hardware", "apps.", "easy to use", "quality", "devices", "storage", "customers", "leading"],
+    template: `Apple Inc. is a famous American 1. {0} company. It was started by Steve Jobs, Steve Wozniak, and Ronald Wayne in 1976. Apple is best known for its innovative 2. {1} like the iPhone, iPad, and Mac computers. The company's headquarters is in Cupertino, California.<br><br>
+Apple creates 3. {2} and software. Their popular hardware includes the iPhone, iPad, Mac computers, Apple Watch, and Apple TV. Apple's software consists of the iOS and macOS operating systems, the iTunes media player, the Safari web browser, and many other 4. {3} One of Apple's key strengths is its ability to create products that are both powerful and 5. {4}. They focus on design and 6. {5}, making their products very popular worldwide. Apple also has a strong ecosystem, which means their 7. {6} work well together. For example, you can easily share files between an iPhone and a Mac.<br><br>
+Apple's services are also important. They offer iCloud for 8. {7}, Apple Music for streaming music, and the App Store for downloading apps. These services help keep 9. {8} connected to Apple's products.<br><br>
+Overall, Apple Inc. is a 10. {9} company in technology, known for its creativity, high-quality products, and strong brand.`,
+    translation: `<b>Tập đoàn Apple:</b><br>
+Apple Inc. là một công ty <b>công nghệ (technology)</b> nổi tiếng của Mỹ. Công ty được thành lập bởi Steve Jobs, Steve Wozniak và Ronald Wayne vào năm 1976. Apple được biết đến nhiều nhất với các <b>sản phẩm (products)</b> mang tính đột phá như iPhone, iPad và máy tính Mac. Trụ sở chính của công ty đặt tại Cupertino, bang California.<br><br>
+Apple sản xuất cả <b>phần cứng (hardware)</b> và phần mềm. Phần cứng nổi tiếng của họ gồm iPhone, iPad, máy tính Mac, Apple Watch và Apple TV. Phần mềm của Apple bao gồm hệ điều hành iOS và macOS, trình phát đa phương tiện iTunes, trình duyệt web Safari và nhiều <b>ứng dụng (apps.)</b> khác. Một trong những thế mạnh cốt lõi của Apple là khả năng tạo ra các sản phẩm vừa mạnh mẽ lại vừa <b>dễ sử dụng (easy to use)</b>. Họ tập trung vào thiết kế và <b>chất lượng (quality)</b>, giúp các sản phẩm rất được ưa chuộng trên toàn cầu. Apple cũng sở hữu một hệ sinh thái mạnh mẽ, nghĩa là các <b>thiết bị (devices)</b> của họ phối hợp với nhau rất mượt mà. Ví dụ, bạn có thể dễ dàng chia sẻ tập tin giữa iPhone và Mac.<br><br>
+Các dịch vụ của Apple cũng đóng vai trò quan trọng. Họ cung cấp iCloud để <b>lưu trữ (storage)</b>, Apple Music để nghe nhạc trực tuyến và App Store để tải ứng dụng. Những dịch vụ này giúp giữ chân <b>khách hàng (customers)</b> luôn gắn kết với các sản phẩm của Apple.<br><br>
+Nhìn chung, Apple Inc. là một công ty <b>hàng đầu (leading)</b> trong lĩnh vực công nghệ, nổi tiếng về sự sáng tạo, sản phẩm chất lượng cao và thương hiệu vững mạnh.`
+  },
+  2: {
+    title: "IT Systems",
+    bank: ["businesses", "store", "user-friendly", "servers", "combination", "tasks", "crashes", "communicating", "browse", "connections"],
+    answers: ["combination", "servers", "connections", "businesses", "tasks", "store", "crashes", "user-friendly", "browse", "communicating"],
+    template: `An IT system is a 1. {0} of hardware, software, and networks that work together to manage, process, and store information. Hardware includes physical devices like computers, 2. {1}, and routers. Software refers to programs and applications that run on these devices, such as operating systems, word processors, and games.<br><br>
+Networks are 3. {2} between devices that allow them to communicate with each other. For example, the Internet is a large network that connects computers all over the world. IT systems help 4. {3} and individuals perform 5. {4} more efficiently. They can 6. {5} large amounts of data, perform complex calculations, and automate repetitive tasks.<br><br>
+A good IT system is reliable, secure, and easy to use. Reliability means the system works well without frequent 7. {6} or errors. Security involves protecting data from unauthorized access and cyber-attacks. Ease of use means the system is 8. {7} and people can learn how to use it quickly.<br><br>
+In everyday life, we use IT systems for many things. We use them to 9. {8} the internet, send emails, play games, and manage our finances. In businesses, IT systems help with tasks like managing inventory, processing transactions, and 10. {9} with customers.<br><br>
+Overall, IT systems are essential in our modern world, making life easier and more efficient.`,
+    translation: `<b>Hệ Thống CNTT (IT Systems):</b><br>
+Hệ thống CNTT là sự <b>kết hợp (combination)</b> giữa phần cứng, phần mềm và mạng làm việc cùng nhau để quản lý, xử lý và lưu trữ thông tin. Phần cứng bao gồm các thiết bị vật lý như máy tính, <b>máy chủ (servers)</b> và thiết bị định tuyến router. Phần mềm đề cập đến các chương trình và ứng dụng chạy trên những thiết bị này, chẳng hạn như hệ điều hành, trình soạn thảo văn bản và trò chơi.<br><br>
+Mạng máy tính là các <b>kết nối (connections)</b> giữa các thiết bị cho phép chúng liên lạc với nhau. Ví dụ, Internet là một mạng khổng lồ kết nối các máy tính trên toàn thế giới. Hệ thống CNTT giúp các <b>doanh nghiệp (businesses)</b> và cá nhân thực hiện các <b>nhiệm vụ (tasks)</b> một cách hiệu quả hơn. Chúng có thể <b>lưu trữ (store)</b> lượng lớn dữ liệu, thực hiện các phép tính phức tạp và tự động hóa những công việc lặp đi lặp lại.<br><br>
+Một hệ thống CNTT tốt phải có độ tin cậy, an toàn và dễ sử dụng. Độ tin cậy nghĩa là hệ thống hoạt động tốt mà không thường xuyên bị <b>sự cố sập nguồn/treo máy (crashes)</b> hay lỗi. Bảo mật bao gồm việc bảo vệ dữ liệu khỏi sự truy cập trái phép và các cuộc tấn công mạng. Tính dễ sử dụng nghĩa là hệ thống <b>thân thiện với người dùng (user-friendly)</b> và mọi người có thể học cách sử dụng nhanh chóng.<br><br>
+Trong cuộc sống hàng ngày, chúng ta sử dụng hệ thống CNTT cho rất nhiều việc. Chúng ta dùng để <b>lướt (browse)</b> internet, gửi email, chơi game và quản lý tài chính. Trong doanh nghiệp, hệ thống CNTT hỗ trợ quản lý kho, xử lý giao dịch và <b>giao tiếp (communicating)</b> với khách hàng.<br><br>
+Nhìn chung, hệ thống CNTT là không thể thiếu trong thế giới hiện đại, giúp cuộc sống trở nên dễ dàng và hiệu quả hơn.`
+  },
+  3: {
+    title: "Introduction to Data Communication",
+    bank: ["browse", "speed", "cables", "data", "types", "communicate", "devices", "digital world", "network", "communication"],
+    answers: ["devices", "data", "cables", "browse", "communication", "network", "types", "speed", "digital world", "communicate"],
+    template: `Data communication is the process of sharing information between 1. {0} such as computers, phones, or other electronic gadgets. It allows these devices to exchange 2. {1}, like text, images, or videos, over a network. This network can be wired, like using 3. {2}, or wireless, like using Wi-Fi or Bluetooth.<br><br>
+When we send an email, 4. {3} the internet, or make a phone call, we are using data 5. {4}. The information we send is broken down into smaller pieces called "data packets." These packets travel through the 6. {5} and are reassembled at the receiving end to recreate the original message.<br><br>
+There are different 7. {6} of data communication, like point-to-point (where data goes directly from one device to another) and multipoint (where data is shared with multiple devices at once). The 8. {7} and quality of data communication depend on factors like the type of network and the devices being used.<br><br>
+In short, data communication is essential in our 9. {8}, making it possible for us to connect, share, and 10. {9} with each other every day.`,
+    translation: `<b>Giới Thiệu Về Truyền Thông Dữ Liệu (Data Communication):</b><br>
+Truyền thông dữ liệu là quá trình chia sẻ thông tin giữa các <b>thiết bị (devices)</b> như máy tính, điện thoại hoặc các thiết bị điện tử khác. Nó cho phép các thiết bị này trao đổi <b>dữ liệu (data)</b> như văn bản, hình ảnh hoặc video qua một mạng lưới. Mạng này có thể có dây, chẳng hạn như dùng <b>dây cáp (cables)</b>, hoặc không dây như dùng Wi-Fi hoặc Bluetooth.<br><br>
+Khi chúng ta gửi email, <b>lướt (browse)</b> internet hoặc gọi điện thoại, chúng ta đang sử dụng <b>truyền thông (communication)</b> dữ liệu. Thông tin chúng ta gửi được chia nhỏ thành các mảnh nhỏ gọi là "gói dữ liệu" (data packets). Các gói này di chuyển qua <b>mạng (network)</b> và được ghép nối lại ở đầu nhận để tái tạo lại thông điệp ban đầu.<br><br>
+Có nhiều <b>loại (types)</b> truyền thông dữ liệu khác nhau, như điểm-tới-điểm (dữ liệu đi trực tiếp từ máy này sang máy khác) và đa điểm (dữ liệu được chia sẻ cho nhiều thiết bị cùng lúc). <b>Tốc độ (speed)</b> và chất lượng của việc truyền thông dữ liệu phụ thuộc vào các yếu tố như loại mạng và các thiết bị đang sử dụng.<br><br>
+Tóm lại, truyền thông dữ liệu là vô cùng quan trọng trong <b>thế giới số (digital world)</b> của chúng ta, giúp chúng ta có thể kết nối, chia sẻ và <b>liên lạc/giao tiếp (communicate)</b> với nhau mỗi ngày.`
+  }
+};
+
+// ================= LOGIC TRẮC NGHIỆM =================
+let currentQuestions = [];
+let currentIndex = 0;
+let score = 0;
+let streak = 0;
+let selectedUnit = 0; // 0 = all
+
+function setQuizUnit(u) {
+  selectedUnit = u;
+  document.querySelectorAll('#tab-quiz .unit-pill').forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === u);
+  });
+  resetQuiz();
+}
+
+function resetQuiz() {
+  currentQuestions = RAW_QUESTIONS.filter(q => selectedUnit === 0 || q.unit === selectedUnit);
+  if (document.getElementById('shuffle-toggle').checked) {
+    currentQuestions = [...currentQuestions].sort(() => Math.random() - 0.5);
+  }
+  currentIndex = 0;
+  score = 0;
+  streak = 0;
+  updateHUD();
+  loadQuestion();
+}
+
+function restartQuiz() {
+  resetQuiz();
+}
+
+function updateHUD() {
+  document.getElementById('q-counter').innerText = `${currentIndex + 1}/${currentQuestions.length}`;
+  document.getElementById('score-counter').innerText = score;
+  document.getElementById('streak-counter').innerText = streak;
+  const pct = (currentIndex / currentQuestions.length) * 100;
+  document.getElementById('progress-fill').style.width = `${pct}%`;
+}
+
+function loadQuestion() {
+  if (currentIndex >= currentQuestions.length) {
+    showQuizCompletion();
+    return;
+  }
+  updateHUD();
+  const item = currentQuestions[currentIndex];
+  document.getElementById('q-unit-badge').innerText = `UNIT ${item.unit}`;
+  document.getElementById('q-question').innerText = `${currentIndex + 1}. ${item.q}`;
+  
+  const optGrid = document.getElementById('q-options');
+  optGrid.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  
+  item.options.forEach((optText, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span><span>${optText}</span>`;
+    btn.onclick = () => chooseAnswer(i);
+    optGrid.appendChild(btn);
+  });
+
+  const fb = document.getElementById('q-feedback');
+  fb.style.display = 'none';
+  fb.className = 'feedback-box';
+  document.getElementById('q-nav-row').style.display = 'none';
+}
+
+function chooseAnswer(selectedIdx) {
+  const item = currentQuestions[currentIndex];
+  const buttons = document.querySelectorAll('.opt-btn');
+  buttons.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('q-feedback');
+  fb.style.display = 'block';
+
+  let statusHtml = '';
+  if (selectedIdx === item.ans) {
+    playSound('correct');
+    buttons[selectedIdx].classList.add('correct');
+    score += 10;
+    streak += 1;
+    fb.className = 'feedback-box correct';
+    statusHtml = `<div class="fb-status" style="color:#10b981;">🎉 CHÍNH XÁC! (+10 điểm)</div>`;
+  } else {
+    playSound('wrong');
+    buttons[selectedIdx].classList.add('wrong');
+    buttons[item.ans].classList.add('correct');
+    streak = 0;
+    fb.className = 'feedback-box wrong';
+    statusHtml = `<div class="fb-status" style="color:#ef4444;">❌ CHƯA ĐÚNG! Đáp án chuẩn của trường là: <b>${item.options[item.ans]}</b></div>`;
+  }
+
+  fb.innerHTML = `
+    ${statusHtml}
+    <div class="fb-translation-box">
+      <div class="fb-translation-title">🇻🇳 DỊCH NGHĨA TRỌN VẸN CÂU NÀY:</div>
+      <div>${item.trans}</div>
+    </div>
+    <div class="fb-explain">💡 <b>Chi tiết từ vựng:</b> ${item.explain}</div>
+  `;
+
+  updateHUD();
+  document.getElementById('q-nav-row').style.display = 'flex';
+}
+
+function nextQuestion() {
+  playSound('click');
+  currentIndex++;
+  loadQuestion();
+}
+
+function showQuizCompletion() {
+  document.getElementById('progress-fill').style.width = `100%`;
+  const card = document.getElementById('q-card');
+  card.innerHTML = `
+    <div style="text-align:center; padding: 30px 10px;">
+      <div style="font-size:60px; margin-bottom:12px;">🏆</div>
+      <h2 style="font-size:28px; color:#fbbf24; margin-bottom:8px;">XUẤT SẮC! BẠN ĐÃ HOÀN THÀNH</h2>
+      <p style="font-size:18px; color:#e2e8f0; margin-bottom:20px;">
+        Tổng điểm của bạn: <b style="color:#10b981; font-size:24px;">${score}</b> điểm.
+      </p>
+      <button class="btn" onclick="resetQuiz()">Luyện Lại Từ Đầu 🔄</button>
+    </div>
+  `;
+}
+
+// ================= LOGIC NỐI TỪ (MATCHING) =================
+let currentMatchUnit = 1;
+let selectedTerm = null;
+let selectedDef = null;
+let pairedCount = 0;
+
+function setMatchUnit(u) {
+  currentMatchUnit = u;
+  document.querySelectorAll('#tab-matching .unit-pill').forEach((btn, idx) => {
+    btn.classList.toggle('active', (idx + 1) === u);
+  });
+  resetMatching();
+}
+
+function resetMatching() {
+  selectedTerm = null;
+  selectedDef = null;
+  pairedCount = 0;
+  const data = MATCHING_DATA[currentMatchUnit];
+  
+  const termsList = document.getElementById('match-terms');
+  const defsList = document.getElementById('match-defs');
+  termsList.innerHTML = '';
+  defsList.innerHTML = '';
+
+  const shuffledTerms = data.map((d, idx) => ({ id: idx, text: d.term, viet: d.viet })).sort(() => Math.random() - 0.5);
+  const shuffledDefs = data.map((d, idx) => ({ id: idx, text: d.def })).sort(() => Math.random() - 0.5);
+
+  shuffledTerms.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.innerText = item.text;
+    div.dataset.id = item.id;
+    div.dataset.viet = item.viet;
+    div.onclick = () => selectMatchingItem('term', div);
+    termsList.appendChild(div);
+  });
+
+  shuffledDefs.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'match-item';
+    div.innerText = item.text;
+    div.dataset.id = item.id;
+    div.onclick = () => selectMatchingItem('def', div);
+    defsList.appendChild(div);
+  });
+}
+
+function selectMatchingItem(type, elem) {
+  playSound('click');
+  if (type === 'term') {
+    if (selectedTerm) selectedTerm.classList.remove('selected');
+    selectedTerm = elem;
+    elem.classList.add('selected');
+  } else {
+    if (selectedDef) selectedDef.classList.remove('selected');
+    selectedDef = elem;
+    elem.classList.add('selected');
+  }
+
+  if (selectedTerm && selectedDef) {
+    if (selectedTerm.dataset.id === selectedDef.dataset.id) {
+      playSound('correct');
+      selectedTerm.className = 'match-item paired';
+      selectedDef.className = 'match-item paired';
+      selectedTerm.innerHTML += `<div style="font-size:12px; color:#38bdf8; margin-top:4px;">🇻🇳 ${selectedTerm.dataset.viet}</div>`;
+      pairedCount++;
+      selectedTerm = null;
+      selectedDef = null;
+
+      if (pairedCount === MATCHING_DATA[currentMatchUnit].length) {
+        setTimeout(() => {
+          alert('🎉 Tuyệt vời! Bạn đã ghép đúng tất cả 10 cặp từ vựng của Unit ' + currentMatchUnit + '!');
+        }, 300);
+      }
+    } else {
+      playSound('wrong');
+      const t = selectedTerm;
+      const d = selectedDef;
+      t.style.borderColor = '#ef4444';
+      d.style.borderColor = '#ef4444';
+      setTimeout(() => {
+        t.style.borderColor = '';
+        d.style.borderColor = '';
+        t.classList.remove('selected');
+        d.classList.remove('selected');
+      }, 500);
+      selectedTerm = null;
+      selectedDef = null;
+    }
+  }
+}
+
+// ================= LOGIC ĐIỀN TỪ (TEXT COMPLETION) =================
+let currentTextUnit = 1;
+
+function setTextUnit(u) {
+  currentTextUnit = u;
+  document.querySelectorAll('#tab-text .unit-pill').forEach((btn, idx) => {
+    btn.classList.toggle('active', (idx + 1) === u);
+  });
+  resetTextCompletion();
+}
+
+function resetTextCompletion() {
+  const data = TEXT_COMPLETION_DATA[currentTextUnit];
+  document.getElementById('text-title').innerText = data.title;
+  
+  // Render word bank
+  const bank = document.getElementById('text-word-bank');
+  bank.innerHTML = '';
+  data.bank.forEach(w => {
+    const span = document.createElement('span');
+    span.className = 'bank-word';
+    span.innerText = w;
+    bank.appendChild(span);
+  });
+
+  // Render text with selects
+  let html = data.template;
+  data.answers.forEach((ans, idx) => {
+    let optionsHtml = `<option value="">-- chọn từ --</option>`;
+    data.bank.forEach(w => {
+      optionsHtml += `<option value="${w}">${w}</option>`;
+    });
+    const selectTag = `<select class="blank-select" id="blank-${idx}">${optionsHtml}</select>`;
+    html = html.replace(`{${idx}}`, selectTag);
+  });
+
+  document.getElementById('text-body').innerHTML = html;
+  document.getElementById('text-result-badge').innerText = '';
+  document.getElementById('text-translation-box').style.display = 'none';
+}
+
+function checkTextCompletion() {
+  const data = TEXT_COMPLETION_DATA[currentTextUnit];
+  let correctCount = 0;
+  data.answers.forEach((ans, idx) => {
+    const sel = document.getElementById(`blank-${idx}`);
+    if (sel.value.trim().toLowerCase() === ans.trim().toLowerCase()) {
+      sel.className = 'blank-select correct';
+      correctCount++;
+    } else {
+      sel.className = 'blank-select wrong';
+    }
+  });
+
+  const resBadge = document.getElementById('text-result-badge');
+  if (correctCount === data.answers.length) {
+    playSound('correct');
+    resBadge.style.color = '#10b981';
+    resBadge.innerText = `🎉 Hoàn hảo! 10/${data.answers.length} câu đúng!`;
+  } else {
+    playSound('wrong');
+    resBadge.style.color = '#ef4444';
+    resBadge.innerText = `Đúng ${correctCount}/${data.answers.length} vị trí. (Các ô đỏ là chỗ sai)`;
+  }
+
+  // Hiển thị khung dịch nghĩa bài đọc
+  const transBox = document.getElementById('text-translation-box');
+  const transContent = document.getElementById('text-translation-content');
+  transContent.innerHTML = data.translation;
+  transBox.style.display = 'block';
+  transBox.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ================= LOGIC FLASHCARDS =================
+let currentFlashUnit = 0;
+
+function setFlashUnit(u) {
+  currentFlashUnit = u;
+  document.querySelectorAll('#tab-flashcards .unit-pill').forEach((btn, idx) => {
+    btn.classList.toggle('active', idx === u);
+  });
+  renderFlashcards();
+}
+
+function renderFlashcards() {
+  const container = document.getElementById('flash-container');
+  container.innerHTML = '';
+
+  let list = [];
+  if (currentFlashUnit === 0) {
+    list = [...MATCHING_DATA[1], ...MATCHING_DATA[2], ...MATCHING_DATA[3]];
+  } else {
+    list = MATCHING_DATA[currentFlashUnit];
+  }
+
+  list.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'flash-card';
+    card.innerHTML = `
+      <div class="fc-word">${item.term}</div>
+      <div class="fc-def">${item.def}</div>
+      <div class="fc-viet">🇻🇳 <b>Dịch:</b> ${item.viet}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ================= TAB NAVIGATION =================
+function setReadSubTab(subTabId, btn) {
+  playSound('click');
+  document.querySelectorAll('.read-pill').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.read-content-panel').forEach(p => p.style.display = 'none');
+  btn.classList.add('active');
+  document.getElementById('sub-' + subTabId).style.display = 'block';
+}
+
+function switchTab(tabName) {
+  playSound('click');
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+
+  event.currentTarget.classList.add('active');
+  document.getElementById(`tab-${tabName}`).classList.add('active');
+
+  if (tabName === 'quiz') updateHUD();
+  if (tabName === 'matching') resetMatching();
+  if (tabName === 'text') resetTextCompletion();
+  if (tabName === 'flashcards') renderFlashcards();
+}
+
+// Khởi chạy mặc định
+window.onload = () => {
+  resetQuiz();
+  resetMatching();
+  resetTextCompletion();
+  renderFlashcards();
+};
+</script>
+
+</body>
+</html>
