@@ -3515,6 +3515,7 @@ window.onload = () => {
   renderFlashcards();
 };
 
+  
   // SLIP MODE CONTROLLER (TRACK 09)
   function switchSlipMode(mode, btn) {
     document.querySelectorAll('.slip-tab-btn').forEach(b => b.classList.remove('active'));
@@ -3534,7 +3535,7 @@ window.onload = () => {
     inputs.forEach(input => {
       const val = input.value.trim().toLowerCase();
       const validAnswers = input.dataset.ans.split(',').map(a => a.trim().toLowerCase());
-      if (val && validAnswers.some(ans => val === ans || val.includes(ans))) {
+      if (val && validAnswers.some(ans => val === ans || val.includes(ans) || ans.includes(val))) {
         input.classList.remove('is-wrong');
         input.classList.add('is-correct');
         correct++;
@@ -3546,19 +3547,19 @@ window.onload = () => {
     const fb = document.getElementById('slip-practice-feedback');
     if (correct === inputs.length) {
       fb.style.color = '#10b981';
-      fb.textContent = `🎉 Xuất sắc! Bạn đã điền chính xác ${correct}/${inputs.length} thông số cốt lõi!`;
+      fb.textContent = `🎉 Tuyệt đỉnh! Bạn đã điền chính xác toàn bộ ${correct}/${inputs.length} thông số trên phiếu!`;
     } else {
       fb.style.color = '#ef4444';
-      fb.textContent = `Đúng ${correct}/${inputs.length} ô. Hãy xem các ô viền đỏ hoặc bấm "Xem Đáp Án" để học thuộc nhé!`;
+      fb.textContent = `Đúng ${correct}/${inputs.length} ô. Hãy kiểm tra các ô màu đỏ hoặc bấm "Điền Nhanh Toàn Bộ Số Đúng" để học thuộc nhé!`;
     }
   }
 
   function showSlipPracticeAnswers() {
-    document.getElementById('slip-in-hdd').value = '500 GB';
-    document.getElementById('slip-in-ram').value = '16 GB';
-    document.getElementById('slip-in-res').value = '1366 × 768';
-    document.getElementById('slip-in-cpu').value = 'eight-core';
-    document.getElementById('slip-in-usb').value = '8';
+    const inputs = document.querySelectorAll('#slip-view-practice .slip-input-blank');
+    inputs.forEach(input => {
+      const firstAns = input.dataset.ans.split(',')[0].trim();
+      input.value = firstAns;
+    });
     checkSlipPractice();
   }
 
@@ -3570,6 +3571,8 @@ window.onload = () => {
     });
     document.getElementById('slip-practice-feedback').textContent = '';
   }
+
+
 
 </script>
 
