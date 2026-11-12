@@ -534,6 +534,96 @@
   }
 
     /* Read & Listen Styles */
+  .cloze-input {
+    background: #0f172a;
+    border: 1.5px solid #6366f1;
+    color: #fbbf24;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 14px;
+    outline: none;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .cloze-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  }
+  .cloze-input.correct {
+    background: #064e3b !important;
+    border-color: #10b981 !important;
+    color: #a7f3d0 !important;
+  }
+  .cloze-input.wrong {
+    background: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fecaca !important;
+  }
+  .cloze-highlight {
+    background: rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    border-bottom: 2px solid #f59e0b;
+  }
+  .track-mode-bar {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+    background: #0f172a;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+  }
+  .track-mode-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .track-mode-btn:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.05);
+  }
+  .track-mode-btn.active {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+  }
+  .cloze-word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 20px;
+    padding: 14px;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px dashed #475569;
+  }
+  .cloze-chip {
+    background: #1e1b4b;
+    color: #c7d2fe;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 16px;
+    border: 1px solid #4338ca;
+  }
+  .cloze-ctrls {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0;
+    align-items: center;
+    flex-wrap: wrap;
+  }
   .read-pill {
     background: var(--card-hover);
     color: var(--text);
@@ -854,7 +944,7 @@
       <div class="read-subtitle">Đoạn hội thoại đối chiếu giữa <b>Phiếu đặt hàng (Order form)</b> của Quản lý và <b>Phiếu giao hàng thực tế (Delivery slip)</b>.</div>
 
       <div class="fact-box">
-        <div class="fact-title">📌 BẢNG SO SÁNH THÔNG SỐ CỐT LÕI (CỰC KỲ DỄ THI):</div>
+        <div class="fact-title">📌 BẢNG SO SÁNH THÔNG SỐ CỐT LÕI (CỰC KỲ DỄ THI ĐỤC LỖ & TRẮC NGHIỆM):</div>
         <table class="fact-table">
           <thead>
             <tr>
@@ -947,122 +1037,80 @@
         </table>
       </div>
 
-      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
-      
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">The shipment just arrived!</div>
-        <div class="dialogue-vi">Kiện hàng vừa mới tới nơi ạ!</div>
+      <!-- THANH CHỌN CHẾ ĐỘ -->
+      <div class="track-mode-bar">
+        <button class="track-mode-btn active" onclick="switchTrackMode('track09', 'view', this)">👁️ Xem Lời Thoại Tô Đậm Từ Khóa Dễ Đục Lỗ</button>
+        <button class="track-mode-btn" onclick="switchTrackMode('track09', 'cloze', this)">✍️ Chế Độ Luyện Nghe Điền Khuyết (Đục Lỗ)</button>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Great! Let's check everything's here. OK. I've got the order form here.</div>
-        <div class="dialogue-vi">Tuyệt quá! Hãy kiểm tra xem mọi thứ có đủ ở đây không. Tôi có phiếu đặt hàng ở đây rồi.</div>
+
+      <!-- CHẾ ĐỘ 1: XEM TÔ ĐẬM -->
+      <div id="track09-view-mode">
+        <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI (CÁC TỪ MÀU VÀNG LÀ VỊ TRÍ RẤT HAY BỊ ĐỤC LỖ):</div>
+        
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">The <span class="cloze-highlight">shipment</span> just arrived!</div><div class="dialogue-vi">Kiện hàng vừa mới tới nơi ạ!</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Great! Let's check everything's here. OK. I've got the <span class="cloze-highlight">order form</span> here.</div><div class="dialogue-vi">Tuyệt quá! Hãy kiểm tra xem mọi thứ có đủ ở đây không. Tôi có phiếu đặt hàng ở đây rồi.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And here's the <span class="cloze-highlight">delivery slip</span> from the shipment.</div><div class="dialogue-vi">Và đây là phiếu giao hàng đi kèm kiện hàng ạ.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Right. Let's see if they match. What's first on yours?</div><div class="dialogue-vi">Được rồi. Hãy xem chúng có khớp nhau không. Thứ đầu tiên trên phiếu của cậu là gì?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><span class="cloze-highlight">Five</span> laptops, each with a <span class="cloze-highlight">2.73-gigahertz</span> <span class="cloze-highlight">dual-core</span> processor.</div><div class="dialogue-vi">5 chiếc laptop, mỗi chiếc chạy chip 2 nhân 2.73 GHz.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">OK, that's fine.</div><div class="dialogue-vi">Được rồi, phần đó đúng.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And <span class="cloze-highlight">390-gigabyte</span> drives.</div><div class="dialogue-vi">Và ổ cứng dung lượng 390 GB.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Ah! We ordered <span class="cloze-highlight">500-gigabyte</span> drives. Oh dear! How much <span class="cloze-highlight">memory</span> do they have?</div><div class="dialogue-vi">Ơ kìa! Chúng ta đặt ổ cứng 500 GB cơ mà. Thôi chết rồi! Thế bộ nhớ RAM của chúng là bao nhiêu?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><span class="cloze-highlight">Eight</span> gigabytes.</div><div class="dialogue-vi">Dạ 8 GB ạ.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">That's no good. We ordered <span class="cloze-highlight">16</span>. How about the <span class="cloze-highlight">video card</span>?</div><div class="dialogue-vi">Thế thì không ổn rồi. Chúng ta đặt 16 GB. Còn card màn hình thì sao?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><span class="cloze-highlight">Ladeon 3850</span>. <span class="cloze-highlight">One</span> gigabyte.</div><div class="dialogue-vi">Card Ladeon 3850, dung lượng 1 GB ạ.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Well, at least they got that one right. And the screen <span class="cloze-highlight">resolution</span>?</div><div class="dialogue-vi">Chà, ít nhất thì mục đó họ giao đúng. Còn độ phân giải màn hình?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><span class="cloze-highlight">15.6-inch</span>, <span class="cloze-highlight">1920 × 1080</span>.</div><div class="dialogue-vi">Màn hình 15.6 inch, độ phân giải 1920 × 1080.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Hmm... Should be <span class="cloze-highlight">1366 × 768</span>. I won't complain about that though.</div><div class="dialogue-vi">Hừm... Đáng lẽ phải là 1366 × 768. Nhưng nét hơn thì tôi không phàn nàn đâu.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And <span class="cloze-highlight">four</span> USB ports, <span class="cloze-highlight">no OS</span>, one year <span class="cloze-highlight">warranty</span>.</div><div class="dialogue-vi">Và có 4 cổng USB, không có sẵn hệ điều hành, bảo hành 1 năm ạ.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Yep, that bit's fine. How about the <span class="cloze-highlight">desktops</span>? There should be <span class="cloze-highlight">ten</span> of those?</div><div class="dialogue-vi">Ừ, phần đó đúng. Thế còn máy tính để bàn? Có đúng 10 bộ không?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">Yep, that's what this says as well. And, er... yep, ten boxes.</div><div class="dialogue-vi">Vâng, phiếu cũng ghi thế ạ. Và đúng 10 thùng máy.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">And they should be <span class="cloze-highlight">3.4 gigahertz</span> and with <span class="cloze-highlight">eight cores</span>.</div><div class="dialogue-vi">Và chúng phải có tốc độ 3.4 GHz với vi xử lý 8 nhân đấy nhé.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">Nope, they each have <span class="cloze-highlight">quad cores</span>.</div><div class="dialogue-vi">Không ạ, mỗi máy chỉ có chip 4 nhân thôi.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Oh dear! Still not what we ordered. We really need eight cores. What about the <span class="cloze-highlight">optical drive</span>?</div><div class="dialogue-vi">Trời đất ơi! Lại giao sai cái ta đã đặt rồi. Còn ổ đĩa quang thì sao?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">That's OK. It's an <span class="cloze-highlight">8x DVD-RW</span>. And there are four USB ports and a <span class="cloze-highlight">wi-fi card</span>.</div><div class="dialogue-vi">Dạ đúng là loại 8x DVD-RW. Và có 4 cổng USB kèm card Wi-Fi.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Well, they got the optical drive and the wi-fi card right, but we asked for <span class="cloze-highlight">eight</span> USB ports! Oh dear! I'll call Dingle straight away.</div><div class="dialogue-vi">Chà, họ giao ổ quang với card Wi-Fi đúng, nhưng ta yêu cầu tới 8 cổng USB cơ mà! Tôi sẽ gọi ngay cho bên Dingle.</div></div>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">And here's the delivery slip from the shipment.</div>
-        <div class="dialogue-vi">Và đây là phiếu giao hàng đi kèm kiện hàng ạ.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Right. Let's see if they match. What's first on yours?</div>
-        <div class="dialogue-vi">Được rồi. Hãy xem chúng có khớp nhau không. Thứ đầu tiên trên phiếu của cậu là gì?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">Five laptops, each with a 2.73-gigahertz dual-core processor.</div>
-        <div class="dialogue-vi">5 chiếc máy tính xách tay (laptop), mỗi chiếc chạy chip 2 nhân 2.73 GHz.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">OK, that's fine.</div>
-        <div class="dialogue-vi">Được rồi, phần đó đúng.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">And 390-gigabyte drives.</div>
-        <div class="dialogue-vi">Và ổ cứng dung lượng 390 GB.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Ah! We ordered 500-gigabyte drives. Oh dear! How much memory do they have?</div>
-        <div class="dialogue-vi">Ơ kìa! Chúng ta đặt ổ cứng 500 GB cơ mà. Thôi chết rồi! Thế bộ nhớ RAM của chúng là bao nhiêu?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">Eight gigabytes.</div>
-        <div class="dialogue-vi">Dạ 8 GB ạ.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">That's no good. We ordered 16. How about the video card?</div>
-        <div class="dialogue-vi">Thế thì không ổn rồi. Chúng ta đặt 16 GB. Còn card màn hình thì sao?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">Ladeon 3850. One gigabyte.</div>
-        <div class="dialogue-vi">Card Ladeon 3850, dung lượng 1 GB ạ.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Well, at least they got that one right. And the screen resolution?</div>
-        <div class="dialogue-vi">Chà, ít nhất thì mục đó họ giao đúng. Còn độ phân giải màn hình?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">15.6-inch, 1920 × 1080.</div>
-        <div class="dialogue-vi">Màn hình 15.6 inch, độ phân giải 1920 × 1080.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Hmm... Should be 1366 × 768. I won't complain about that though.</div>
-        <div class="dialogue-vi">Hừm... Đáng lẽ phải là 1366 × 768. Nhưng màn hình nét hơn thì tôi sẽ không phàn nàn đâu.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">And four USB ports, no OS, one year warranty.</div>
-        <div class="dialogue-vi">Và có 4 cổng USB, không có sẵn hệ điều hành (no OS), bảo hành 1 năm ạ.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Yep, that bit's fine. How about the desktops? There should be ten of those?</div>
-        <div class="dialogue-vi">Ừ, phần đó đúng. Thế còn máy tính để bàn (desktop)? Có đúng 10 bộ không?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">Yep, that's what this says as well. And, er... yep, ten boxes.</div>
-        <div class="dialogue-vi">Vâng, phiếu cũng ghi thế ạ. Và... vâng, đúng 10 thùng máy.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">And they should be 3.4 gigahertz and with eight cores.</div>
-        <div class="dialogue-vi">Và chúng phải có tốc độ 3.4 GHz với vi xử lý 8 nhân (8 cores) đấy nhé.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">Nope, they each have quad cores.</div>
-        <div class="dialogue-vi">Không ạ, mỗi máy chỉ có chip 4 nhân (quad cores) thôi.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Oh dear! Still not what we ordered. We really need eight cores. What about the optical drive?</div>
-        <div class="dialogue-vi">Trời đất ơi! Lại không đúng như ta đã đặt rồi. Ta thực sự cần chip 8 nhân mà. Còn ổ đĩa quang thì sao?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">That's OK. It's an 8x DVD-RW.</div>
-        <div class="dialogue-vi">Dạ ổ quang đúng ạ, là loại 8x DVD-RW.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
-        <div class="dialogue-en">And there are four USB ports and a wi-fi card.</div>
-        <div class="dialogue-vi">Và có 4 cổng USB kèm một card mạng Wi-Fi.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
-        <div class="dialogue-en">Well, they got the optical drive and the wi-fi card right, but we asked for eight USB ports! Oh dear! I'll call Dingle straight away.</div>
-        <div class="dialogue-vi">Chà, họ giao ổ quang với card Wi-Fi đúng, nhưng ta yêu cầu tới 8 cổng USB cơ mà! Thôi để tôi gọi ngay cho bên Dingle để khiếu nại.</div>
+
+      <!-- CHẾ ĐỘ 2: LUYỆN ĐIỀN KHUYẾT (CLOZE PRACTICE) -->
+      <div id="track09-cloze-mode" style="display:none;">
+        <div style="font-weight:700; color:#fbbf24; margin-bottom:8px;">HỘP TỪ GỢI Ý (WORD BANK):</div>
+        <div class="cloze-word-bank">
+          <span class="cloze-chip">shipment</span><span class="cloze-chip">order form</span><span class="cloze-chip">delivery slip</span>
+          <span class="cloze-chip">Five</span><span class="cloze-chip">2.73-gigahertz</span><span class="cloze-chip">dual-core</span>
+          <span class="cloze-chip">390-gigabyte</span><span class="cloze-chip">500-gigabyte</span><span class="cloze-chip">memory</span>
+          <span class="cloze-chip">Eight</span><span class="cloze-chip">16</span><span class="cloze-chip">video card</span>
+          <span class="cloze-chip">Ladeon 3850</span><span class="cloze-chip">resolution</span><span class="cloze-chip">15.6-inch</span>
+          <span class="cloze-chip">1920 × 1080</span><span class="cloze-chip">four</span><span class="cloze-chip">warranty</span>
+          <span class="cloze-chip">desktops</span><span class="cloze-chip">ten</span><span class="cloze-chip">3.4 gigahertz</span>
+          <span class="cloze-chip">eight cores</span><span class="cloze-chip">quad cores</span><span class="cloze-chip">optical drive</span>
+          <span class="cloze-chip">8x DVD-RW</span><span class="cloze-chip">wi-fi card</span><span class="cloze-chip">eight</span>
+        </div>
+
+        <div class="cloze-ctrls">
+          <button class="btn" onclick="checkCloze('track09')">Kiểm Tra Đáp Án</button>
+          <button class="btn btn-secondary" onclick="showClozeAnswers('track09')">Xem Đáp Án Chuẩn</button>
+          <button class="btn btn-secondary" onclick="resetCloze('track09')">Làm Lại</button>
+          <span id="track09-result" style="font-weight:800; font-size:15px; margin-left:8px;"></span>
+        </div>
+
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">The <input class="cloze-input" data-track="track09" data-ans="shipment" style="width:110px;"> just arrived!</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Great! Let's check everything's here. OK. I've got the <input class="cloze-input" data-track="track09" data-ans="order form" style="width:120px;"> here.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And here's the <input class="cloze-input" data-track="track09" data-ans="delivery slip" style="width:120px;"> from the shipment.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><input class="cloze-input" data-track="track09" data-ans="Five" style="width:65px;"> laptops, each with a <input class="cloze-input" data-track="track09" data-ans="2.73-gigahertz" style="width:130px;"> <input class="cloze-input" data-track="track09" data-ans="dual-core" style="width:105px;"> processor.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And <input class="cloze-input" data-track="track09" data-ans="390-gigabyte" style="width:130px;"> drives.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Ah! We ordered <input class="cloze-input" data-track="track09" data-ans="500-gigabyte" style="width:130px;"> drives. Oh dear! How much <input class="cloze-input" data-track="track09" data-ans="memory" style="width:95px;"> do they have?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><input class="cloze-input" data-track="track09" data-ans="Eight" style="width:75px;"> gigabytes.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">That's no good. We ordered <input class="cloze-input" data-track="track09" data-ans="16" style="width:50px;">. How about the <input class="cloze-input" data-track="track09" data-ans="video card" style="width:110px;">?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><input class="cloze-input" data-track="track09" data-ans="Ladeon 3850" style="width:130px;">. One gigabyte.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Well, at least they got that one right. And the screen <input class="cloze-input" data-track="track09" data-ans="resolution" style="width:110px;">?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en"><input class="cloze-input" data-track="track09" data-ans="15.6-inch" style="width:95px;">, <input class="cloze-input" data-track="track09" data-ans="1920 × 1080" style="width:120px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">And <input class="cloze-input" data-track="track09" data-ans="four" style="width:65px;"> USB ports, no OS, one year <input class="cloze-input" data-track="track09" data-ans="warranty" style="width:95px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Yep, that bit's fine. How about the <input class="cloze-input" data-track="track09" data-ans="desktops" style="width:100px;">? There should be <input class="cloze-input" data-track="track09" data-ans="ten" style="width:65px;"> of those?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">And they should be <input class="cloze-input" data-track="track09" data-ans="3.4 gigahertz" style="width:125px;"> and with <input class="cloze-input" data-track="track09" data-ans="eight cores" style="width:115px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">Nope, they each have <input class="cloze-input" data-track="track09" data-ans="quad cores" style="width:115px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Oh dear! Still not what we ordered. We really need eight cores. What about the <input class="cloze-input" data-track="track09" data-ans="optical drive" style="width:125px;">?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Assistant:</div><div class="dialogue-en">That's OK. It's an <input class="cloze-input" data-track="track09" data-ans="8x DVD-RW" style="width:115px;">. And there are four USB ports and a <input class="cloze-input" data-track="track09" data-ans="wi-fi card" style="width:105px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">Manager:</div><div class="dialogue-en">Well, they got the optical drive and the wi-fi card right, but we asked for <input class="cloze-input" data-track="track09" data-ans="eight" style="width:70px;"> USB ports!</div></div>
       </div>
     </div>
 
@@ -1082,82 +1130,57 @@
         </div>
       </div>
 
-      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
-      
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">OK, so first, can you see 'Computer' in the left-hand pane?</div>
-        <div class="dialogue-vi">Được rồi, đầu tiên cậu có thấy mục 'Computer' ở khung bên trái không?</div>
+      <!-- THANH CHỌN CHẾ ĐỘ -->
+      <div class="track-mode-bar">
+        <button class="track-mode-btn active" onclick="switchTrackMode('track10', 'view', this)">👁️ Xem Lời Thoại Tô Đậm Từ Khóa Dễ Đục Lỗ</button>
+        <button class="track-mode-btn" onclick="switchTrackMode('track10', 'cloze', this)">✍️ Chế Độ Luyện Nghe Điền Khuyết (Đục Lỗ)</button>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Er... mm... no, I don't think so.</div>
-        <div class="dialogue-vi">Ờ... không, tôi chưa thấy.</div>
+
+      <!-- CHẾ ĐỘ 1: XEM TÔ ĐẬM -->
+      <div id="track10-view-mode">
+        <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI (CÁC TỪ MÀU VÀNG LÀ VỊ TRÍ RẤT HAY BỊ ĐỤC LỖ):</div>
+        
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">OK, so first, can you see '<span class="cloze-highlight">Computer</span>' in the <span class="cloze-highlight">left-hand pane</span>?</div><div class="dialogue-vi">Đầu tiên cậu có thấy mục 'Computer' ở khung bên trái không?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">OK, can you <span class="cloze-highlight">scroll up</span> to the top?</div><div class="dialogue-vi">Cậu cuộn chuột lên trên cùng xem nào?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Now, <span class="cloze-highlight">right-click</span> on that and a <span class="cloze-highlight">menu</span> will appear. Just select '<span class="cloze-highlight">Manage</span>'.</div><div class="dialogue-vi">Nhấp chuột phải vào đó, menu hiện ra rồi chọn 'Manage'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Can you see where it says '<span class="cloze-highlight">Storage</span>', in the left-hand pane?</div><div class="dialogue-vi">Cậu có thấy chỗ nào ghi chữ 'Storage' ở khung bên trái không?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Just to the left of that is a little box with a <span class="cloze-highlight">plus sign</span>. Click on that.</div><div class="dialogue-vi">Ngay bên trái chữ đó có một ô vuông nhỏ chứa dấu cộng (+). Nhấp vào đó.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">And a new icon will appear, labelled '<span class="cloze-highlight">Disk management</span>'. Click on that and a list of your <span class="cloze-highlight">drives</span> will appear in the <span class="cloze-highlight">centre pane</span>.</div><div class="dialogue-vi">Biểu tượng 'Disk management' hiện ra, nhấp vào đó danh sách ổ đĩa sẽ hiện ở khung giữa.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">There are two: '<span class="cloze-highlight">Disk 0</span>' and '<span class="cloze-highlight">Disk 1</span>'.</div><div class="dialogue-vi">Có 2 ổ: 'Disk 0' và 'Disk 1'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Now, just right-click where it says 'Disk 0' and choose '<span class="cloze-highlight">Properties</span>' from the menu. Then, from the box that appears, choose the '<span class="cloze-highlight">Details</span>' tab.</div><div class="dialogue-vi">Chuột phải vào 'Disk 0', chọn 'Properties' rồi chọn thẻ 'Details'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">In that <span class="cloze-highlight">drop-down menu</span>, select '<span class="cloze-highlight">Install date</span>'.</div><div class="dialogue-vi">Trong menu thả xuống đó, chọn 'Install date'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Ah, yes. Here it is. <span class="cloze-highlight">7 December 2011</span>.</div><div class="dialogue-vi">Nó đây: Ngày 7 tháng 12 năm 2011.</div></div>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">OK, can you scroll up to the top?</div>
-        <div class="dialogue-vi">Cậu cuộn chuột lên trên cùng xem nào?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Ah, yes. I can see it now.</div>
-        <div class="dialogue-vi">À thấy rồi, tôi thấy nó rồi.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">Now, right-click on that and a menu will appear. Just select 'Manage'. There may be a short wait but a box should appear. Can you see it yet?</div>
-        <div class="dialogue-vi">Bây giờ, nhấp chuột phải vào đó, một menu sẽ hiện ra. Chọn 'Manage'. Có thể phải đợi một lát nhưng một cửa sổ sẽ hiện lên. Cậu thấy chưa?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Mm... not yet. Ah, yes! There it is.</div>
-        <div class="dialogue-vi">Chưa... À được rồi! Nó đây rồi.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">Can you see where it says 'Storage', in the left-hand pane?</div>
-        <div class="dialogue-vi">Cậu có thấy chỗ nào ghi chữ 'Storage' ở khung bên trái không?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Yep.</div>
-        <div class="dialogue-vi">Có.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">Just to the left of that is a little box with a plus sign. Click on that.</div>
-        <div class="dialogue-vi">Ngay bên trái chữ đó có một ô vuông nhỏ chứa dấu cộng (+). Nhấp vào đó.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Um... yep, got it!</div>
-        <div class="dialogue-vi">Xong rồi, tôi bấm rồi!</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">And a new icon will appear, labelled 'Disk management'. Click on that and a list of your drives will appear in the centre pane. How many are there?</div>
-        <div class="dialogue-vi">Một biểu tượng mới sẽ hiện ra mang tên 'Disk management' (Quản lý ổ đĩa). Nhấp vào đó và danh sách các ổ đĩa sẽ hiện ra ở khung giữa. Có bao nhiêu ổ ở đó?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">There are two: 'Disk 0' and 'Disk 1'.</div>
-        <div class="dialogue-vi">Có 2 ổ: 'Disk 0' và 'Disk 1'.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">I see. Now, just right-click where it says 'Disk 0' and choose 'Properties' from the menu. Then, from the box that appears, choose the 'Details' tab. Then you'll see a drop-down menu.</div>
-        <div class="dialogue-vi">Tôi hiểu rồi. Giờ hãy nhấp chuột phải vào chỗ ghi 'Disk 0' và chọn 'Properties'. Sau đó chọn thẻ 'Details'. Cậu sẽ thấy một menu thả xuống.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
-        <div class="dialogue-en">In that drop-down menu, select 'Install date'. It's about half way down. You'll probably have to scroll down a bit.</div>
-        <div class="dialogue-vi">Trong menu thả xuống đó, hãy chọn mục 'Install date' (Ngày cài đặt). Nó ở khoảng giữa, cậu cần cuộn chuột xuống một chút.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
-        <div class="dialogue-en">Ah, yes. Here it is. 7 December 2011.</div>
-        <div class="dialogue-vi">À thấy rồi. Nó đây: Ngày <b>7 tháng 12 năm 2011</b>.</div>
+
+      <!-- CHẾ ĐỘ 2: LUYỆN ĐIỀN KHUYẾT (CLOZE PRACTICE) -->
+      <div id="track10-cloze-mode" style="display:none;">
+        <div style="font-weight:700; color:#fbbf24; margin-bottom:8px;">HỘP TỪ GỢI Ý (WORD BANK):</div>
+        <div class="cloze-word-bank">
+          <span class="cloze-chip">Computer</span><span class="cloze-chip">left-hand pane</span><span class="cloze-chip">scroll up</span>
+          <span class="cloze-chip">right-click</span><span class="cloze-chip">menu</span><span class="cloze-chip">Manage</span>
+          <span class="cloze-chip">Storage</span><span class="cloze-chip">plus sign</span><span class="cloze-chip">Disk management</span>
+          <span class="cloze-chip">drives</span><span class="cloze-chip">centre pane</span><span class="cloze-chip">Disk 0</span>
+          <span class="cloze-chip">Disk 1</span><span class="cloze-chip">Properties</span><span class="cloze-chip">Details</span>
+          <span class="cloze-chip">drop-down menu</span><span class="cloze-chip">Install date</span><span class="cloze-chip">7 December 2011</span>
+        </div>
+
+        <div class="cloze-ctrls">
+          <button class="btn" onclick="checkCloze('track10')">Kiểm Tra Đáp Án</button>
+          <button class="btn btn-secondary" onclick="showClozeAnswers('track10')">Xem Đáp Án Chuẩn</button>
+          <button class="btn btn-secondary" onclick="resetCloze('track10')">Làm Lại</button>
+          <span id="track10-result" style="font-weight:800; font-size:15px; margin-left:8px;"></span>
+        </div>
+
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">OK, so first, can you see '<input class="cloze-input" data-track="track10" data-ans="Computer" style="width:110px;">' in the <input class="cloze-input" data-track="track10" data-ans="left-hand pane" style="width:130px;">?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">OK, can you <input class="cloze-input" data-track="track10" data-ans="scroll up" style="width:100px;"> to the top?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Now, <input class="cloze-input" data-track="track10" data-ans="right-click" style="width:105px;"> on that and a <input class="cloze-input" data-track="track10" data-ans="menu" style="width:80px;"> will appear. Just select '<input class="cloze-input" data-track="track10" data-ans="Manage" style="width:95px;">'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Can you see where it says '<input class="cloze-input" data-track="track10" data-ans="Storage" style="width:95px;">', in the left-hand pane?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Just to the left of that is a little box with a <input class="cloze-input" data-track="track10" data-ans="plus sign" style="width:100px;">. Click on that.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">And a new icon will appear, labelled '<input class="cloze-input" data-track="track10" data-ans="Disk management" style="width:150px;">'. Click on that and a list of your <input class="cloze-input" data-track="track10" data-ans="drives" style="width:85px;"> will appear in the <input class="cloze-input" data-track="track10" data-ans="centre pane" style="width:120px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">There are two: '<input class="cloze-input" data-track="track10" data-ans="Disk 0" style="width:85px;">' and '<input class="cloze-input" data-track="track10" data-ans="Disk 1" style="width:85px;">'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Now, just right-click where it says 'Disk 0' and choose '<input class="cloze-input" data-track="track10" data-ans="Properties" style="width:105px;">' from the menu. Then, choose the '<input class="cloze-input" data-track="track10" data-ans="Details" style="width:90px;">' tab.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">In that <input class="cloze-input" data-track="track10" data-ans="drop-down menu" style="width:150px;">, select '<input class="cloze-input" data-track="track10" data-ans="Install date" style="width:115px;">'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Ah, yes. Here it is. <input class="cloze-input" data-track="track10" data-ans="7 December 2011" style="width:160px;">.</div></div>
       </div>
     </div>
 
@@ -1176,62 +1199,54 @@
         </div>
       </div>
 
-      <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI SONG NGỮ:</div>
-      
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Hi, is that the IT Department? I'm having trouble with the new browser we're using on our PCs.</div>
-        <div class="dialogue-vi">Xin chào, có phải phòng CNTT không ạ? Tôi đang gặp chút rắc rối với trình duyệt web mới cài trên máy tính của chúng tôi.</div>
+      <!-- THANH CHỌN CHẾ ĐỘ -->
+      <div class="track-mode-bar">
+        <button class="track-mode-btn active" onclick="switchTrackMode('track12', 'view', this)">👁️ Xem Lời Thoại Tô Đậm Từ Khóa Dễ Đục Lỗ</button>
+        <button class="track-mode-btn" onclick="switchTrackMode('track12', 'cloze', this)">✍️ Chế Độ Luyện Nghe Điền Khuyết (Đục Lỗ)</button>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
-        <div class="dialogue-en">OK, what's the problem?</div>
-        <div class="dialogue-vi">Vâng, có vấn đề gì vậy bạn?</div>
+
+      <!-- CHẾ ĐỘ 1: XEM TÔ ĐẬM -->
+      <div id="track12-view-mode">
+        <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">CHI TIẾT LỜI THOẠI (CÁC TỪ MÀU VÀNG LÀ VỊ TRÍ RẤT HAY BỊ ĐỤC LỖ):</div>
+        
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Hi, is that the <span class="cloze-highlight">IT Department</span>? I'm having trouble with the new <span class="cloze-highlight">browser</span> we're using on our PCs.</div><div class="dialogue-vi">Xin chào, có phải phòng CNTT không ạ? Tôi đang gặp rắc rối với trình duyệt web mới.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Well, the old one had a box for <span class="cloze-highlight">searching</span>.</div><div class="dialogue-vi">Ở trình duyệt cũ thì có một ô riêng để tìm kiếm.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">The <span class="cloze-highlight">search bar</span>? Yep, this one has it too but it's the same place that you type the <span class="cloze-highlight">web address</span> into.</div><div class="dialogue-vi">Thanh tìm kiếm ấy hả? Nó nằm chung một chỗ với nơi bạn gõ địa chỉ web.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Ah, you mean that one that starts with '<span class="cloze-highlight">http</span>'? I need to open a <span class="cloze-highlight">new tab</span> first.</div><div class="dialogue-vi">Ý anh là cái chỗ bắt đầu bằng chữ 'http' đúng không? Tôi cần mở tab mới trước đã.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Now, see the little shape to the right of your <span class="cloze-highlight">current tab</span>? Just click on that.</div><div class="dialogue-vi">Bạn thấy biểu tượng hình nhỏ xíu nằm bên phải tab hiện tại không? Bấm vào đó.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Now just type what you are looking for into the <span class="cloze-highlight">address bar</span> and hit '<span class="cloze-highlight">Enter</span>'. It'll search for you.</div><div class="dialogue-vi">Gõ nội dung cần tìm vào thanh địa chỉ rồi nhấn 'Enter', nó sẽ tự tìm.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">I can't see any <span class="cloze-highlight">menus</span>. Where did they go?</div><div class="dialogue-vi">Tôi không thấy các thanh menu đâu cả. Chúng đi đâu rồi?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Well, see that <span class="cloze-highlight">spanner symbol</span> in the <span class="cloze-highlight">top right corner</span>? Click on that and you'll see all the menus there.</div><div class="dialogue-vi">Bạn thấy biểu tượng cái mỏ lết (cờ lê) ở góc trên bên phải không? Bấm vào đó sẽ thấy toàn bộ menu.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">I can see all my <span class="cloze-highlight">bookmarks</span> now, just below the address bar. Much easier than going to a menu!</div><div class="dialogue-vi">Tôi thấy tất cả các dấu trang nằm ngay dưới thanh địa chỉ rồi. Tiện hơn nhiều!</div></div>
       </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Well, the old one had a box for searching.</div>
-        <div class="dialogue-vi">À, ở trình duyệt cũ thì có một ô riêng để tìm kiếm.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
-        <div class="dialogue-en">The search bar? Yep, this one has it too but it's the same place that you type the web address into.</div>
-        <div class="dialogue-vi">Thanh tìm kiếm ấy hả? Trình duyệt này cũng có, nhưng nó nằm chung một chỗ với nơi bạn gõ địa chỉ trang web (thanh địa chỉ).</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Ah, you mean that one that starts with 'http'? OK, let me try it. I need to open a new tab first. I knew how to do that in the old browser but not in this one.</div>
-        <div class="dialogue-vi">À, ý anh là cái chỗ bắt đầu bằng chữ 'http' đúng không? Để tôi thử xem. Nhưng trước tiên tôi cần mở một tab mới đã. Trình duyệt cũ tôi biết làm, nhưng cái mới này thì chưa.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
-        <div class="dialogue-en">Now, see the little shape to the right of your current tab? Just click on that.</div>
-        <div class="dialogue-vi">Bây giờ, bạn có thấy cái biểu tượng hình nhỏ xíu nằm ở bên phải tab hiện tại không? Chỉ cần bấm vào đó.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Ah, yes. I've got a new tab now.</div>
-        <div class="dialogue-vi">À được rồi, tôi vừa mở được một tab mới.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
-        <div class="dialogue-en">OK, now just type what you are looking for into the address bar and hit 'Enter'. It'll search for you.</div>
-        <div class="dialogue-vi">Tốt, giờ bạn chỉ cần gõ nội dung muốn tìm vào thanh địa chỉ rồi nhấn phím 'Enter' là nó sẽ tự tìm kiếm.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Oh, I see. OK, that works! Great! But something else is confusing me: I can't see any menus. Where did they go?</div>
-        <div class="dialogue-vi">Ồ được rồi, tìm được rồi! Tuyệt quá! Nhưng còn điều này làm tôi bối rối: Tôi không thấy các thanh menu đâu cả. Chúng biến đi đâu rồi?</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
-        <div class="dialogue-en">Well, see that spanner symbol in the top right corner? Click on that and you'll see all the menus there.</div>
-        <div class="dialogue-vi">Bạn có thấy biểu tượng cái mỏ lết (cờ lê) ở góc trên cùng bên phải không? Bấm vào đó bạn sẽ thấy toàn bộ menu nằm trong đó.</div>
-      </div>
-      <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
-        <div class="dialogue-en">Oh yes! Thank you. I don't know how I missed that! There is one thing I do like. I can see all my bookmarks now, just below the address bar. Much easier than going to a menu for them like before!</div>
-        <div class="dialogue-vi">Ôi đúng rồi! Cảm ơn anh nhé. Có một điều tôi rất thích: Bây giờ tôi có thể nhìn thấy tất cả các dấu trang (bookmarks) của mình ngay bên dưới thanh địa chỉ. Dễ hơn nhiều so với việc phải vào menu như trước kia!</div>
+
+      <!-- CHẾ ĐỘ 2: LUYỆN ĐIỀN KHUYẾT (CLOZE PRACTICE) -->
+      <div id="track12-cloze-mode" style="display:none;">
+        <div style="font-weight:700; color:#fbbf24; margin-bottom:8px;">HỘP TỪ GỢI Ý (WORD BANK):</div>
+        <div class="cloze-word-bank">
+          <span class="cloze-chip">IT Department</span><span class="cloze-chip">browser</span><span class="cloze-chip">searching</span>
+          <span class="cloze-chip">search bar</span><span class="cloze-chip">web address</span><span class="cloze-chip">http</span>
+          <span class="cloze-chip">new tab</span><span class="cloze-chip">current tab</span><span class="cloze-chip">address bar</span>
+          <span class="cloze-chip">Enter</span><span class="cloze-chip">menus</span><span class="cloze-chip">spanner symbol</span>
+          <span class="cloze-chip">top right corner</span><span class="cloze-chip">bookmarks</span>
+        </div>
+
+        <div class="cloze-ctrls">
+          <button class="btn" onclick="checkCloze('track12')">Kiểm Tra Đáp Án</button>
+          <button class="btn btn-secondary" onclick="showClozeAnswers('track12')">Xem Đáp Án Chuẩn</button>
+          <button class="btn btn-secondary" onclick="resetCloze('track12')">Làm Lại</button>
+          <span id="track12-result" style="font-weight:800; font-size:15px; margin-left:8px;"></span>
+        </div>
+
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Hi, is that the <input class="cloze-input" data-track="track12" data-ans="IT Department" style="width:130px;">? I'm having trouble with the new <input class="cloze-input" data-track="track12" data-ans="browser" style="width:95px;"> on our PCs.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Well, the old one had a box for <input class="cloze-input" data-track="track12" data-ans="searching" style="width:105px;">.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">The <input class="cloze-input" data-track="track12" data-ans="search bar" style="width:110px;">? Yep, it's the same place that you type the <input class="cloze-input" data-track="track12" data-ans="web address" style="width:125px;"> into.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">Ah, that one that starts with '<input class="cloze-input" data-track="track12" data-ans="http" style="width:70px;">'? I need to open a <input class="cloze-input" data-track="track12" data-ans="new tab" style="width:95px;"> first.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">See the little shape to the right of your <input class="cloze-input" data-track="track12" data-ans="current tab" style="width:115px;">? Just click on that.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">Now just type what you are looking for into the <input class="cloze-input" data-track="track12" data-ans="address bar" style="width:115px;"> and hit '<input class="cloze-input" data-track="track12" data-ans="Enter" style="width:75px;">'.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">I can't see any <input class="cloze-input" data-track="track12" data-ans="menus" style="width:85px;">. Where did they go?</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">B:</div><div class="dialogue-en">See that <input class="cloze-input" data-track="track12" data-ans="spanner symbol" style="width:150px;"> in the <input class="cloze-input" data-track="track12" data-ans="top right corner" style="width:150px;">? Click on that.</div></div>
+        <div class="dialogue-item"><div class="dialogue-speaker">A:</div><div class="dialogue-en">I can see all my <input class="cloze-input" data-track="track12" data-ans="bookmarks" style="width:115px;"> now, just below the address bar.</div></div>
       </div>
     </div>
 
@@ -2674,6 +2689,75 @@ function renderFlashcards() {
 }
 
 // ================= TAB NAVIGATION =================
+function switchTrackMode(trackId, mode, btn) {
+  playSound('click');
+  const parent = btn.parentElement;
+  parent.querySelectorAll('.track-mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const viewEl = document.getElementById(trackId + '-view-mode');
+  const clozeEl = document.getElementById(trackId + '-cloze-mode');
+  if (mode === 'view') {
+    viewEl.style.display = 'block';
+    clozeEl.style.display = 'none';
+  } else {
+    viewEl.style.display = 'none';
+    clozeEl.style.display = 'block';
+  }
+}
+
+function checkCloze(trackId) {
+  const inputs = document.querySelectorAll('#' + trackId + '-cloze-mode .cloze-input');
+  let correct = 0;
+  inputs.forEach(inp => {
+    const userVal = inp.value.trim().toLowerCase();
+    const ansVal = inp.dataset.ans.trim().toLowerCase();
+    // Chấp nhận x hoặc ×, dấu cách thừa
+    const cleanUser = userVal.replace(/×/g, 'x').replace(/\s+/g, ' ');
+    const cleanAns = ansVal.replace(/×/g, 'x').replace(/\s+/g, ' ');
+
+    if (cleanUser === cleanAns) {
+      inp.className = 'cloze-input correct';
+      correct++;
+    } else {
+      inp.className = 'cloze-input wrong';
+    }
+  });
+
+  const res = document.getElementById(trackId + '-result');
+  if (correct === inputs.length) {
+    playSound('correct');
+    res.style.color = '#10b981';
+    res.innerText = '🎉 Xuất sắc! ' + correct + '/' + inputs.length + ' từ chính xác 100%!';
+  } else {
+    playSound('wrong');
+    res.style.color = '#ef4444';
+    res.innerText = 'Đúng ' + correct + '/' + inputs.length + ' từ. (Các ô màu đỏ là chưa đúng hoặc bỏ trống)';
+  }
+}
+
+function showClozeAnswers(trackId) {
+  playSound('click');
+  const inputs = document.querySelectorAll('#' + trackId + '-cloze-mode .cloze-input');
+  inputs.forEach(inp => {
+    inp.value = inp.dataset.ans;
+    inp.className = 'cloze-input correct';
+  });
+  const res = document.getElementById(trackId + '-result');
+  res.style.color = '#38bdf8';
+  res.innerText = 'Đã điền toàn bộ ' + inputs.length + ' đáp án mẫu.';
+}
+
+function resetCloze(trackId) {
+  playSound('click');
+  const inputs = document.querySelectorAll('#' + trackId + '-cloze-mode .cloze-input');
+  inputs.forEach(inp => {
+    inp.value = '';
+    inp.className = 'cloze-input';
+  });
+  document.getElementById(trackId + '-result').innerText = '';
+}
+
 function setReadSubTab(subTabId, btn) {
   playSound('click');
   document.querySelectorAll('.read-pill').forEach(b => b.classList.remove('active'));
