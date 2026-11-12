@@ -924,6 +924,195 @@
     color: #fcd34d;
     margin-bottom: 20px;
   }
+
+  /* DELIVERY SLIP STYLES (TRACK 09) */
+  .delivery-slip-wrapper {
+    margin: 22px 0 28px 0;
+  }
+  .slip-toggle-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .slip-tab-btn {
+    padding: 9px 18px;
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .slip-tab-btn.active {
+    background: #6366f1;
+    color: #ffffff;
+    border-color: #818cf8;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  }
+  .delivery-slip-card {
+    background: #ffffff;
+    color: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .slip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+  .slip-order-for {
+    font-size: 19px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+  .slip-order-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 3px;
+  }
+  .slip-supplier {
+    text-align: right;
+  }
+  .slip-supplier-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1e3a8a;
+  }
+  .slip-supplier-sub {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .slip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 768px) {
+    .slip-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .slip-col {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .slip-col-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+    line-height: 1.45;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 8px;
+  }
+  .slip-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .slip-list li {
+    font-size: 13.5px;
+    line-height: 1.55;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e2e8f0;
+    color: #334155;
+    position: relative;
+    padding-left: 18px;
+  }
+  .slip-list li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: #475569;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .slip-list li:last-child {
+    border-bottom: none;
+  }
+  .slip-badge-wrong {
+    background: #fee2e2;
+    color: #b91c1c;
+    text-decoration: line-through;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-right: 4px;
+    border: 1px solid #fca5a5;
+    display: inline-block;
+  }
+  .slip-badge-correct {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 800;
+    border: 1px solid #86efac;
+    display: inline-block;
+  }
+  .slip-badge-ok {
+    background: #f1f5f9;
+    color: #0f766e;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+  .slip-note {
+    display: block;
+    font-size: 12px;
+    color: #0369a1;
+    background: #f0f9ff;
+    border-left: 3px solid #0284c7;
+    padding: 4px 8px;
+    margin-top: 5px;
+    border-radius: 0 4px 4px 0;
+    line-height: 1.4;
+  }
+  .slip-input-blank {
+    background: #fef08a;
+    border: 2px solid #ca8a04;
+    color: #854d0e;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+  }
+  .slip-input-blank:focus {
+    background: #ffffff;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  }
+  .slip-input-blank.is-correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #15803d !important;
+  }
+  .slip-input-blank.is-wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #b91c1c !important;
+  }
+
 </style>
 </head>
 <body>
@@ -1063,6 +1252,208 @@
     <div id="sub-track09" class="read-content-panel read-box">
       <div class="read-title">🎧 Track 09 (Unit 2): Kiểm Tra Đơn Giao Hàng Thiết Bị Máy Tính</div>
       <div class="read-subtitle">Đoạn hội thoại đối chiếu giữa <b>Phiếu đặt hàng (Order form)</b> của Quản lý và <b>Phiếu giao hàng thực tế (Delivery slip)</b>.</div>
+
+      
+      <!-- KHUNG PHIẾU GIAO HÀNG ĐẶC BIỆT MÔ PHỎNG 100% SÁCH GIÁO KHOA (TRACK 09) -->
+      <div class="delivery-slip-wrapper">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:10px;">
+          <div style="font-weight:800; font-size:16px; color:#38bdf8;">
+            📦 PHIẾU GIAO HÀNG (DELIVERY SLIP) - TRACK 09 (MÔ PHỎNG NGUYÊN BẢN SÁCH):
+          </div>
+          <div class="slip-toggle-bar" style="margin-bottom:0;">
+            <button class="slip-tab-btn active" onclick="switchSlipMode('review', this)">
+              📋 Bản Chữa Chi Tiết (Có Số Đúng & Số Sai)
+            </button>
+            <button class="slip-tab-btn" onclick="switchSlipMode('practice', this)">
+              ✍️ Chế Độ Luyện Thi (Tự Điền Số Vào Ô Trống)
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW 1: BẢN GHI CHÚ CHI TIẾT SỐ SAI & SỐ ĐÚNG -->
+        <div id="slip-view-review" class="delivery-slip-card">
+          <div class="slip-header">
+            <div>
+              <div class="slip-order-for">Order for: Wood Publishing</div>
+              <div class="slip-order-sub">Listening 6: Correct this delivery slip to show what was ordered</div>
+            </div>
+            <div class="slip-supplier">
+              <div class="slip-supplier-name">Dingle Digital</div>
+              <div class="slip-supplier-sub">Hardware Supplies</div>
+            </div>
+          </div>
+
+          <div class="slip-grid">
+            <!-- CỘT TRÁI: LAPTOP -->
+            <div class="slip-col">
+              <div class="slip-col-title">
+                <b>5 × Expression 5710</b> laptop computers with the following specifications:
+              </div>
+              <ul class="slip-list">
+                <li>
+                  Entel <b>2.73 GHz</b> dual-core CPU
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  1 × <span class="slip-badge-wrong">390 GB</span> <span style="font-weight:bold; color:#15803d;">➔</span> <span class="slip-badge-correct">500 GB</span> SDD
+                  <div class="slip-note">❌ <b>Sai ổ cứng:</b> Phiếu giao ghi 390 GB. Quản lý phát hiện: <i>"We ordered 500-gigabyte drives."</i> ➔ <b>Số đúng: 500 GB</b>.</div>
+                </li>
+                <li>
+                  <span class="slip-badge-wrong">8 GB</span> <span style="font-weight:bold; color:#15803d;">➔</span> <span class="slip-badge-correct">16 GB</span> dual-channel DDR3 1666 MHz RAM
+                  <div class="slip-note">❌ <b>Sai RAM:</b> Phiếu giao ghi 8 GB. Quản lý phản hồi: <i>"That's no good. We ordered 16."</i> ➔ <b>Số đúng: 16 GB</b>.</div>
+                </li>
+                <li>
+                  Ladeon 3850 <b>1 GB</b> graphics card
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  No optical drive
+                  <span class="slip-badge-ok">✔ Đúng (không ổ đĩa)</span>
+                </li>
+                <li>
+                  15.6-inch WLED <span class="slip-badge-wrong">1920 × 1080</span> <span style="font-weight:bold; color:#15803d;">➔</span> <span class="slip-badge-correct">1366 × 768</span> screen
+                  <div class="slip-note">💡 <b>Độ phân giải:</b> Quản lý bảo: <i>"Should be 1366 × 768. I won't complain about that though."</i> (Phiếu giao là 1920 × 1080 - nét hơn nên nhận).</div>
+                </li>
+                <li>
+                  <b>4 × USB ports</b>
+                  <span class="slip-badge-ok">✔ Đúng (4 cổng)</span>
+                </li>
+                <li>
+                  No operating system installed
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  <b>1 year</b> next business day on-site service
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- CỘT PHẢI: DESKTOP -->
+            <div class="slip-col">
+              <div class="slip-col-title">
+                <b>10 × Domination 8720</b> desktop computers
+              </div>
+              <ul class="slip-list">
+                <li>
+                  Entel 3.4 GHz <span class="slip-badge-wrong">quad-core</span> <span style="font-weight:bold; color:#15803d;">➔</span> <span class="slip-badge-correct">eight-core (8 cores)</span> CPU
+                  <div class="slip-note">❌ <b>Sai CPU:</b> Phiếu ghi quad-core (4 nhân). Quản lý yêu cầu: <i>"They should be 3.4 GHz and with eight cores... We really need eight cores."</i> ➔ <b>Số đúng: eight-core (8 nhân)</b>.</div>
+                </li>
+                <li>
+                  1 × Eastern Digital <b>2 TB</b> 7200 rpm SATA HDD
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  <b>16 GB</b> 2000 MHz memory
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  Ladeon 7950 <b>2 GB</b> graphics card
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  6 × Blu-ray combo optical drive (Blu-ray, DVD+/-RW & CD)
+                  <span class="slip-badge-ok">✔ Đúng (8x DVD-RW combo)</span>
+                </li>
+                <li>
+                  <span class="slip-badge-wrong">4 ×</span> <span style="font-weight:bold; color:#15803d;">➔</span> <span class="slip-badge-correct">8 ×</span> USB ports
+                  <div class="slip-note">❌ <b>Sai cổng USB:</b> Phiếu ghi 4 cổng. Quản lý thốt lên: <i>"We asked for eight USB ports! Oh dear! I'll call Dingle straight away."</i> ➔ <b>Số đúng: 8 cổng USB</b>.</div>
+                </li>
+                <li>
+                  802.11n WLAN wi-fi mini card
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  No operating system installed
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+                <li>
+                  <b>1 year</b> next business day on-site service
+                  <span class="slip-badge-ok">✔ Đúng</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 2: CHẾ ĐỘ LUYỆN TẬP TỰ ĐIỀN SỐ VÀO Ô TRỐNG -->
+        <div id="slip-view-practice" class="delivery-slip-card" style="display:none;">
+          <div class="slip-header">
+            <div>
+              <div class="slip-order-for">Order for: Wood Publishing</div>
+              <div class="slip-order-sub">✍️ <b>Bài tập:</b> Nghe và gõ thông số đúng mà Quản lý thực tế đã đặt (Ordered) vào các ô trống:</div>
+            </div>
+            <div class="slip-supplier">
+              <div class="slip-supplier-name">Dingle Digital</div>
+              <div class="slip-supplier-sub">Hardware Supplies</div>
+            </div>
+          </div>
+
+          <div style="background:#fef3c7; border:1px solid #f59e0b; padding:10px 14px; border-radius:6px; font-size:13px; color:#92400e; margin-bottom:14px;">
+            💡 <b>Gợi ý:</b> Nhập số vào các ô trống (Ví dụ: <code>500</code> hoặc <code>500 GB</code>, <code>16</code> hoặc <code>16 GB</code>, <code>1366 x 768</code>, <code>eight-core</code> hoặc <code>8</code>, <code>8</code>).
+          </div>
+
+          <div class="slip-grid">
+            <!-- CỘT TRÁI: LAPTOP LUYỆN TẬP -->
+            <div class="slip-col">
+              <div class="slip-col-title">
+                5 × Expression 5710 laptop computers with the following specifications:
+              </div>
+              <ul class="slip-list">
+                <li>• Entel 2.73 GHz dual-core CPU</li>
+                <li>
+                  • 1 × <input class="slip-input-blank" id="slip-in-hdd" data-ans="500,500 GB,500GB" placeholder="Dung lượng?" style="width:110px;"> SDD
+                  <span style="font-size:11px; color:#dc2626; margin-left:4px;">(Phiếu giao sai: 390 GB)</span>
+                </li>
+                <li>
+                  • <input class="slip-input-blank" id="slip-in-ram" data-ans="16,16 GB,16GB" placeholder="RAM?" style="width:85px;"> dual-channel DDR3 1666 MHz RAM
+                  <span style="font-size:11px; color:#dc2626; margin-left:4px;">(Phiếu giao sai: 8 GB)</span>
+                </li>
+                <li>• Ladeon 3850 1 GB graphics card</li>
+                <li>• No optical drive</li>
+                <li>
+                  • 15.6-inch WLED <input class="slip-input-blank" id="slip-in-res" data-ans="1366 x 768,1366x768,1366 × 768" placeholder="Độ phân giải?" style="width:130px;"> screen
+                  <span style="font-size:11px; color:#6b7280; margin-left:4px;">(Phiếu giao: 1920 × 1080)</span>
+                </li>
+                <li>• 4 × USB ports</li>
+                <li>• No operating system installed</li>
+                <li>• 1 year next business day on-site service</li>
+              </ul>
+            </div>
+
+            <!-- CỘT PHẢI: DESKTOP LUYỆN TẬP -->
+            <div class="slip-col">
+              <div class="slip-col-title">
+                10 × Domination 8720 desktop computers
+              </div>
+              <ul class="slip-list">
+                <li>
+                  • Entel 3.4 GHz <input class="slip-input-blank" id="slip-in-cpu" data-ans="eight-core,eight cores,8-core,8 cores,8" placeholder="Số nhân CPU?" style="width:115px;"> CPU
+                  <span style="font-size:11px; color:#dc2626; margin-left:4px;">(Phiếu giao sai: quad-core)</span>
+                </li>
+                <li>• 1 × Eastern Digital 2 TB 7200 rpm SATA HDD</li>
+                <li>• 16 GB 2000 MHz memory</li>
+                <li>• Ladeon 7950 2 GB graphics card</li>
+                <li>• 6 × Blu-ray combo optical drive (Blu-ray, DVD+/-RW & CD)</li>
+                <li>
+                  • <input class="slip-input-blank" id="slip-in-usb" data-ans="8,eight,8 ports,eight ports" placeholder="Số cổng?" style="width:85px;"> × USB ports
+                  <span style="font-size:11px; color:#dc2626; margin-left:4px;">(Phiếu giao sai: 4 cổng)</span>
+                </li>
+                <li>• 802.11n WLAN wi-fi mini card</li>
+                <li>• No operating system installed</li>
+                <li>• 1 year next business day on-site service</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <button class="btn" onclick="checkSlipPractice()">✔ Kiểm Tra Kết Quả Phiếu</button>
+            <button class="btn btn-secondary" onclick="showSlipPracticeAnswers()">💡 Xem Đáp Án</button>
+            <button class="btn btn-secondary" onclick="resetSlipPractice()">🔄 Làm Lại</button>
+            <span id="slip-practice-feedback" style="font-weight:800; font-size:14px; margin-left:8px;"></span>
+          </div>
+        </div>
+      </div>
 
       <div class="fact-box">
         <div class="fact-title">📌 BẢNG SO SÁNH THÔNG SỐ CỐT LÕI (RẤT HAY THI):</div>
@@ -3123,6 +3514,63 @@ window.onload = () => {
   resetTextCompletion();
   renderFlashcards();
 };
+
+  // SLIP MODE CONTROLLER (TRACK 09)
+  function switchSlipMode(mode, btn) {
+    document.querySelectorAll('.slip-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (mode === 'review') {
+      document.getElementById('slip-view-review').style.display = 'block';
+      document.getElementById('slip-view-practice').style.display = 'none';
+    } else {
+      document.getElementById('slip-view-review').style.display = 'none';
+      document.getElementById('slip-view-practice').style.display = 'block';
+    }
+  }
+
+  function checkSlipPractice() {
+    const inputs = document.querySelectorAll('#slip-view-practice .slip-input-blank');
+    let correct = 0;
+    inputs.forEach(input => {
+      const val = input.value.trim().toLowerCase();
+      const validAnswers = input.dataset.ans.split(',').map(a => a.trim().toLowerCase());
+      if (val && validAnswers.some(ans => val === ans || val.includes(ans))) {
+        input.classList.remove('is-wrong');
+        input.classList.add('is-correct');
+        correct++;
+      } else {
+        input.classList.remove('is-correct');
+        input.classList.add('is-wrong');
+      }
+    });
+    const fb = document.getElementById('slip-practice-feedback');
+    if (correct === inputs.length) {
+      fb.style.color = '#10b981';
+      fb.textContent = `🎉 Xuất sắc! Bạn đã điền chính xác ${correct}/${inputs.length} thông số cốt lõi!`;
+    } else {
+      fb.style.color = '#ef4444';
+      fb.textContent = `Đúng ${correct}/${inputs.length} ô. Hãy xem các ô viền đỏ hoặc bấm "Xem Đáp Án" để học thuộc nhé!`;
+    }
+  }
+
+  function showSlipPracticeAnswers() {
+    document.getElementById('slip-in-hdd').value = '500 GB';
+    document.getElementById('slip-in-ram').value = '16 GB';
+    document.getElementById('slip-in-res').value = '1366 × 768';
+    document.getElementById('slip-in-cpu').value = 'eight-core';
+    document.getElementById('slip-in-usb').value = '8';
+    checkSlipPractice();
+  }
+
+  function resetSlipPractice() {
+    const inputs = document.querySelectorAll('#slip-view-practice .slip-input-blank');
+    inputs.forEach(input => {
+      input.value = '';
+      input.classList.remove('is-correct', 'is-wrong');
+    });
+    document.getElementById('slip-practice-feedback').textContent = '';
+  }
+
 </script>
 
 </body>
