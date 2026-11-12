@@ -587,6 +587,67 @@
     border: 1px solid rgba(245, 158, 11, 0.45);
     display: inline-block;
   }
+  .audio-ctrl-bar {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #0f172a;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+  }
+  .audio-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    font-weight: 800;
+    font-size: 13px;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .audio-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  }
+  .audio-btn-stop {
+    background: #475569;
+  }
+  .audio-btn-stop:hover {
+    background: #64748b;
+    box-shadow: 0 4px 12px rgba(100, 116, 139, 0.4);
+  }
+  .speak-mini-btn {
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid #6366f1;
+    color: #c7d2fe;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .speak-mini-btn:hover {
+    background: #6366f1;
+    color: white;
+  }
+  .dialogue-item.speaking-active {
+    border-left: 4px solid #10b981 !important;
+    background: rgba(16, 185, 129, 0.12) !important;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+    transform: scale(1.01);
+  }
   .dialogue-item {
     padding: 12px 16px;
     border-radius: 12px;
@@ -956,117 +1017,197 @@
         </table>
       </div>
 
+      
+      <!-- THANH ĐIỀU KHIỂN ÂM THANH CHO BÀI NGHE -->
+      <div class="audio-ctrl-bar">
+        <button class="audio-btn" id="track09-playall-btn" onclick="togglePlayAll('track09', this)">
+          ▶️ Nghe Tự Động Toàn Bài (Giọng Bản Xứ)
+        </button>
+        <button class="audio-btn audio-btn-stop" onclick="stopAudio('track09')">
+          ⏹️ Dừng Phát
+        </button>
+        <span style="font-size:12px; color:#94a3b8; margin-left:auto;">
+          💡 Bấm nút <b>🔊 Nghe</b> ở từng câu để nghe riêng lẻ câu đó.
+        </span>
+      </div>
+  
       <div style="font-weight:700; color:#818cf8; margin-bottom:14px; font-size:16px;">
         💬 LỜI THOẠI CHI TIẾT (CÁC TỪ KHÓA MÀU VÀNG LÀ TỪ QUAN TRỌNG CẦN NHỚ KHI THI):
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">The <span class="kw-highlight">shipment</span> just arrived!</div>
         <div class="dialogue-vi">Kiện hàng vừa mới tới nơi ạ!</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Great! Let's check everything's here. OK. I've got the <span class="kw-highlight">order form</span> here.</div>
         <div class="dialogue-vi">Tuyệt quá! Hãy kiểm tra xem mọi thứ có đủ ở đây không. Tôi có phiếu đặt hàng ở đây rồi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">And here's the <span class="kw-highlight">delivery slip</span> from the shipment.</div>
         <div class="dialogue-vi">Và đây là phiếu giao hàng đi kèm kiện hàng ạ.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Right. Let's see if they match. What's first on yours?</div>
         <div class="dialogue-vi">Được rồi. Hãy xem chúng có khớp nhau không. Thứ đầu tiên trên phiếu của cậu là gì?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en"><span class="kw-highlight">Five laptops</span>, each with a <span class="kw-highlight">2.73-gigahertz</span> <span class="kw-highlight">dual-core</span> processor.</div>
         <div class="dialogue-vi">5 chiếc laptop, mỗi chiếc chạy chip 2 nhân 2.73 GHz.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">OK, that's fine.</div>
         <div class="dialogue-vi">Được rồi, phần đó đúng.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">And <span class="kw-highlight">390-gigabyte</span> drives.</div>
         <div class="dialogue-vi">Và ổ cứng dung lượng 390 GB.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Ah! We ordered <span class="kw-highlight">500-gigabyte</span> drives. Oh dear! How much <span class="kw-highlight">memory</span> do they have?</div>
         <div class="dialogue-vi">Ơ kìa! Chúng ta đặt ổ cứng 500 GB cơ mà. Thôi chết rồi! Thế bộ nhớ RAM của chúng là bao nhiêu?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en"><span class="kw-highlight">Eight gigabytes</span>.</div>
         <div class="dialogue-vi">Dạ 8 GB ạ.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">That's no good. We ordered <span class="kw-highlight">16</span>. How about the <span class="kw-highlight">video card</span>?</div>
         <div class="dialogue-vi">Thế thì không ổn rồi. Chúng ta đặt 16 GB. Còn card màn hình thì sao?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en"><span class="kw-highlight">Ladeon 3850</span>. <span class="kw-highlight">One gigabyte</span>.</div>
         <div class="dialogue-vi">Card Ladeon 3850, dung lượng 1 GB ạ.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Well, at least they got that one right. And the screen <span class="kw-highlight">resolution</span>?</div>
         <div class="dialogue-vi">Chà, ít nhất thì mục đó họ giao đúng. Còn độ phân giải màn hình?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en"><span class="kw-highlight">15.6-inch</span>, <span class="kw-highlight">1920 × 1080</span>.</div>
         <div class="dialogue-vi">Màn hình 15.6 inch, độ phân giải 1920 × 1080.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Hmm... Should be <span class="kw-highlight">1366 × 768</span>. I won't complain about that though.</div>
         <div class="dialogue-vi">Hừm... Đáng lẽ phải là 1366 × 768. Nhưng nét hơn thì tôi sẽ không phàn nàn đâu.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">And <span class="kw-highlight">four USB ports</span>, <span class="kw-highlight">no OS</span>, one year <span class="kw-highlight">warranty</span>.</div>
         <div class="dialogue-vi">Và có 4 cổng USB, không có sẵn hệ điều hành, bảo hành 1 năm ạ.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Yep, that bit's fine. How about the <span class="kw-highlight">desktops</span>? There should be <span class="kw-highlight">ten of those</span>?</div>
         <div class="dialogue-vi">Ừ, phần đó đúng. Thế còn máy tính để bàn? Có đúng 10 bộ không?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Yep, that's what this says as well. And, er... yep, <span class="kw-highlight">ten boxes</span>.</div>
         <div class="dialogue-vi">Vâng, phiếu cũng ghi thế ạ. Và đúng 10 thùng máy.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">And they should be <span class="kw-highlight">3.4 gigahertz</span> and with <span class="kw-highlight">eight cores</span>.</div>
         <div class="dialogue-vi">Và chúng phải có tốc độ 3.4 GHz với vi xử lý 8 nhân đấy nhé.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Nope, they each have <span class="kw-highlight">quad cores</span>.</div>
         <div class="dialogue-vi">Không ạ, mỗi máy chỉ có chip 4 nhân thôi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Oh dear! Still not what we ordered. We really need eight cores. What about the <span class="kw-highlight">optical drive</span>?</div>
         <div class="dialogue-vi">Trời đất ơi! Lại giao sai cái ta đã đặt rồi. Ta thực sự cần chip 8 nhân mà. Còn ổ đĩa quang thì sao?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Assistant (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Assistant (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">That's OK. It's an <span class="kw-highlight">8x DVD-RW</span>. And there are <span class="kw-highlight">four USB ports</span> and a <span class="kw-highlight">wi-fi card</span>.</div>
         <div class="dialogue-vi">Dạ ổ quang đúng ạ, là loại 8x DVD-RW. Và có 4 cổng USB kèm một card mạng Wi-Fi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Manager (M):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Manager (M):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Well, they got the optical drive and the wi-fi card right, but we asked for <span class="kw-highlight">eight USB ports</span>! Oh dear! I'll call Dingle straight away.</div>
         <div class="dialogue-vi">Chà, họ giao ổ quang với card Wi-Fi đúng, nhưng ta yêu cầu tới 8 cổng USB cơ mà! Thôi để tôi gọi ngay cho bên Dingle.</div>
       </div>
@@ -1076,6 +1217,20 @@
     <div id="sub-track10" class="read-content-panel read-box" style="display:none;">
       <div class="read-title">🎧 Track 10 (Unit 2): Các Bước Tra Cứu Thông Tin Ổ Đĩa (Disk Management)</div>
       <div class="read-subtitle">Quy trình hướng dẫn từng bước trên hệ thống để xem ngày cài đặt ổ cứng <b>(Install date)</b>.</div>
+
+      <!-- THANH ĐIỀU KHIỂN ÂM THANH CHO BÀI NGHE -->
+      <div class="audio-ctrl-bar">
+        <button class="audio-btn" id="track10-playall-btn" onclick="togglePlayAll('track10', this)">
+          ▶️ Nghe Tự Động Toàn Bài (Giọng Bản Xứ)
+        </button>
+        <button class="audio-btn audio-btn-stop" onclick="stopAudio('track10')">
+          ⏹️ Dừng Phát
+        </button>
+        <span style="font-size:12px; color:#94a3b8; margin-left:auto;">
+          💡 Bấm nút <b>🔊 Nghe</b> ở từng câu để nghe riêng lẻ câu đó.
+        </span>
+      </div>
+  
 
       <div class="fact-box">
         <div class="fact-title">📌 5 BƯỚC THAO TÁC CẦN NHỚ THEO THỨ TỰ:</div>
@@ -1093,77 +1248,122 @@
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">OK, so first, can you see '<span class="kw-highlight">Computer</span>' in the <span class="kw-highlight">left-hand pane</span>?</div>
         <div class="dialogue-vi">Được rồi, đầu tiên cậu có thấy mục 'Computer' ở khung bên trái không?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Er... mm... no, I don't think so.</div>
         <div class="dialogue-vi">Ờ... không, tôi chưa thấy.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">OK, can you <span class="kw-highlight">scroll up</span> to the top?</div>
         <div class="dialogue-vi">Cậu cuộn chuột lên trên cùng xem nào?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Ah, yes. I can see it now.</div>
         <div class="dialogue-vi">À thấy rồi, tôi thấy nó rồi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Now, <span class="kw-highlight">right-click</span> on that and a <span class="kw-highlight">menu</span> will appear. Just select '<span class="kw-highlight">Manage</span>'. There may be a short wait but a box should appear. Can you see it yet?</div>
         <div class="dialogue-vi">Bây giờ, nhấp chuột phải vào đó, menu hiện ra rồi chọn 'Manage'. Có thể phải đợi một lát nhưng một cửa sổ sẽ hiện lên. Cậu thấy chưa?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Mm... not yet. Ah, yes! There it is.</div>
         <div class="dialogue-vi">Chưa... À được rồi! Nó đây rồi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Can you see where it says '<span class="kw-highlight">Storage</span>', in the left-hand pane?</div>
         <div class="dialogue-vi">Cậu có thấy chỗ nào ghi chữ 'Storage' ở khung bên trái không?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Yep.</div>
         <div class="dialogue-vi">Có.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Just to the left of that is a little box with a <span class="kw-highlight">plus sign</span>. Click on that.</div>
         <div class="dialogue-vi">Ngay bên trái chữ đó có một ô vuông nhỏ chứa dấu cộng (+). Nhấp vào đó.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Um... yep, got it!</div>
         <div class="dialogue-vi">Xong rồi, tôi bấm rồi!</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">And a new icon will appear, labelled '<span class="kw-highlight">Disk management</span>'. Click on that and a list of your <span class="kw-highlight">drives</span> will appear in the <span class="kw-highlight">centre pane</span>. How many are there?</div>
         <div class="dialogue-vi">Biểu tượng 'Disk management' hiện ra, nhấp vào đó danh sách ổ đĩa sẽ hiện ở khung giữa. Có bao nhiêu ổ ở đó?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">There are two: '<span class="kw-highlight">Disk 0</span>' and '<span class="kw-highlight">Disk 1</span>'.</div>
         <div class="dialogue-vi">Có 2 ổ: 'Disk 0' và 'Disk 1'.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">I see. Now, just right-click where it says 'Disk 0' and choose '<span class="kw-highlight">Properties</span>' from the menu. Then, from the box that appears, choose the '<span class="kw-highlight">Details</span>' tab. Then you'll see a <span class="kw-highlight">drop-down menu</span>.</div>
         <div class="dialogue-vi">Tôi hiểu rồi. Giờ hãy nhấp chuột phải vào chỗ ghi 'Disk 0' và chọn 'Properties'. Sau đó chọn thẻ 'Details'. Cậu sẽ thấy một menu thả xuống.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người hướng dẫn (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người hướng dẫn (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">In that drop-down menu, select '<span class="kw-highlight">Install date</span>'. It's about half way down. You'll probably have to scroll down a bit.</div>
         <div class="dialogue-vi">Trong menu thả xuống đó, hãy chọn mục 'Install date' (Ngày cài đặt). Nó ở khoảng giữa, cậu cần cuộn chuột xuống một chút.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Người thao tác (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Người thao tác (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Ah, yes. Here it is. <span class="kw-highlight">7 December 2011</span>.</div>
         <div class="dialogue-vi">À thấy rồi. Nó đây: Ngày <b>7 tháng 12 năm 2011</b>.</div>
       </div>
@@ -1173,6 +1373,20 @@
     <div id="sub-track12" class="read-content-panel read-box" style="display:none;">
       <div class="read-title">🎧 Track 12 (Unit 3): Hướng Dẫn Sử Dụng Trình Duyệt Web Mới</div>
       <div class="read-subtitle">Cuộc gọi hỗ trợ giữa nhân viên văn phòng và chuyên viên phòng IT về các tính năng trên Browser mới.</div>
+
+      <!-- THANH ĐIỀU KHIỂN ÂM THANH CHO BÀI NGHE -->
+      <div class="audio-ctrl-bar">
+        <button class="audio-btn" id="track12-playall-btn" onclick="togglePlayAll('track12', this)">
+          ▶️ Nghe Tự Động Toàn Bài (Giọng Bản Xứ)
+        </button>
+        <button class="audio-btn audio-btn-stop" onclick="stopAudio('track12')">
+          ⏹️ Dừng Phát
+        </button>
+        <span style="font-size:12px; color:#94a3b8; margin-left:auto;">
+          💡 Bấm nút <b>🔊 Nghe</b> ở từng câu để nghe riêng lẻ câu đó.
+        </span>
+      </div>
+  
 
       <div class="fact-box">
         <div class="fact-title">📌 4 ĐẶC ĐIỂM CỦA TRÌNH DUYỆT MỚI:</div>
@@ -1189,57 +1403,90 @@
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Hi, is that the <span class="kw-highlight">IT Department</span>? I'm having trouble with the <span class="kw-highlight">new browser</span> we're using on our PCs.</div>
         <div class="dialogue-vi">Xin chào, có phải phòng CNTT không ạ? Tôi đang gặp chút rắc rối với trình duyệt web mới cài trên máy tính của chúng tôi.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Kỹ thuật viên IT (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">OK, what's the problem?</div>
         <div class="dialogue-vi">Vâng, có vấn đề gì vậy bạn?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Well, the old one had a box for <span class="kw-highlight">searching</span>.</div>
         <div class="dialogue-vi">À, ở trình duyệt cũ thì có một ô riêng để tìm kiếm.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Kỹ thuật viên IT (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">The <span class="kw-highlight">search bar</span>? Yep, this one has it too but it's the same place that you type the <span class="kw-highlight">web address</span> into.</div>
         <div class="dialogue-vi">Thanh tìm kiếm ấy hả? Trình duyệt này cũng có, nhưng nó nằm chung một chỗ với nơi bạn gõ địa chỉ trang web (thanh địa chỉ).</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Ah, you mean that one that starts with '<span class="kw-highlight">http</span>'? OK, let me try it. I need to <span class="kw-highlight">open a new tab</span> first. I knew how to do that in the old browser but not in this one.</div>
         <div class="dialogue-vi">À, ý anh là cái chỗ bắt đầu bằng chữ 'http' đúng không? Để tôi thử xem. Nhưng trước tiên tôi cần mở một tab mới đã.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Kỹ thuật viên IT (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Now, see the <span class="kw-highlight">little shape to the right</span> of your <span class="kw-highlight">current tab</span>? Just click on that.</div>
         <div class="dialogue-vi">Bây giờ, bạn có thấy cái biểu tượng hình nhỏ xíu nằm ở bên phải tab hiện tại không? Chỉ cần bấm vào đó.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Ah, yes. I've got a new tab now.</div>
         <div class="dialogue-vi">À được rồi, tôi vừa mở được một tab mới.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Kỹ thuật viên IT (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">OK, now just type what you are looking for into the <span class="kw-highlight">address bar</span> and hit '<span class="kw-highlight">Enter</span>'. It'll search for you.</div>
         <div class="dialogue-vi">Tốt, giờ bạn chỉ cần gõ nội dung muốn tìm vào thanh địa chỉ rồi nhấn phím 'Enter' là nó sẽ tự tìm kiếm.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Oh, I see. OK, that works! Great! But something else is confusing me: I can't see any <span class="kw-highlight">menus</span>. Where did they go?</div>
         <div class="dialogue-vi">Ồ được rồi, tìm được rồi! Tuyệt quá! Nhưng tôi không thấy các thanh menu đâu cả. Chúng biến đi đâu rồi?</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Kỹ thuật viên IT (B):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Kỹ thuật viên IT (B):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Well, see that <span class="kw-highlight">spanner symbol</span> in the <span class="kw-highlight">top right corner</span>? Click on that and you'll see all the menus there.</div>
         <div class="dialogue-vi">Bạn có thấy biểu tượng cái mỏ lết (cờ lê) ở góc trên cùng bên phải không? Bấm vào đó bạn sẽ thấy toàn bộ menu nằm trong đó.</div>
       </div>
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Nhân viên (A):</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Nhân viên (A):</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Oh yes! Thank you. I don't know how I missed that! There is one thing I do like. I can see all my <span class="kw-highlight">bookmarks</span> now, <span class="kw-highlight">just below the address bar</span>. Much easier than going to a menu for them like before!</div>
         <div class="dialogue-vi">Ôi đúng rồi! Có một điều tôi rất thích: Bây giờ tôi có thể nhìn thấy tất cả các dấu trang (bookmarks) của mình ngay bên dưới thanh địa chỉ. Dễ hơn nhiều!</div>
       </div>
@@ -1264,19 +1511,28 @@
       <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">ĐOẠN VĂN SONG NGỮ CHI TIẾT:</div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 1: Chi phí và sự tự do khỏi nhà cung cấp</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 1: Chi phí và sự tự do khỏi nhà cung cấp</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">With open source software, what do people think about first? Money, usually, because open source software is free. But this isn't the only important thing. First, there is freedom from the software vendors. Organisations say that freedom is the number one reason to choose open source software. With open source software, an organisation doesn't have to follow the software vendor's decisions. With proprietary software the vendor controls software updates. For example, users can't add features to proprietary software themselves but they can add features to open source software.</div>
         <div class="dialogue-vi">Khi nói về phần mềm nguồn mở, người ta nghĩ đến điều gì đầu tiên? Thường là tiền bạc, bởi vì phần mềm nguồn mở là miễn phí. Nhưng đây không phải là điều quan trọng duy nhất. Trước hết, đó là <b>sự tự do khỏi các nhà cung cấp phần mềm</b>. Các tổ chức cho rằng sự tự do chính là lý do số một để lựa chọn phần mềm nguồn mở. Với phần mềm nguồn mở, một tổ chức không bắt buộc phải tuân theo các quyết định của nhà cung cấp. Trong khi với phần mềm thương mại độc quyền, nhà cung cấp nắm toàn quyền kiểm soát các bản cập nhật. Ví dụ: người dùng không thể tự thêm các tính năng vào phần mềm độc quyền, nhưng họ hoàn toàn có thể tự thêm tính năng vào phần mềm nguồn mở.</div>
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 2: Kiểm soát dữ liệu và chuyển đổi dữ liệu</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 2: Kiểm soát dữ liệu và chuyển đổi dữ liệu</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Also, with open source software companies have more control of their data. Proprietary software often stores data in special ways that only the vendor understands. So, when a company wants to change to another vendor's software, moving the data to the new software can be very difficult. Open source software is different; open source software vendors explain their data clearly and openly so that they are not a secret. Because of this, moving data isn't a problem.</div>
         <div class="dialogue-vi">Ngoài ra, với phần mềm nguồn mở, các công ty có nhiều quyền kiểm soát dữ liệu của mình hơn. Phần mềm thương mại đóng thường lưu trữ dữ liệu theo những cách thức đặc biệt mà chỉ có nhà cung cấp đó mới hiểu được. Vì vậy, khi một công ty muốn chuyển sang phần mềm của nhà cung cấp khác, việc di chuyển dữ liệu sang phần mềm mới có thể vô cùng khó khăn. Phần mềm nguồn mở thì khác; các nhà phát triển nguồn mở giải thích dữ liệu của họ một cách rõ ràng và công khai để chúng không phải là bí mật. Nhờ vậy, việc chuyển đổi dữ liệu không còn là vấn đề nan giải.</div>
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 3: Hệ điều hành và mảng đồ họa</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 3: Hệ điều hành và mảng đồ họa</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Sometimes people worry about open source operating systems. They think that their favourite software won't run on open source operating systems. However, this isn't true because there is a lot of office software, such as word processors and spreadsheets, for open source operating systems. In fact, there are many kinds of this software and they work well. It is only special areas, such as graphics design, where proprietary software is clearly better.</div>
         <div class="dialogue-vi">Đôi khi mọi người lo lắng về các hệ điều hành nguồn mở. Họ nghĩ rằng phần mềm yêu thích của họ sẽ không chạy được trên hệ điều hành nguồn mở. Tuy nhiên, điều này không đúng vì hiện có rất nhiều phần mềm văn phòng, chẳng hạn như trình soạn thảo văn bản và bảng tính, dành cho hệ điều hành nguồn mở. Thực tế có rất nhiều loại phần mềm như vậy và chúng hoạt động rất mượt mà. Chỉ có một số lĩnh vực chuyên biệt đặc thù, chẳng hạn như <b>thiết kế đồ họa (graphics design)</b>, là nơi mà phần mềm thương mại độc quyền vẫn vượt trội hơn hẳn.</div>
       </div>
@@ -1338,19 +1594,28 @@
       <div style="font-weight:700; color:#818cf8; margin-bottom:12px;">ĐOẠN VĂN SONG NGỮ CHI TIẾT:</div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 1: Định nghĩa mạng, LAN và WAN</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 1: Định nghĩa mạng, LAN và WAN</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">A network is a group of linked computers or other devices. There are two kinds of networks that are in common use. In Local Area Networks (LANs) computers are close together - perhaps in the same building. They might be connected directly to each other by cable or through a wireless network such as wi-fi. In contrast, wide area networks (WANs) cover a larger area and usually use telephone lines or a mobile phone system to connect. A LAN can be a part of a WAN.</div>
         <div class="dialogue-vi">Mạng máy tính là một tập hợp các máy tính hoặc các thiết bị khác được liên kết lại với nhau. Có hai loại mạng thông dụng nhất: Mạng cục bộ (LANs) là nơi các máy tính ở gần nhau - chẳng hạn như trong cùng một tòa nhà. Chúng có thể được kết nối trực tiếp với nhau bằng dây cáp hoặc thông qua mạng không dây như Wi-Fi. Ngược lại, mạng diện rộng (WANs) bao phủ một khu vực rộng lớn hơn và thường sử dụng đường dây điện thoại hoặc hệ thống mạng di động để kết nối. Một mạng LAN có thể là một phần nằm trong mạng WAN.</div>
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 2: Các cấu trúc mạng có dây (Star, Ring, Bus, Mesh)</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 2: Các cấu trúc mạng có dây (Star, Ring, Bus, Mesh)</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">There are different types of wired networks. One is a star system. In this, each computer (or other device) is connected to a central server. Another type is a ring system. This is a network that has each computer linked to two others. In a bus system there is a central cable which is called a bus, and each computer is linked to it. Some large networks use a mesh. In this, each computer is linked to several others. This has one big advantage: if one connection breaks, the data can use other connections. Therefore, it is difficult to break a mesh network.</div>
         <div class="dialogue-vi">Có nhiều loại cấu trúc mạng có dây khác nhau: Một là mạng hình sao (star system), mỗi máy tính đều kết nối vào máy chủ trung tâm. Một loại khác là mạng hình vòng (ring system), mỗi máy tính liên kết với 2 máy khác tạo thành vòng khép kín. Trong mạng đường trục (bus system), có một sợi cáp trung tâm gọi là bus và các máy tính nối vào đó. Một số mạng lớn dùng mạng lưới (mesh), mỗi máy nối với nhiều máy khác. Ưu điểm lớn: nếu một đường truyền bị đứt, dữ liệu có thể đi qua đường khác ➔ rất khó làm tê liệt mạng lưới.</div>
       </div>
 
       <div class="dialogue-item">
-        <div class="dialogue-speaker">Đoạn 3: Hệ thống Máy khách - Máy chủ (Client-Server System)</div>
+        <div class="dialogue-speaker" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Đoạn 3: Hệ thống Máy khách - Máy chủ (Client-Server System)</span>
+          <button class="speak-mini-btn" onclick="speakDialogue(this)">🔊 Nghe câu này</button>
+        </div>
         <div class="dialogue-en">Many networks work on a client-server system. In this, servers are special computers that store data, serve websites and have other similar functions. Generally, a client program will ask the server for data and the server will then send the data back to the client. For example, when you type a web address into a browser, the browser (the client) will ask the server for a web page, which then sends the web page back.</div>
         <div class="dialogue-vi">Nhiều hệ thống mạng hoạt động theo mô hình máy khách - máy chủ (client-server). Máy chủ (server) là các máy tính đặc biệt chuyên lưu trữ dữ liệu, cung cấp trang web và các chức năng tương tự. Một chương trình máy khách (client) sẽ gửi yêu cầu xin dữ liệu tới máy chủ, và máy chủ sẽ gửi trả dữ liệu về. Ví dụ: khi bạn gõ địa chỉ web vào trình duyệt, trình duyệt (client) gửi yêu cầu đòi trang web từ máy chủ, và máy chủ gửi trang web trở lại cho bạn xem.</div>
       </div>
@@ -2684,6 +2949,114 @@ function renderFlashcards() {
 }
 
 // ================= TAB NAVIGATION =================
+
+// ================= HỆ THỐNG ÂM THANH GIỌNG ĐỌC CHO BÀI NGHE (WEB SPEECH API) =================
+let isPlayingAll = false;
+let currentPlayTrackId = null;
+
+function speakDialogue(btn) {
+  if (!('speechSynthesis' in window)) {
+    alert('Trình duyệt của bạn chưa hỗ trợ âm thanh Web Speech.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  
+  const item = btn.closest('.dialogue-item');
+  document.querySelectorAll('.dialogue-item').forEach(el => el.classList.remove('speaking-active'));
+  item.classList.add('speaking-active');
+
+  const enText = item.querySelector('.dialogue-en').innerText;
+  const speakerText = item.querySelector('.dialogue-speaker span').innerText;
+  
+  const u = new SpeechSynthesisUtterance(enText);
+  u.lang = 'en-US';
+  u.rate = 0.92; // Tốc độ chuẩn rõ ràng cho người học
+  
+  // Tùy chỉnh cao độ giọng: Manager trầm hơn, Assistant cao hơn
+  if (speakerText.includes('Manager') || speakerText.includes('B:') || speakerText.includes('Đoạn')) {
+    u.pitch = 0.88;
+  } else {
+    u.pitch = 1.15;
+  }
+
+  u.onend = () => {
+    item.classList.remove('speaking-active');
+  };
+  u.onerror = () => {
+    item.classList.remove('speaking-active');
+  };
+
+  window.speechSynthesis.speak(u);
+}
+
+function togglePlayAll(trackId, btn) {
+  if (isPlayingAll && currentPlayTrackId === trackId) {
+    stopAudio(trackId);
+    return;
+  }
+  
+  stopAudio(trackId);
+  isPlayingAll = true;
+  currentPlayTrackId = trackId;
+  btn.innerHTML = '⏸️ Đang Phát Toàn Bài... (Bấm Để Dừng)';
+  btn.style.background = '#ea580c';
+
+  const items = Array.from(document.querySelectorAll('#sub-' + trackId + ' .dialogue-item'));
+  let idx = 0;
+
+  function playNextSentence() {
+    if (!isPlayingAll || idx >= items.length) {
+      stopAudio(trackId);
+      return;
+    }
+
+    items.forEach(el => el.classList.remove('speaking-active'));
+    const currentItem = items[idx];
+    currentItem.classList.add('speaking-active');
+    currentItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const enText = currentItem.querySelector('.dialogue-en').innerText;
+    const speakerText = currentItem.querySelector('.dialogue-speaker span').innerText;
+
+    const u = new SpeechSynthesisUtterance(enText);
+    u.lang = 'en-US';
+    u.rate = 0.92;
+    if (speakerText.includes('Manager') || speakerText.includes('B:')) {
+      u.pitch = 0.88;
+    } else {
+      u.pitch = 1.15;
+    }
+
+    u.onend = () => {
+      idx++;
+      if (isPlayingAll) setTimeout(playNextSentence, 450);
+    };
+    u.onerror = () => {
+      idx++;
+      if (isPlayingAll) setTimeout(playNextSentence, 450);
+    };
+
+    window.speechSynthesis.speak(u);
+  }
+
+  playNextSentence();
+}
+
+function stopAudio(trackId) {
+  isPlayingAll = false;
+  currentPlayTrackId = null;
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  document.querySelectorAll('.dialogue-item').forEach(el => el.classList.remove('speaking-active'));
+  document.querySelectorAll('.audio-btn').forEach(btn => {
+    if (btn.id.includes('playall')) {
+      btn.innerHTML = '▶️ Nghe Tự Động Toàn Bài (Giọng Bản Xứ)';
+      btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+    }
+  });
+}
+
 function setReadSubTab(subTabId, btn) {
   playSound('click');
   document.querySelectorAll('.read-pill').forEach(b => b.classList.remove('active'));
